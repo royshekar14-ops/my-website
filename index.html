@@ -1,602 +1,747 @@
-<!DOCTYPE html>  <html>  
-<head>  
-    <title>Lotus and Rising Sun</title>  <style>  
-
-    * {  
-        box-sizing: border-box;  
-    }  
-
-    body {  
-        margin: 0;  
-        height: 100vh;  
-        overflow: hidden;  
-        font-family: Arial, sans-serif;  
-        background: #07111f;  
-    }  
-
-    /* =========================  
-       FIRST SCREEN  
-    ========================= */  
-
-    .first-screen {  
-        position: absolute;  
-        width: 100%;  
-        height: 100vh;  
-
-        display: flex;  
-        justify-content: center;  
-        align-items: center;  
-
-        background: #07111f;  
-
-        animation: firstScreenOut 1.5s ease-in-out 5s forwards;  
-    }  
-
-    .lotus-area {  
-        position: relative;  
-
-        display: flex;  
-        justify-content: center;  
-        align-items: center;  
-
-        gap: 80px;  
-    }  
-
-    /* =========================  
-       LOTUS  
-    ========================= */  
-
-    .lotus {  
-        position: relative;  
-        width: 320px;  
-        height: 300px;  
-    }  
-
-    .second-lotus {  
-        transform: scaleX(-1);  
-    }  
-
-    .petal {  
-        position: absolute;  
-
-        width: 85px;  
-        height: 150px;  
-
-        left: 117px;  
-        top: 70px;  
-
-        background: linear-gradient(  
-            to top,  
-            #d92f83,  
-            #f85ca5,  
-            #ffd6e8  
-        );  
-
-        border-radius: 50% 50% 45% 45%;  
-
-        transform-origin: bottom center;  
-
-        box-shadow:  
-            inset 0 -12px 18px rgba(120, 0, 70, 0.2),  
-            0 4px 12px rgba(255, 100, 180, 0.2);  
-    }  
-
-    .p1 {  
-        transform: rotate(-65deg) scale(0);  
-        animation: bloom1 2s ease-out 0s forwards;  
-    }  
-
-    .p2 {  
-        transform: rotate(-45deg) scale(0);  
-        animation: bloom2 2s ease-out 0.1s forwards;  
-    }  
-
-    .p3 {  
-        transform: rotate(-25deg) scale(0);  
-        animation: bloom3 2s ease-out 0.2s forwards;  
-    }  
-
-    .p4 {  
-        transform: rotate(-10deg) scale(0);  
-        animation: bloom4 2s ease-out 0.3s forwards;  
-    }  
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lotus and Rising Sun</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            height: 100vh;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+            background: #07111f;
+        }
+
+        /* =========================
+           FIRST SCREEN
+        ========================= */
+
+        .first-screen {
+            position: absolute;
+            width: 100%;
+            height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background: #07111f;
+
+            animation: firstScreenOut 1.5s ease-in-out 5s forwards;
+        }
+
+        .lotus-area {
+            position: relative;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            gap: 80px;
+        }
+
+        /* =========================
+           LOTUS
+        ========================= */
+
+        .lotus {
+            position: relative;
+            width: 320px;
+            height: 300px;
+        }
+
+        .second-lotus {
+            transform: scaleX(-1);
+        }
+
+        .petal {
+            position: absolute;
+
+            width: 85px;
+            height: 150px;
+
+            left: 117px;
+            top: 70px;
+
+            background: linear-gradient(
+                to top,
+                #d92f83,
+                #f85ca5,
+                #ffd6e8
+            );
+
+            border-radius: 50% 50% 45% 45%;
+
+            transform-origin: bottom center;
+
+            box-shadow:
+                inset 0 -12px 18px rgba(120, 0, 70, 0.2),
+                0 4px 12px rgba(255, 100, 180, 0.2);
+        }
+
+        .p1 {
+            transform: rotate(-65deg) scale(0);
+            animation: bloom1 2s ease-out 0s forwards;
+        }
+
+        .p2 {
+            transform: rotate(-45deg) scale(0);
+            animation: bloom2 2s ease-out 0.1s forwards;
+        }
+
+        .p3 {
+            transform: rotate(-25deg) scale(0);
+            animation: bloom3 2s ease-out 0.2s forwards;
+        }
 
-    .p5 {  
-        transform: rotate(10deg) scale(0);  
-        animation: bloom5 2s ease-out 0.3s forwards;  
-    }  
+        .p4 {
+            transform: rotate(-10deg) scale(0);
+            animation: bloom4 2s ease-out 0.3s forwards;
+        }
 
-    .p6 {  
-        transform: rotate(25deg) scale(0);  
-        animation: bloom6 2s ease-out 0.2s forwards;  
-    }  
+        .p5 {
+            transform: rotate(10deg) scale(0);
+            animation: bloom5 2s ease-out 0.3s forwards;
+        }
 
-    .p7 {  
-        transform: rotate(45deg) scale(0);  
-        animation: bloom7 2s ease-out 0.1s forwards;  
-    }  
+        .p6 {
+            transform: rotate(25deg) scale(0);
+            animation: bloom6 2s ease-out 0.2s forwards;
+        }
 
-    .p8 {  
-        transform: rotate(65deg) scale(0);  
-        animation: bloom8 2s ease-out 0s forwards;  
-    }  
+        .p7 {
+            transform: rotate(45deg) scale(0);
+            animation: bloom7 2s ease-out 0.1s forwards;
+        }
 
-    .inner {  
-        width: 70px;  
-        height: 120px;  
+        .p8 {
+            transform: rotate(65deg) scale(0);
+            animation: bloom8 2s ease-out 0s forwards;
+        }
 
-        top: 105px;  
-        left: 125px;  
+        .inner {
+            width: 70px;
+            height: 120px;
 
-        z-index: 10;  
-    }  
+            top: 105px;
+            left: 125px;
 
-    .i1 {  
-        transform: rotate(-40deg) scale(0);  
-        animation: inner1 2s ease-out 0.7s forwards;  
-    }  
+            z-index: 10;
+        }
 
-    .i2 {  
-        transform: rotate(-20deg) scale(0);  
-        animation: inner2 2s ease-out 0.8s forwards;  
-    }  
+        .i1 {
+            transform: rotate(-40deg) scale(0);
+            animation: inner1 2s ease-out 0.7s forwards;
+        }
 
-    .i3 {  
-        transform: rotate(20deg) scale(0);  
-        animation: inner3 2s ease-out 0.8s forwards;  
-    }  
+        .i2 {
+            transform: rotate(-20deg) scale(0);
+            animation: inner2 2s ease-out 0.8s forwards;
+        }
 
-    .i4 {  
-        transform: rotate(40deg) scale(0);  
-        animation: inner4 2s ease-out 0.7s forwards;  
-    }  
+        .i3 {
+            transform: rotate(20deg) scale(0);
+            animation: inner3 2s ease-out 0.8s forwards;
+        }
 
-    .center {  
-        position: absolute;  
+        .i4 {
+            transform: rotate(40deg) scale(0);
+            animation: inner4 2s ease-out 0.7s forwards;
+        }
 
-        width: 62px;  
-        height: 62px;  
+        .center {
+            position: absolute;
 
-        left: 129px;  
-        top: 142px;  
+            width: 62px;
+            height: 62px;
 
-        border-radius: 50%;  
+            left: 129px;
+            top: 142px;
 
-        background: radial-gradient(  
-            circle at 35% 30%,  
-            #fff9c4,  
-            #ffe071 35%,  
-            #ffc13d 70%,  
-            #e99b20  
-        );  
+            border-radius: 50%;
 
-        z-index: 30;  
+            background: radial-gradient(
+                circle at 35% 30%,
+                #fff9c4,
+                #ffe071 35%,
+                #ffc13d 70%,
+                #e99b20
+            );
 
-        box-shadow:  
-            0 0 18px rgba(255, 215, 80, 0.8);  
-    }  
+            z-index: 30;
 
-    /* =========================  
-       SUN  
-    ========================= */  
+            box-shadow:
+                0 0 18px rgba(255, 215, 80, 0.8);
+        }
 
-    .sun-area {  
-        position: absolute;  
+        /* =========================
+           SUN
+        ========================= */
 
-        left: 50%;  
-        top: 50%;  
+        .sun-area {
+            position: absolute;
 
-        width: 250px;  
-        height: 250px;  
+            left: 50%;
+            top: 50%;
 
-        transform:  
-            translate(-50%, -50%)  
-            translateY(170px);  
+            width: 250px;
+            height: 250px;
 
-        z-index: 100;  
+            transform:
+                translate(-50%, -50%)
+                translateY(170px);
 
-        animation:  
-            sunRise 2.5s ease-out 0s forwards;  
-    }  
+            z-index: 100;
 
-    .rays {  
-        position: absolute;  
+            animation:
+                sunRise 2.5s ease-out 0s forwards;
+        }
 
-        left: 50%;  
-        top: 50%;  
+        .rays {
+            position: absolute;
 
-        width: 230px;  
-        height: 230px;  
+            left: 50%;
+            top: 50%;
 
-        transform:  
-            translate(-50%, -50%);  
+            width: 230px;
+            height: 230px;
 
-        border-radius: 50%;  
+            transform:
+                translate(-50%, -50%);
 
-        background:  
-            repeating-conic-gradient(  
-                from 0deg,  
-                rgba(255, 215, 70, 0.65) 0deg 5deg,  
-                transparent 5deg 15deg  
-            );  
+            border-radius: 50%;
 
-        filter: blur(2px);  
+            background:
+                repeating-conic-gradient(
+                    from 0deg,
+                    rgba(255, 215, 70, 0.65) 0deg 5deg,
+                    transparent 5deg 15deg
+                );
 
-        opacity: 0;  
+            filter: blur(2px);
 
-        z-index: 1;  
+            opacity: 0;
 
-        animation:  
-            raysAppear 1.5s ease-out 0s forwards;  
-    }  
+            z-index: 1;
 
-    .sun {  
-        position: absolute;  
+            animation:
+                raysAppear 1.5s ease-out 0s forwards;
+        }
 
-        left: 50%;  
-        top: 50%;  
+        .sun {
+            position: absolute;
 
-        width: 100px;  
-        height: 100px;  
+            left: 50%;
+            top: 50%;
 
-        transform:  
-            translate(-50%, -50%);  
+            width: 100px;
+            height: 100px;
 
-        border-radius: 50%;  
+            transform:
+                translate(-50%, -50%);
 
-        background: radial-gradient(  
-            circle,  
-            #fffbd0 0%,  
-            #fff176 25%,  
-            #ffd43b 60%,  
-            #ff9d00 100%  
-        );  
+            border-radius: 50%;
 
-        box-shadow:  
-            0 0 25px #ffd43b,  
-            0 0 60px #ffb300,  
-            0 0 100px rgba(255, 179, 0, 0.6);  
+            background: radial-gradient(
+                circle,
+                #fffbd0 0%,
+                #fff176 25%,
+                #ffd43b 60%,
+                #ff9d00 100%
+            );
 
-        z-index: 2;  
+            box-shadow:
+                0 0 25px #ffd43b,
+                0 0 60px #ffb300,
+                0 0 100px rgba(255, 179, 0, 0.6);
 
-        animation:  
-            sunGlow 2s ease-in-out 2.5s infinite alternate;  
-    }  
+            z-index: 2;
 
-    /* =========================  
-       SECOND SCREEN  
-    ========================= */  
+            animation:
+                sunGlow 2s ease-in-out 2.5s infinite alternate;
+        }
 
-    .welcome-screen {  
-        position: absolute;  
+        /* =========================
+           WELCOME SCREEN
+        ========================= */
 
-        width: 100%;  
-        height: 100vh;  
+        .welcome-screen {
+            position: absolute;
 
-        background: #000;  
+            width: 100%;
+            height: 100vh;
 
-        display: flex;  
-        flex-direction: column;  
+            background: #000;
 
-        justify-content: center;  
-        align-items: center;  
+            display: flex;
+            flex-direction: column;
 
-        text-align: center;  
+            justify-content: center;
+            align-items: center;
 
-        opacity: 0;  
+            text-align: center;
 
-        z-index: 500;  
+            opacity: 0;
 
-        animation:  
-            welcomeShow 1.5s ease-in-out 5s forwards;  
-    }  
+            z-index: 500;
 
-    .welcome-screen h1 {  
-        margin: 0;  
+            animation:
+                welcomeShow 1.5s ease-in-out 5s forwards;
+        }
 
-        color: white;  
+        .welcome-screen h1 {
+            margin: 0;
 
-        font-size: 42px;  
+            color: white;
 
-        letter-spacing: 2px;  
+            font-size: 42px;
 
-        text-shadow:  
-            0 0 10px rgba(255,255,255,0.5),  
-            0 0 30px rgba(255,180,50,0.4);  
-    }  
+            letter-spacing: 2px;
 
-    .welcome-screen p {  
-        color: #aaa;  
+            text-shadow:
+                0 0 10px rgba(255,255,255,0.5),
+                0 0 30px rgba(255,180,50,0.4);
+        }
 
-        font-size: 17px;  
+        .welcome-screen p {
+            color: #aaa;
 
-        margin-top: 12px;  
-    }  
+            font-size: 17px;
 
-    /* BUTTON */  
+            margin-top: 12px;
+        }
 
-    .collection-button {  
-        margin-top: 30px;  
+        /* =========================
+           BUTTON
+        ========================= */
 
-        padding: 15px 28px;  
+        .collection-button {
+            margin-top: 30px;
 
-        border: 1px solid #ffd43b;  
+            padding: 15px 28px;
 
-        border-radius: 30px;  
+            border: 1px solid #ffd43b;
 
-        background: transparent;  
+            border-radius: 30px;
 
-        color: #ffd43b;  
+            background: transparent;
 
-        font-size: 16px;  
+            color: #ffd43b;
 
-        cursor: pointer;  
+            font-size: 16px;
 
-        transition: 0.3s;  
+            cursor: pointer;
 
-        box-shadow:  
-            0 0 10px rgba(255, 212, 59, 0.2);  
-    }  
+            transition: 0.3s;
 
-    .collection-button:hover {  
-        background: #ffd43b;  
+            box-shadow:
+                0 0 10px rgba(255, 212, 59, 0.2);
+        }
 
-        color: #000;  
+        .collection-button:hover {
+            background: #ffd43b;
 
-        box-shadow:  
-            0 0 25px rgba(255, 212, 59, 0.8);  
+            color: #000;
 
-        transform: translateY(-3px);  
-    }  
+            box-shadow:
+                0 0 25px rgba(255, 212, 59, 0.8);
 
-    /* =========================  
-       ANIMATIONS  
-    ========================= */  
+            transform: translateY(-3px);
+        }
 
-    @keyframes sunRise {  
+        /* =========================
+           VIDEO SCREEN
+        ========================= */
 
-        0% {  
-            transform:  
-                translate(-50%, -50%)  
-                translateY(170px);  
+        .video-screen {
+            position: fixed;
 
-            opacity: 0;  
-        }  
+            inset: 0;
 
-        70% {  
-            transform:  
-                translate(-50%, -50%)  
-                translateY(-10px);  
+            background: #000;
 
-            opacity: 1;  
-        }  
+            display: flex;
 
-        100% {  
-            transform:  
-                translate(-50%, -50%)  
-                translateY(0);  
+            justify-content: center;
 
-            opacity: 1;  
-        }  
-    }  
+            align-items: center;
 
-    @keyframes raysAppear {  
+            opacity: 0;
 
-        from {  
-            opacity: 0;  
+            visibility: hidden;
 
-            transform:  
-                translate(-50%, -50%)  
-                scale(0.2);  
-        }  
+            z-index: 1000;
 
-        to {  
-            opacity: 0.45;  
+            transition: 0.5s;
+        }
 
-            transform:  
-                translate(-50%, -50%)  
-                scale(1);  
-        }  
-    }  
+        .video-screen.show {
+            opacity: 1;
 
-    @keyframes sunGlow {  
+            visibility: visible;
+        }
 
-        from {  
-            box-shadow:  
-                0 0 25px #ffd43b,  
-                0 0 60px #ffb300,  
-                0 0 100px rgba(255, 179, 0, 0.5);  
-        }  
+        .video-screen video {
+            width: 90%;
 
-        to {  
-            box-shadow:  
-                0 0 40px #fff176,  
-                0 0 90px #ffb300,  
-                0 0 140px rgba(255, 179, 0, 0.8);  
-        }  
-    }  
+            max-width: 900px;
 
-    /* LOTUS */  
+            max-height: 85vh;
 
-    @keyframes bloom1 {  
-        to {  
-            transform: rotate(-65deg) scale(1);  
-        }  
-    }  
+            border-radius: 12px;
 
-    @keyframes bloom2 {  
-        to {  
-            transform: rotate(-45deg) scale(1);  
-        }  
-    }  
+            box-shadow:
+                0 0 30px rgba(255,255,255,0.2);
+        }
 
-    @keyframes bloom3 {  
-        to {  
-            transform: rotate(-25deg) scale(1);  
-        }  
-    }  
+        /* CLOSE BUTTON */
 
-    @keyframes bloom4 {  
-        to {  
-            transform: rotate(-10deg) scale(1);  
-        }  
-    }  
+        .close-video {
+            position: absolute;
 
-    @keyframes bloom5 {  
-        to {  
-            transform: rotate(10deg) scale(1);  
-        }  
-    }  
+            top: 20px;
 
-    @keyframes bloom6 {  
-        to {  
-            transform: rotate(25deg) scale(1);  
-        }  
-    }  
+            right: 25px;
 
-    @keyframes bloom7 {  
-        to {  
-            transform: rotate(45deg) scale(1);  
-        }  
-    }  
+            width: 45px;
 
-    @keyframes bloom8 {  
-        to {  
-            transform: rotate(65deg) scale(1);  
-        }  
-    }  
+            height: 45px;
 
-    @keyframes inner1 {  
-        to {  
-            transform: rotate(-40deg) scale(1);  
-        }  
-    }  
+            border: 1px solid #ffd43b;
 
-    @keyframes inner2 {  
-        to {  
-            transform: rotate(-20deg) scale(1);  
-        }  
-    }  
+            border-radius: 50%;
 
-    @keyframes inner3 {  
-        to {  
-            transform: rotate(20deg) scale(1);  
-        }  
-    }  
+            background: #000;
 
-    @keyframes inner4 {  
-        to {  
-            transform: rotate(40deg) scale(1);  
-        }  
-    }  
+            color: #ffd43b;
 
-    /* SCREEN CHANGE */  
+            font-size: 22px;
 
-    @keyframes firstScreenOut {  
+            cursor: pointer;
 
-        0% {  
-            opacity: 1;  
-        }  
+            z-index: 1001;
+        }
 
-        100% {  
-            opacity: 0;  
-            visibility: hidden;  
-        }  
-    }  
+        .close-video:hover {
+            background: #ffd43b;
 
-    @keyframes welcomeShow {  
+            color: #000;
+        }
 
-        0% {  
-            opacity: 0;  
-            transform: scale(1.05);  
-        }  
+        /* =========================
+           ANIMATIONS
+        ========================= */
 
-        100% {  
-            opacity: 1;  
-            transform: scale(1);  
-        }  
-    }  
+        @keyframes sunRise {
 
-</style>
+            0% {
+                transform:
+                    translate(-50%, -50%)
+                    translateY(170px);
 
-</head>  <body>  <!-- FIRST ANIMATION -->  
+                opacity: 0;
+            }
 
-<div class="first-screen">  
+            70% {
+                transform:
+                    translate(-50%, -50%)
+                    translateY(-10px);
 
-    <div class="lotus-area">  
+                opacity: 1;
+            }
 
-        <!-- LEFT LOTUS -->  
+            100% {
+                transform:
+                    translate(-50%, -50%)
+                    translateY(0);
 
-        <div class="lotus">  
+                opacity: 1;
+            }
+        }
 
-            <div class="petal p1"></div>  
-            <div class="petal p2"></div>  
-            <div class="petal p3"></div>  
-            <div class="petal p4"></div>  
-            <div class="petal p5"></div>  
-            <div class="petal p6"></div>  
-            <div class="petal p7"></div>  
-            <div class="petal p8"></div>  
+        @keyframes raysAppear {
 
-            <div class="petal inner i1"></div>  
-            <div class="petal inner i2"></div>  
-            <div class="petal inner i3"></div>  
-            <div class="petal inner i4"></div>  
+            from {
+                opacity: 0;
 
-            <div class="center"></div>  
+                transform:
+                    translate(-50%, -50%)
+                    scale(0.2);
+            }
 
-        </div>  
+            to {
+                opacity: 0.45;
 
-        <!-- RIGHT LOTUS -->  
+                transform:
+                    translate(-50%, -50%)
+                    scale(1);
+            }
+        }
 
-        <div class="lotus second-lotus">  
+        @keyframes sunGlow {
 
-            <div class="petal p1"></div>  
-            <div class="petal p2"></div>  
-            <div class="petal p3"></div>  
-            <div class="petal p4"></div>  
-            <div class="petal p5"></div>  
-            <div class="petal p6"></div>  
-            <div class="petal p7"></div>  
-            <div class="petal p8"></div>  
+            from {
+                box-shadow:
+                    0 0 25px #ffd43b,
+                    0 0 60px #ffb300,
+                    0 0 100px rgba(255, 179, 0, 0.5);
+            }
 
-            <div class="petal inner i1"></div>  
-            <div class="petal inner i2"></div>  
-            <div class="petal inner i3"></div>  
-            <div class="petal inner i4"></div>  
+            to {
+                box-shadow:
+                    0 0 40px #fff176,
+                    0 0 90px #ffb300,
+                    0 0 140px rgba(255, 179, 0, 0.8);
+            }
+        }
 
-            <div class="center"></div>  
+        /* LOTUS */
 
-        </div>  
+        @keyframes bloom1 {
+            to {
+                transform: rotate(-65deg) scale(1);
+            }
+        }
 
-        <!-- SUN -->  
+        @keyframes bloom2 {
+            to {
+                transform: rotate(-45deg) scale(1);
+            }
+        }
 
-        <div class="sun-area">  
+        @keyframes bloom3 {
+            to {
+                transform: rotate(-25deg) scale(1);
+            }
+        }
 
-            <div class="rays"></div>  
+        @keyframes bloom4 {
+            to {
+                transform: rotate(-10deg) scale(1);
+            }
+        }
 
-            <div class="sun"></div>  
+        @keyframes bloom5 {
+            to {
+                transform: rotate(10deg) scale(1);
+            }
+        }
 
-        </div>  
+        @keyframes bloom6 {
+            to {
+                transform: rotate(25deg) scale(1);
+            }
+        }
 
-    </div>  
+        @keyframes bloom7 {
+            to {
+                transform: rotate(45deg) scale(1);
+            }
+        }
 
-</div>  
+        @keyframes bloom8 {
+            to {
+                transform: rotate(65deg) scale(1);
+            }
+        }
 
+        @keyframes inner1 {
+            to {
+                transform: rotate(-40deg) scale(1);
+            }
+        }
 
-<!-- SECOND SCREEN -->  
+        @keyframes inner2 {
+            to {
+                transform: rotate(-20deg) scale(1);
+            }
+        }
 
-<div class="welcome-screen">  
+        @keyframes inner3 {
+            to {
+                transform: rotate(20deg) scale(1);
+            }
+        }
 
-    <h1>Welcome to My Creative World</h1>  
+        @keyframes inner4 {
+            to {
+                transform: rotate(40deg) scale(1);
+            }
+        }
 
-    <p>Discover something legendary.</p>  
+        /* SCREEN CHANGE */
 
-    <button class="collection-button">  
-        View My Legendary Collection  
-    </button>  
+        @keyframes firstScreenOut {
 
-</div>
+            0% {
+                opacity: 1;
+            }
 
-</body>  
+            100% {
+                opacity: 0;
+
+                visibility: hidden;
+            }
+        }
+
+        @keyframes welcomeShow {
+
+            0% {
+                opacity: 0;
+
+                transform: scale(1.05);
+            }
+
+            100% {
+                opacity: 1;
+
+                transform: scale(1);
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- FIRST ANIMATION -->
+
+    <div class="first-screen">
+
+        <div class="lotus-area">
+
+            <!-- LEFT LOTUS -->
+
+            <div class="lotus">
+
+                <div class="petal p1"></div>
+                <div class="petal p2"></div>
+                <div class="petal p3"></div>
+                <div class="petal p4"></div>
+                <div class="petal p5"></div>
+                <div class="petal p6"></div>
+                <div class="petal p7"></div>
+                <div class="petal p8"></div>
+
+                <div class="petal inner i1"></div>
+                <div class="petal inner i2"></div>
+                <div class="petal inner i3"></div>
+                <div class="petal inner i4"></div>
+
+                <div class="center"></div>
+
+            </div>
+
+            <!-- RIGHT LOTUS -->
+
+            <div class="lotus second-lotus">
+
+                <div class="petal p1"></div>
+                <div class="petal p2"></div>
+                <div class="petal p3"></div>
+                <div class="petal p4"></div>
+                <div class="petal p5"></div>
+                <div class="petal p6"></div>
+                <div class="petal p7"></div>
+                <div class="petal p8"></div>
+
+                <div class="petal inner i1"></div>
+                <div class="petal inner i2"></div>
+                <div class="petal inner i3"></div>
+                <div class="petal inner i4"></div>
+
+                <div class="center"></div>
+
+            </div>
+
+            <!-- SUN -->
+
+            <div class="sun-area">
+
+                <div class="rays"></div>
+
+                <div class="sun"></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- WELCOME SCREEN -->
+
+    <div class="welcome-screen">
+
+        <h1>Welcome to My Creative World</h1>
+
+        <p>Discover something legendary.</p>
+
+        <button class="collection-button">
+            View My Legendary Collection
+        </button>
+
+    </div>
+
+
+    <!-- VIDEO SCREEN -->
+
+    <div class="video-screen" id="videoScreen">
+
+        <button class="close-video" onclick="closeVideo()">
+            ✕
+        </button>
+
+        <video id="myVideo" controls playsinline>
+
+            <source src="myvideo.mp4" type="video/mp4">
+
+            Your browser does not support video.
+
+        </video>
+
+    </div>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+
+        const button =
+            document.querySelector(".collection-button");
+
+        const videoScreen =
+            document.getElementById("videoScreen");
+
+        const video =
+            document.getElementById("myVideo");
+
+
+        button.addEventListener("click", function() {
+
+            videoScreen.classList.add("show");
+
+            video.play();
+
+        });
+
+
+        function closeVideo() {
+
+            video.pause();
+
+            video.currentTime = 0;
+
+            videoScreen.classList.remove("show");
+
+        }
+
+    </script>
+
+</body>
 </html>
