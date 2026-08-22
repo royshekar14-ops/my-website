@@ -1,63 +1,602 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>আমার প্রথম ওয়েবসাইট</title>
+<!DOCTYPE html>  <html>  
+<head>  
+    <title>Lotus and Rising Sun</title>  <style>  
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background: #111827;
-            color: white;
-            padding-top: 100px;
-        }
+    * {  
+        box-sizing: border-box;  
+    }  
 
-        h1 {
-            font-size: 40px;
-        }
+    body {  
+        margin: 0;  
+        height: 100vh;  
+        overflow: hidden;  
+        font-family: Arial, sans-serif;  
+        background: #07111f;  
+    }  
 
-        p {
-            font-size: 20px;
-        }
+    /* =========================  
+       FIRST SCREEN  
+    ========================= */  
 
-        a {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 12px 25px;
-            background: #2563eb;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-        }
-        nav {
-    background: #1e293b;
-    padding: 15px;
-}
+    .first-screen {  
+        position: absolute;  
+        width: 100%;  
+        height: 100vh;  
 
-nav a {
-    color: white;
-    text-decoration: none;
-    margin: 0 15px;
-    font-size: 18px;
-}
+        display: flex;  
+        justify-content: center;  
+        align-items: center;  
 
-nav a:hover {
-    color: #60a5fa;
-}
-    </style>
-</head>
+        background: #07111f;  
 
-<body>
+        animation: firstScreenOut 1.5s ease-in-out 5s forwards;  
+    }  
 
-    <nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-</nav>
-    <h1>আমার প্রথম ওয়েবসাইট 🚀</h1>
+    .lotus-area {  
+        position: relative;  
 
-    <p>আমি Software Developer হতে শিখছি!</p>
+        display: flex;  
+        justify-content: center;  
+        align-items: center;  
 
-    <a href="about.html">About Me</a>
+        gap: 80px;  
+    }  
 
-</body>
+    /* =========================  
+       LOTUS  
+    ========================= */  
+
+    .lotus {  
+        position: relative;  
+        width: 320px;  
+        height: 300px;  
+    }  
+
+    .second-lotus {  
+        transform: scaleX(-1);  
+    }  
+
+    .petal {  
+        position: absolute;  
+
+        width: 85px;  
+        height: 150px;  
+
+        left: 117px;  
+        top: 70px;  
+
+        background: linear-gradient(  
+            to top,  
+            #d92f83,  
+            #f85ca5,  
+            #ffd6e8  
+        );  
+
+        border-radius: 50% 50% 45% 45%;  
+
+        transform-origin: bottom center;  
+
+        box-shadow:  
+            inset 0 -12px 18px rgba(120, 0, 70, 0.2),  
+            0 4px 12px rgba(255, 100, 180, 0.2);  
+    }  
+
+    .p1 {  
+        transform: rotate(-65deg) scale(0);  
+        animation: bloom1 2s ease-out 0s forwards;  
+    }  
+
+    .p2 {  
+        transform: rotate(-45deg) scale(0);  
+        animation: bloom2 2s ease-out 0.1s forwards;  
+    }  
+
+    .p3 {  
+        transform: rotate(-25deg) scale(0);  
+        animation: bloom3 2s ease-out 0.2s forwards;  
+    }  
+
+    .p4 {  
+        transform: rotate(-10deg) scale(0);  
+        animation: bloom4 2s ease-out 0.3s forwards;  
+    }  
+
+    .p5 {  
+        transform: rotate(10deg) scale(0);  
+        animation: bloom5 2s ease-out 0.3s forwards;  
+    }  
+
+    .p6 {  
+        transform: rotate(25deg) scale(0);  
+        animation: bloom6 2s ease-out 0.2s forwards;  
+    }  
+
+    .p7 {  
+        transform: rotate(45deg) scale(0);  
+        animation: bloom7 2s ease-out 0.1s forwards;  
+    }  
+
+    .p8 {  
+        transform: rotate(65deg) scale(0);  
+        animation: bloom8 2s ease-out 0s forwards;  
+    }  
+
+    .inner {  
+        width: 70px;  
+        height: 120px;  
+
+        top: 105px;  
+        left: 125px;  
+
+        z-index: 10;  
+    }  
+
+    .i1 {  
+        transform: rotate(-40deg) scale(0);  
+        animation: inner1 2s ease-out 0.7s forwards;  
+    }  
+
+    .i2 {  
+        transform: rotate(-20deg) scale(0);  
+        animation: inner2 2s ease-out 0.8s forwards;  
+    }  
+
+    .i3 {  
+        transform: rotate(20deg) scale(0);  
+        animation: inner3 2s ease-out 0.8s forwards;  
+    }  
+
+    .i4 {  
+        transform: rotate(40deg) scale(0);  
+        animation: inner4 2s ease-out 0.7s forwards;  
+    }  
+
+    .center {  
+        position: absolute;  
+
+        width: 62px;  
+        height: 62px;  
+
+        left: 129px;  
+        top: 142px;  
+
+        border-radius: 50%;  
+
+        background: radial-gradient(  
+            circle at 35% 30%,  
+            #fff9c4,  
+            #ffe071 35%,  
+            #ffc13d 70%,  
+            #e99b20  
+        );  
+
+        z-index: 30;  
+
+        box-shadow:  
+            0 0 18px rgba(255, 215, 80, 0.8);  
+    }  
+
+    /* =========================  
+       SUN  
+    ========================= */  
+
+    .sun-area {  
+        position: absolute;  
+
+        left: 50%;  
+        top: 50%;  
+
+        width: 250px;  
+        height: 250px;  
+
+        transform:  
+            translate(-50%, -50%)  
+            translateY(170px);  
+
+        z-index: 100;  
+
+        animation:  
+            sunRise 2.5s ease-out 0s forwards;  
+    }  
+
+    .rays {  
+        position: absolute;  
+
+        left: 50%;  
+        top: 50%;  
+
+        width: 230px;  
+        height: 230px;  
+
+        transform:  
+            translate(-50%, -50%);  
+
+        border-radius: 50%;  
+
+        background:  
+            repeating-conic-gradient(  
+                from 0deg,  
+                rgba(255, 215, 70, 0.65) 0deg 5deg,  
+                transparent 5deg 15deg  
+            );  
+
+        filter: blur(2px);  
+
+        opacity: 0;  
+
+        z-index: 1;  
+
+        animation:  
+            raysAppear 1.5s ease-out 0s forwards;  
+    }  
+
+    .sun {  
+        position: absolute;  
+
+        left: 50%;  
+        top: 50%;  
+
+        width: 100px;  
+        height: 100px;  
+
+        transform:  
+            translate(-50%, -50%);  
+
+        border-radius: 50%;  
+
+        background: radial-gradient(  
+            circle,  
+            #fffbd0 0%,  
+            #fff176 25%,  
+            #ffd43b 60%,  
+            #ff9d00 100%  
+        );  
+
+        box-shadow:  
+            0 0 25px #ffd43b,  
+            0 0 60px #ffb300,  
+            0 0 100px rgba(255, 179, 0, 0.6);  
+
+        z-index: 2;  
+
+        animation:  
+            sunGlow 2s ease-in-out 2.5s infinite alternate;  
+    }  
+
+    /* =========================  
+       SECOND SCREEN  
+    ========================= */  
+
+    .welcome-screen {  
+        position: absolute;  
+
+        width: 100%;  
+        height: 100vh;  
+
+        background: #000;  
+
+        display: flex;  
+        flex-direction: column;  
+
+        justify-content: center;  
+        align-items: center;  
+
+        text-align: center;  
+
+        opacity: 0;  
+
+        z-index: 500;  
+
+        animation:  
+            welcomeShow 1.5s ease-in-out 5s forwards;  
+    }  
+
+    .welcome-screen h1 {  
+        margin: 0;  
+
+        color: white;  
+
+        font-size: 42px;  
+
+        letter-spacing: 2px;  
+
+        text-shadow:  
+            0 0 10px rgba(255,255,255,0.5),  
+            0 0 30px rgba(255,180,50,0.4);  
+    }  
+
+    .welcome-screen p {  
+        color: #aaa;  
+
+        font-size: 17px;  
+
+        margin-top: 12px;  
+    }  
+
+    /* BUTTON */  
+
+    .collection-button {  
+        margin-top: 30px;  
+
+        padding: 15px 28px;  
+
+        border: 1px solid #ffd43b;  
+
+        border-radius: 30px;  
+
+        background: transparent;  
+
+        color: #ffd43b;  
+
+        font-size: 16px;  
+
+        cursor: pointer;  
+
+        transition: 0.3s;  
+
+        box-shadow:  
+            0 0 10px rgba(255, 212, 59, 0.2);  
+    }  
+
+    .collection-button:hover {  
+        background: #ffd43b;  
+
+        color: #000;  
+
+        box-shadow:  
+            0 0 25px rgba(255, 212, 59, 0.8);  
+
+        transform: translateY(-3px);  
+    }  
+
+    /* =========================  
+       ANIMATIONS  
+    ========================= */  
+
+    @keyframes sunRise {  
+
+        0% {  
+            transform:  
+                translate(-50%, -50%)  
+                translateY(170px);  
+
+            opacity: 0;  
+        }  
+
+        70% {  
+            transform:  
+                translate(-50%, -50%)  
+                translateY(-10px);  
+
+            opacity: 1;  
+        }  
+
+        100% {  
+            transform:  
+                translate(-50%, -50%)  
+                translateY(0);  
+
+            opacity: 1;  
+        }  
+    }  
+
+    @keyframes raysAppear {  
+
+        from {  
+            opacity: 0;  
+
+            transform:  
+                translate(-50%, -50%)  
+                scale(0.2);  
+        }  
+
+        to {  
+            opacity: 0.45;  
+
+            transform:  
+                translate(-50%, -50%)  
+                scale(1);  
+        }  
+    }  
+
+    @keyframes sunGlow {  
+
+        from {  
+            box-shadow:  
+                0 0 25px #ffd43b,  
+                0 0 60px #ffb300,  
+                0 0 100px rgba(255, 179, 0, 0.5);  
+        }  
+
+        to {  
+            box-shadow:  
+                0 0 40px #fff176,  
+                0 0 90px #ffb300,  
+                0 0 140px rgba(255, 179, 0, 0.8);  
+        }  
+    }  
+
+    /* LOTUS */  
+
+    @keyframes bloom1 {  
+        to {  
+            transform: rotate(-65deg) scale(1);  
+        }  
+    }  
+
+    @keyframes bloom2 {  
+        to {  
+            transform: rotate(-45deg) scale(1);  
+        }  
+    }  
+
+    @keyframes bloom3 {  
+        to {  
+            transform: rotate(-25deg) scale(1);  
+        }  
+    }  
+
+    @keyframes bloom4 {  
+        to {  
+            transform: rotate(-10deg) scale(1);  
+        }  
+    }  
+
+    @keyframes bloom5 {  
+        to {  
+            transform: rotate(10deg) scale(1);  
+        }  
+    }  
+
+    @keyframes bloom6 {  
+        to {  
+            transform: rotate(25deg) scale(1);  
+        }  
+    }  
+
+    @keyframes bloom7 {  
+        to {  
+            transform: rotate(45deg) scale(1);  
+        }  
+    }  
+
+    @keyframes bloom8 {  
+        to {  
+            transform: rotate(65deg) scale(1);  
+        }  
+    }  
+
+    @keyframes inner1 {  
+        to {  
+            transform: rotate(-40deg) scale(1);  
+        }  
+    }  
+
+    @keyframes inner2 {  
+        to {  
+            transform: rotate(-20deg) scale(1);  
+        }  
+    }  
+
+    @keyframes inner3 {  
+        to {  
+            transform: rotate(20deg) scale(1);  
+        }  
+    }  
+
+    @keyframes inner4 {  
+        to {  
+            transform: rotate(40deg) scale(1);  
+        }  
+    }  
+
+    /* SCREEN CHANGE */  
+
+    @keyframes firstScreenOut {  
+
+        0% {  
+            opacity: 1;  
+        }  
+
+        100% {  
+            opacity: 0;  
+            visibility: hidden;  
+        }  
+    }  
+
+    @keyframes welcomeShow {  
+
+        0% {  
+            opacity: 0;  
+            transform: scale(1.05);  
+        }  
+
+        100% {  
+            opacity: 1;  
+            transform: scale(1);  
+        }  
+    }  
+
+</style>
+
+</head>  <body>  <!-- FIRST ANIMATION -->  
+
+<div class="first-screen">  
+
+    <div class="lotus-area">  
+
+        <!-- LEFT LOTUS -->  
+
+        <div class="lotus">  
+
+            <div class="petal p1"></div>  
+            <div class="petal p2"></div>  
+            <div class="petal p3"></div>  
+            <div class="petal p4"></div>  
+            <div class="petal p5"></div>  
+            <div class="petal p6"></div>  
+            <div class="petal p7"></div>  
+            <div class="petal p8"></div>  
+
+            <div class="petal inner i1"></div>  
+            <div class="petal inner i2"></div>  
+            <div class="petal inner i3"></div>  
+            <div class="petal inner i4"></div>  
+
+            <div class="center"></div>  
+
+        </div>  
+
+        <!-- RIGHT LOTUS -->  
+
+        <div class="lotus second-lotus">  
+
+            <div class="petal p1"></div>  
+            <div class="petal p2"></div>  
+            <div class="petal p3"></div>  
+            <div class="petal p4"></div>  
+            <div class="petal p5"></div>  
+            <div class="petal p6"></div>  
+            <div class="petal p7"></div>  
+            <div class="petal p8"></div>  
+
+            <div class="petal inner i1"></div>  
+            <div class="petal inner i2"></div>  
+            <div class="petal inner i3"></div>  
+            <div class="petal inner i4"></div>  
+
+            <div class="center"></div>  
+
+        </div>  
+
+        <!-- SUN -->  
+
+        <div class="sun-area">  
+
+            <div class="rays"></div>  
+
+            <div class="sun"></div>  
+
+        </div>  
+
+    </div>  
+
+</div>  
+
+
+<!-- SECOND SCREEN -->  
+
+<div class="welcome-screen">  
+
+    <h1>Welcome to My Creative World</h1>  
+
+    <p>Discover something legendary.</p>  
+
+    <button class="collection-button">  
+        View My Legendary Collection  
+    </button>  
+
+</div>
+
+</body>  
 </html>
