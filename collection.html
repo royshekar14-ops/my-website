@@ -5,17 +5,12 @@
     <title>My Legendary Collection</title>
 
     <style>
-        * {
-            box-sizing: border-box;
-        }
-
         body {
             margin: 0;
             min-height: 100vh;
             background: #000;
             color: white;
             font-family: Arial, sans-serif;
-
             display: flex;
             justify-content: center;
             align-items: center;
@@ -24,36 +19,21 @@
         }
 
         h1 {
-            font-size: 38px;
-            margin-bottom: 25px;
+            font-size: 35px;
         }
 
-        video {
-            width: 90%;
-            max-width: 900px;
-            max-height: 80vh;
-            border-radius: 15px;
-
-            box-shadow:
-                0 0 30px rgba(255, 212, 59, 0.5);
-        }
-
-        .back-button {
-            margin-top: 25px;
-
-            padding: 12px 25px;
-
+        .watch-button {
+            padding: 15px 30px;
             border: 1px solid #ffd43b;
-            border-radius: 25px;
-
+            border-radius: 30px;
             background: transparent;
             color: #ffd43b;
-
-            font-size: 16px;
+            font-size: 17px;
             cursor: pointer;
+            text-decoration: none;
         }
 
-        .back-button:hover {
+        .watch-button:hover {
             background: #ffd43b;
             color: #000;
         }
@@ -64,15 +44,11 @@
 
     <h1>My Legendary Collection</h1>
 
-    <video controls playsinline>
-        <source
-            src="https://wispy-water-7efb.royshekar14.workers.dev/"
-            type="video/mp4">
-    </video>
-
-    <button class="back-button" onclick="history.back()">
-        ← Back
-    </button>
+    <a class="watch-button"
+       href="https://wispy-water-7efb.royshekar14.workers.dev/"
+       target="_blank">
+        ▶ Watch Video
+    </a>
 
 </body>
 </html>
