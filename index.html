@@ -32,7 +32,7 @@
 
             background: #07111f;
 
-            animation: firstScreenOut 1.5s ease-in-out 5s forwards;
+            animation: firstScreenOut 1.5s ease-in-out 6s forwards;
         }
 
         .lotus-area {
@@ -42,7 +42,9 @@
             justify-content: center;
             align-items: center;
 
-            gap: 80px;
+            gap: 35px;
+
+            transform: scale(1.25);
         }
 
         /* =========================
@@ -51,6 +53,7 @@
 
         .lotus {
             position: relative;
+
             width: 320px;
             height: 300px;
         }
@@ -62,11 +65,11 @@
         .petal {
             position: absolute;
 
-            width: 85px;
-            height: 150px;
+            width: 100px;
+            height: 175px;
 
-            left: 117px;
-            top: 70px;
+            left: 110px;
+            top: 55px;
 
             background: linear-gradient(
                 to top,
@@ -81,7 +84,7 @@
 
             box-shadow:
                 inset 0 -12px 18px rgba(120, 0, 70, 0.2),
-                0 4px 12px rgba(255, 100, 180, 0.2);
+                0 4px 15px rgba(255, 100, 180, 0.3);
         }
 
         .p1 {
@@ -125,11 +128,11 @@
         }
 
         .inner {
-            width: 70px;
-            height: 120px;
+            width: 82px;
+            height: 140px;
 
-            top: 105px;
-            left: 125px;
+            top: 85px;
+            left: 119px;
 
             z-index: 10;
         }
@@ -157,11 +160,11 @@
         .center {
             position: absolute;
 
-            width: 62px;
-            height: 62px;
+            width: 70px;
+            height: 70px;
 
-            left: 129px;
-            top: 142px;
+            left: 125px;
+            top: 135px;
 
             border-radius: 50%;
 
@@ -176,7 +179,7 @@
             z-index: 30;
 
             box-shadow:
-                0 0 18px rgba(255, 215, 80, 0.8);
+                0 0 22px rgba(255, 215, 80, 0.9);
         }
 
         /* =========================
@@ -208,8 +211,8 @@
             left: 50%;
             top: 50%;
 
-            width: 230px;
-            height: 230px;
+            width: 250px;
+            height: 250px;
 
             transform:
                 translate(-50%, -50%);
@@ -239,8 +242,8 @@
             left: 50%;
             top: 50%;
 
-            width: 100px;
-            height: 100px;
+            width: 125px;
+            height: 125px;
 
             transform:
                 translate(-50%, -50%);
@@ -256,9 +259,9 @@
             );
 
             box-shadow:
-                0 0 25px #ffd43b,
-                0 0 60px #ffb300,
-                0 0 100px rgba(255, 179, 0, 0.6);
+                0 0 30px #ffd43b,
+                0 0 70px #ffb300,
+                0 0 110px rgba(255, 179, 0, 0.6);
 
             z-index: 2;
 
@@ -267,7 +270,134 @@
         }
 
         /* =========================
-           WELCOME SCREEN
+           GRASS
+        ========================= */
+
+        .grass {
+            position: absolute;
+
+            bottom: 0;
+            left: 0;
+
+            width: 100%;
+            height: 115px;
+
+            z-index: 150;
+
+            background:
+                linear-gradient(
+                    to top,
+                    #071f12,
+                    #0b3d20
+                );
+
+            clip-path: polygon(
+                0 35%,
+                3% 20%,
+                6% 38%,
+                9% 12%,
+                12% 35%,
+                15% 18%,
+                18% 40%,
+                21% 10%,
+                24% 35%,
+                27% 15%,
+                30% 38%,
+                33% 12%,
+                36% 35%,
+                39% 18%,
+                42% 40%,
+                45% 10%,
+                48% 35%,
+                51% 15%,
+                54% 38%,
+                57% 12%,
+                60% 35%,
+                63% 18%,
+                66% 40%,
+                69% 10%,
+                72% 35%,
+                75% 15%,
+                78% 38%,
+                81% 12%,
+                84% 35%,
+                87% 18%,
+                90% 40%,
+                93% 10%,
+                96% 35%,
+                100% 18%,
+                100% 100%,
+                0 100%
+            );
+        }
+
+        /* =========================
+           SMALL FLOWERS IN GRASS
+        ========================= */
+
+        .field-flower {
+            position: absolute;
+
+            width: 13px;
+            height: 13px;
+
+            border-radius: 50%;
+
+            background: #ff75b5;
+
+            box-shadow:
+                0 0 8px rgba(255, 120, 190, 0.8);
+        }
+
+        .field-flower::before,
+        .field-flower::after {
+            content: "";
+
+            position: absolute;
+
+            width: 13px;
+            height: 13px;
+
+            border-radius: 50%;
+
+            background: #ffb6dc;
+        }
+
+        .field-flower::before {
+            left: -7px;
+        }
+
+        .field-flower::after {
+            left: 7px;
+        }
+
+        .flower1 {
+            left: 12%;
+            bottom: 45px;
+        }
+
+        .flower2 {
+            left: 28%;
+            bottom: 25px;
+        }
+
+        .flower3 {
+            left: 48%;
+            bottom: 48px;
+        }
+
+        .flower4 {
+            left: 68%;
+            bottom: 30px;
+        }
+
+        .flower5 {
+            left: 85%;
+            bottom: 50px;
+        }
+
+        /* =========================
+           SECOND SCREEN
         ========================= */
 
         .welcome-screen {
@@ -291,7 +421,7 @@
             z-index: 500;
 
             animation:
-                welcomeShow 1.5s ease-in-out 5s forwards;
+                welcomeShow 1.5s ease-in-out 6s forwards;
         }
 
         .welcome-screen h1 {
@@ -302,10 +432,6 @@
             font-size: 42px;
 
             letter-spacing: 2px;
-
-            text-shadow:
-                0 0 10px rgba(255,255,255,0.5),
-                0 0 30px rgba(255,180,50,0.4);
         }
 
         .welcome-screen p {
@@ -315,10 +441,6 @@
 
             margin-top: 12px;
         }
-
-        /* =========================
-           BUTTON
-        ========================= */
 
         .collection-button {
             margin-top: 30px;
@@ -338,9 +460,6 @@
             cursor: pointer;
 
             transition: 0.3s;
-
-            box-shadow:
-                0 0 10px rgba(255, 212, 59, 0.2);
         }
 
         .collection-button:hover {
@@ -352,85 +471,6 @@
                 0 0 25px rgba(255, 212, 59, 0.8);
 
             transform: translateY(-3px);
-        }
-
-        /* =========================
-           VIDEO SCREEN
-        ========================= */
-
-        .video-screen {
-            position: fixed;
-
-            inset: 0;
-
-            background: #000;
-
-            display: flex;
-
-            justify-content: center;
-
-            align-items: center;
-
-            opacity: 0;
-
-            visibility: hidden;
-
-            z-index: 1000;
-
-            transition: 0.5s;
-        }
-
-        .video-screen.show {
-            opacity: 1;
-
-            visibility: visible;
-        }
-
-        .video-screen video {
-            width: 90%;
-
-            max-width: 900px;
-
-            max-height: 85vh;
-
-            border-radius: 12px;
-
-            box-shadow:
-                0 0 30px rgba(255,255,255,0.2);
-        }
-
-        /* CLOSE BUTTON */
-
-        .close-video {
-            position: absolute;
-
-            top: 20px;
-
-            right: 25px;
-
-            width: 45px;
-
-            height: 45px;
-
-            border: 1px solid #ffd43b;
-
-            border-radius: 50%;
-
-            background: #000;
-
-            color: #ffd43b;
-
-            font-size: 22px;
-
-            cursor: pointer;
-
-            z-index: 1001;
-        }
-
-        .close-video:hover {
-            background: #ffd43b;
-
-            color: #000;
         }
 
         /* =========================
@@ -487,20 +527,18 @@
 
             from {
                 box-shadow:
-                    0 0 25px #ffd43b,
-                    0 0 60px #ffb300,
-                    0 0 100px rgba(255, 179, 0, 0.5);
+                    0 0 30px #ffd43b,
+                    0 0 70px #ffb300,
+                    0 0 110px rgba(255, 179, 0, 0.5);
             }
 
             to {
                 box-shadow:
-                    0 0 40px #fff176,
-                    0 0 90px #ffb300,
-                    0 0 140px rgba(255, 179, 0, 0.8);
+                    0 0 45px #fff176,
+                    0 0 100px #ffb300,
+                    0 0 150px rgba(255, 179, 0, 0.8);
             }
         }
-
-        /* LOTUS */
 
         @keyframes bloom1 {
             to {
@@ -574,17 +612,13 @@
             }
         }
 
-        /* SCREEN CHANGE */
-
         @keyframes firstScreenOut {
-
             0% {
                 opacity: 1;
             }
 
             100% {
                 opacity: 0;
-
                 visibility: hidden;
             }
         }
@@ -593,13 +627,11 @@
 
             0% {
                 opacity: 0;
-
                 transform: scale(1.05);
             }
 
             100% {
                 opacity: 1;
-
                 transform: scale(1);
             }
         }
@@ -609,7 +641,7 @@
 
 <body>
 
-    <!-- FIRST ANIMATION -->
+    <!-- FIRST SCREEN -->
 
     <div class="first-screen">
 
@@ -671,10 +703,22 @@
 
         </div>
 
+        <!-- GRASS -->
+
+        <div class="grass">
+
+            <div class="field-flower flower1"></div>
+            <div class="field-flower flower2"></div>
+            <div class="field-flower flower3"></div>
+            <div class="field-flower flower4"></div>
+            <div class="field-flower flower5"></div>
+
+        </div>
+
     </div>
 
 
-    <!-- WELCOME SCREEN -->
+    <!-- SECOND SCREEN -->
 
     <div class="welcome-screen">
 
@@ -682,67 +726,11 @@
 
         <p>Discover something legendary.</p>
 
-        <button class="collection-button"
-        onclick="window.location.href='collection.html'">
-    View My Legendary Collection
+        <button class="collection-button">
+            View My Legendary Collection
         </button>
 
     </div>
-
-
-    <!-- VIDEO SCREEN -->
-
-    <div class="video-screen" id="videoScreen">
-
-        <button class="close-video" onclick="closeVideo()">
-            ✕
-        </button>
-
-        <video id="myVideo" controls playsinline>
-
-            <source src="myvideo.mp4" type="video/mp4">
-
-            Your browser does not support video.
-
-        </video>
-
-    </div>
-
-
-    <!-- JAVASCRIPT -->
-
-    <script>
-
-        const button =
-            document.querySelector(".collection-button");
-
-        const videoScreen =
-            document.getElementById("videoScreen");
-
-        const video =
-            document.getElementById("myVideo");
-
-
-        button.addEventListener("click", function() {
-
-            videoScreen.classList.add("show");
-
-            video.play();
-
-        });
-
-
-        function closeVideo() {
-
-            video.pause();
-
-            video.currentTime = 0;
-
-            videoScreen.classList.remove("show");
-
-        }
-
-    </script>
 
 </body>
 </html>
