@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-
 <title>My Creative World</title>
 
 <style>
@@ -22,93 +21,54 @@ body{
 }
 
 
-/* =====================================
+/* =========================
    FULL SCREEN INTRO
-===================================== */
+========================= */
 
 .intro{
     position:fixed;
     inset:0;
-
     width:100%;
     height:100vh;
-
     overflow:hidden;
-
     background:
-        radial-gradient(
-            circle at center,
-            #35105f 0%,
-            #120d2d 35%,
-            #03040b 100%
-        );
-
+        radial-gradient(circle at center,#35105f,#120d2d 40%,#03040b);
     z-index:9999;
-
-    animation:
-        introOut 1.5s ease 7s forwards;
+    animation:introOut 1.5s ease 7s forwards;
 }
-
-
-/* BIG CENTER GLOW */
 
 .intro-glow{
     position:absolute;
-
     left:50%;
     top:50%;
-
-    width:60vw;
-    height:60vw;
-
+    width:65vw;
+    height:65vw;
     max-width:800px;
     max-height:800px;
-
-    transform:
-        translate(-50%,-50%);
-
+    transform:translate(-50%,-50%);
     border-radius:50%;
-
     background:
-        radial-gradient(
-            circle,
-            rgba(255,190,80,.35),
-            rgba(180,60,255,.18),
-            transparent 70%
-        );
-
+        radial-gradient(circle,
+        rgba(255,190,80,.35),
+        rgba(180,60,255,.18),
+        transparent 70%);
     filter:blur(15px);
-
-    animation:
-        glowPulse 3s infinite alternate;
+    animation:glowPulse 3s infinite alternate;
 }
-
-
-/* ROTATING RINGS */
 
 .ring{
     position:absolute;
-
     left:50%;
     top:50%;
-
+    border:1px solid rgba(255,210,100,.25);
     border-radius:50%;
-
-    border:
-        1px solid
-        rgba(255,210,100,.25);
-
-    transform:
-        translate(-50%,-50%);
-
-    animation:
-        ringRotate 12s linear infinite;
+    transform:translate(-50%,-50%);
+    animation:ringRotate 12s linear infinite;
 }
 
 .ring1{
     width:75vw;
     height:75vw;
-
     max-width:900px;
     max-height:900px;
 }
@@ -116,743 +76,400 @@ body{
 .ring2{
     width:50vw;
     height:50vw;
-
     max-width:650px;
     max-height:650px;
-
-    border-color:
-        rgba(210,100,255,.25);
-
+    border-color:rgba(210,100,255,.25);
     animation-direction:reverse;
-
     animation-duration:9s;
 }
 
 .ring3{
     width:30vw;
     height:30vw;
-
     max-width:400px;
     max-height:400px;
-
-    border-color:
-        rgba(255,190,60,.25);
-
+    border-color:rgba(255,190,60,.25);
     animation-duration:7s;
 }
 
-
-/* STARS */
-
 .star{
     position:absolute;
-
     width:4px;
     height:4px;
-
     border-radius:50%;
-
     background:white;
-
-    box-shadow:
-        0 0 10px white;
-
-    animation:
-        starMove 4s infinite alternate;
+    box-shadow:0 0 10px white;
+    animation:starMove 4s infinite alternate;
 }
 
-.s1{left:8%;top:15%;}
-.s2{left:18%;top:70%;animation-delay:1s;}
-.s3{left:30%;top:25%;animation-delay:1.5s;}
-.s4{left:45%;top:12%;animation-delay:.5s;}
-.s5{left:60%;top:75%;animation-delay:1.8s;}
-.s6{left:72%;top:20%;animation-delay:.8s;}
-.s7{left:84%;top:65%;animation-delay:1.2s;}
-.s8{left:92%;top:32%;animation-delay:2s;}
-.s9{left:12%;top:45%;animation-delay:2.5s;}
-.s10{left:78%;top:45%;animation-delay:1.7s;}
-.s11{left:38%;top:82%;animation-delay:2.2s;}
-.s12{left:55%;top:30%;animation-delay:1.3s;}
-.s13{left:25%;top:90%;animation-delay:1.7s;}
-.s14{left:88%;top:80%;animation-delay:.7s;}
-.s15{left:50%;top:90%;animation-delay:2.4s;}
-
-
-/* INTRO CONTENT */
+.s1{left:8%;top:15%}
+.s2{left:18%;top:70%;animation-delay:1s}
+.s3{left:30%;top:25%;animation-delay:1.5s}
+.s4{left:45%;top:12%;animation-delay:.5s}
+.s5{left:60%;top:75%;animation-delay:1.8s}
+.s6{left:72%;top:20%;animation-delay:.8s}
+.s7{left:84%;top:65%;animation-delay:1.2s}
+.s8{left:92%;top:32%;animation-delay:2s}
+.s9{left:12%;top:45%;animation-delay:2.5s}
+.s10{left:78%;top:45%;animation-delay:1.7s}
+.s11{left:38%;top:82%;animation-delay:2.2s}
+.s12{left:55%;top:30%;animation-delay:1.3s}
+.s13{left:25%;top:90%;animation-delay:1.7s}
+.s14{left:88%;top:80%;animation-delay:.7s}
+.s15{left:50%;top:90%;animation-delay:2.4s}
 
 .intro-content{
     position:absolute;
-
     left:50%;
     top:50%;
-
-    transform:
-        translate(-50%,-50%);
-
+    transform:translate(-50%,-50%);
     text-align:center;
-
     width:90%;
 }
-
-
-/* LOGO */
 
 .intro-logo{
     width:150px;
     height:150px;
-
     margin:auto;
-
     border-radius:50%;
-
     display:flex;
-
     justify-content:center;
     align-items:center;
-
     font-size:70px;
-
     background:
-        radial-gradient(
-            circle,
-            #fff5a0,
-            #ffbd32 45%,
-            #ff6b00
-        );
-
+        radial-gradient(circle,#fff5a0,#ffbd32 45%,#ff6b00);
     box-shadow:
         0 0 30px #ffc400,
         0 0 80px #ff8c00,
-        0 0 150px
-        rgba(255,120,0,.5);
-
-    animation:
-        logoFloat 3s ease-in-out infinite;
+        0 0 150px rgba(255,120,0,.5);
+    animation:logoFloat 3s ease-in-out infinite;
 }
-
 
 .intro-content h2{
-
-    margin:
-        35px 0 10px;
-
-    font-size:
-        clamp(40px,8vw,90px);
-
+    margin:35px 0 10px;
+    font-size:clamp(40px,8vw,90px);
     letter-spacing:7px;
-
     background:
-        linear-gradient(
-            90deg,
-            #ffffff,
-            #ffd75e,
-            #ffffff,
-            #ffd75e
-        );
-
+        linear-gradient(90deg,#fff,#ffd75e,#fff,#ffd75e);
     background-size:300%;
-
     -webkit-background-clip:text;
-
     color:transparent;
-
-    animation:
-        textShine 3s linear infinite;
+    animation:textShine 3s linear infinite;
 }
 
-
 .intro-content p{
-
     margin:0;
-
     color:#d0cde0;
-
-    font-size:
-        clamp(13px,2vw,21px);
-
+    font-size:clamp(13px,2vw,21px);
     letter-spacing:5px;
 }
 
 
-/* =====================================
+/* =========================
    WELCOME
-===================================== */
+========================= */
 
 .welcome{
-
     min-height:100vh;
-
     position:relative;
-
     overflow:hidden;
-
-    padding:
-        120px 20px 140px;
-
+    padding:120px 20px 150px;
     text-align:center;
-
     background:
-        radial-gradient(
-            circle at 50% 0%,
-            #24103e,
-            #080810 45%,
-            #030306 100%
-        );
+        radial-gradient(circle at 50% 0%,#24103e,#080810 45%,#030306);
 }
 
-
-/* DECORATIVE CIRCLES */
-
 .design-circle{
-
     position:absolute;
-
     border-radius:50%;
-
-    border:
-        1px solid
-        rgba(255,210,90,.18);
-
+    border:1px solid rgba(255,210,90,.18);
     pointer-events:none;
 }
 
 .dc1{
-
     width:500px;
     height:500px;
-
     left:-250px;
     top:80px;
-
-    animation:
-        floatDesign 8s ease-in-out infinite;
+    animation:floatDesign 8s ease-in-out infinite;
 }
 
 .dc2{
-
     width:400px;
     height:400px;
-
     right:-200px;
     top:250px;
-
-    border-color:
-        rgba(190,100,255,.2);
-
-    animation:
-        floatDesign 7s ease-in-out infinite reverse;
+    border-color:rgba(190,100,255,.2);
+    animation:floatDesign 7s ease-in-out infinite reverse;
 }
 
 .dc3{
-
     width:750px;
     height:750px;
-
     left:50%;
     top:45%;
-
-    transform:
-        translate(-50%,-50%);
-
-    border-color:
-        rgba(255,180,70,.08);
+    transform:translate(-50%,-50%);
+    border-color:rgba(255,180,70,.08);
 }
-
-
-/* SMALL GLOW DOTS */
 
 .dot{
-
     position:absolute;
-
     width:8px;
     height:8px;
-
     border-radius:50%;
-
     background:#ffd34d;
-
-    box-shadow:
-        0 0 15px #ffd34d;
-
-    animation:
-        dotFloat 4s infinite alternate;
+    box-shadow:0 0 15px #ffd34d;
+    animation:dotFloat 4s infinite alternate;
 }
 
-.d1{left:10%;top:30%;}
-.d2{right:12%;top:35%;animation-delay:1s;}
-.d3{left:20%;top:70%;animation-delay:2s;}
-.d4{right:20%;top:75%;animation-delay:1.5s;}
-.d5{left:50%;top:20%;animation-delay:2s;}
-.d6{right:35%;top:65%;animation-delay:1s;}
-
-
-/* WELCOME CONTENT */
+.d1{left:10%;top:30%}
+.d2{right:12%;top:35%;animation-delay:1s}
+.d3{left:20%;top:70%;animation-delay:2s}
+.d4{right:20%;top:75%;animation-delay:1.5s}
+.d5{left:50%;top:20%;animation-delay:2s}
+.d6{right:35%;top:65%;animation-delay:1s}
 
 .welcome-content{
-
     position:relative;
-
     z-index:5;
-
     max-width:1100px;
-
     margin:auto;
 }
 
-
 .welcome h1{
-
     margin:0;
-
-    font-size:
-        clamp(42px,8vw,90px);
-
+    font-size:clamp(42px,8vw,90px);
     line-height:1.1;
-
     letter-spacing:2px;
-
     text-shadow:
-        0 0 20px
-        rgba(255,255,255,.25),
-
-        0 0 60px
-        rgba(255,190,60,.2);
+        0 0 20px rgba(255,255,255,.25),
+        0 0 60px rgba(255,190,60,.2);
 }
 
-
 .welcome-sub{
-
-    margin:
-        25px auto 40px;
-
+    margin:25px auto 40px;
     max-width:700px;
-
     color:#aaaabc;
-
-    font-size:
-        clamp(16px,2vw,21px);
-
+    font-size:clamp(16px,2vw,21px);
     line-height:1.7;
 }
 
 
-/* =====================================
-   COLLECTION BUTTON
-===================================== */
+/* =========================
+   BUTTON
+========================= */
 
 .button-area{
-
     position:relative;
-
     display:inline-block;
-
     margin-top:10px;
 }
 
-
 .collection-button{
-
     position:relative;
-
     display:inline-flex;
-
     align-items:center;
     justify-content:center;
-
-    padding:
-        19px 38px;
-
+    padding:19px 38px;
     border-radius:50px;
-
     text-decoration:none;
-
     color:#fff;
-
     font-size:18px;
-
     font-weight:bold;
-
     letter-spacing:1px;
-
     background:
-        linear-gradient(
-            135deg,
-            #7b32ff,
-            #ff9d25
-        );
-
-    border:
-        1px solid
-        rgba(255,255,255,.4);
-
+        linear-gradient(135deg,#7b32ff,#ff9d25);
+    border:1px solid rgba(255,255,255,.4);
     box-shadow:
-        0 0 20px
-        rgba(150,80,255,.4),
-
-        0 0 50px
-        rgba(255,160,50,.18);
-
+        0 0 20px rgba(150,80,255,.4),
+        0 0 50px rgba(255,160,50,.18);
     transition:.3s;
-
     overflow:hidden;
 }
 
-
 .collection-button::before{
-
     content:"";
-
     position:absolute;
-
     width:45px;
     height:200%;
-
     top:-50%;
-
     left:-80px;
-
-    background:
-        rgba(255,255,255,.5);
-
-    transform:
-        rotate(25deg);
-
-    animation:
-        buttonShine 3s infinite;
+    background:rgba(255,255,255,.5);
+    transform:rotate(25deg);
+    animation:buttonShine 3s infinite;
 }
-
 
 .collection-button:hover{
-
-    transform:
-        translateY(-5px)
-        scale(1.04);
-
+    transform:translateY(-5px) scale(1.04);
     box-shadow:
-        0 0 30px
-        rgba(150,80,255,.6),
-
-        0 0 70px
-        rgba(255,160,50,.35);
+        0 0 30px rgba(150,80,255,.6),
+        0 0 70px rgba(255,160,50,.35);
 }
-
-
-/* BUTTON OUTSIDE DESIGN */
 
 .button-design{
-
     margin-top:25px;
-
     font-size:24px;
-
     letter-spacing:15px;
-
     color:#ffd34d;
-
-    text-shadow:
-        0 0 15px #ffd34d;
-
-    animation:
-        decorGlow 2s infinite alternate;
+    text-shadow:0 0 15px #ffd34d;
+    animation:decorGlow 2s infinite alternate;
 }
 
 
-/* =====================================
+/* =========================
    COLLECTION
-===================================== */
+========================= */
 
 .collection{
-
     position:relative;
-
     z-index:5;
-
-    width:
-        min(1100px,100%);
-
-    margin:
-        100px auto 0;
-
-    padding:
-        50px 20px 100px;
+    width:min(1100px,100%);
+    margin:100px auto 0;
+    padding:50px 20px 100px;
 }
-
 
 .collection h2{
-
-    margin:
-        0 0 45px;
-
-    font-size:
-        clamp(30px,5vw,50px);
-
+    margin:0 0 45px;
+    font-size:clamp(30px,5vw,50px);
     letter-spacing:2px;
-
     color:#fff;
-
-    text-shadow:
-        0 0 25px
-        rgba(255,190,50,.25);
+    text-shadow:0 0 25px rgba(255,190,50,.25);
 }
 
-
-/* =====================================
-   VIDEO GRID
-===================================== */
-
 .video-grid{
-
     display:grid;
-
-    grid-template-columns:
-        repeat(2,1fr);
-
+    grid-template-columns:repeat(2,1fr);
     gap:30px;
 }
 
-
 .video-card{
-
     position:relative;
-
     overflow:hidden;
-
     border-radius:22px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #181522,
-            #09090d
-        );
-
-    border:
-        1px solid
-        rgba(255,255,255,.1);
-
+    background:#09090d;
+    border:1px solid rgba(255,255,255,.12);
     cursor:pointer;
-
     transition:.35s;
-
-    box-shadow:
-        0 15px 40px
-        rgba(0,0,0,.4);
+    box-shadow:0 15px 40px rgba(0,0,0,.5);
 }
-
 
 .video-card:hover{
-
-    transform:
-        translateY(-8px)
-        scale(1.015);
-
+    transform:translateY(-7px);
     border-color:#ffd34d;
-
-    box-shadow:
-        0 20px 60px
-        rgba(255,180,50,.18);
+    box-shadow:0 20px 60px rgba(255,180,50,.25);
 }
 
+
+/* VIDEO INSIDE CARD */
 
 .thumbnail{
-
-    height:270px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    font-size:75px;
-
-    color:#ffd34d;
-
-    background:
-        radial-gradient(
-            circle,
-            #30203e,
-            #0a0a10
-        );
-
     position:relative;
+    width:100%;
+    height:270px;
+    overflow:hidden;
+    background:#000;
 }
 
-
-.thumbnail::before{
-
-    content:"";
-
-    position:absolute;
-
-    width:100px;
-    height:100px;
-
-    border-radius:50%;
-
-    border:
-        2px solid
-        rgba(255,211,77,.25);
-
-    animation:
-        thumbRing 3s linear infinite;
+.thumbnail video{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
 }
-
 
 .thumbnail::after{
-
     content:"";
-
     position:absolute;
-
     inset:0;
-
-    background:
-        linear-gradient(
-            120deg,
-            transparent,
-            rgba(255,255,255,.08),
-            transparent
-        );
-
-    transform:
-        translateX(-100%);
-
-    transition:.6s;
-}
-
-
-.video-card:hover
-.thumbnail::after{
-
-    transform:
-        translateX(100%);
-}
-
-
-.video-card h3{
-
-    margin:0;
-
-    padding:22px;
-
-    text-align:left;
-
-    font-size:20px;
-
-    color:#fff;
-}
-
-
-/* =====================================
-   GRASS + FLOWERS
-===================================== */
-
-.grass-area{
-
-    position:absolute;
-
-    bottom:0;
-    left:0;
-
-    width:100%;
-    height:120px;
-
-    pointer-events:none;
-}
-
-
-.grass{
-
-    position:absolute;
-
-    bottom:0;
-
-    width:100%;
-    height:70px;
-
     background:
         linear-gradient(
             to top,
-            #071b12,
-            #0d3821
+            rgba(0,0,0,.65),
+            transparent 60%
         );
+    pointer-events:none;
+}
 
+.play-icon{
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    width:75px;
+    height:75px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:rgba(0,0,0,.55);
+    border:2px solid rgba(255,211,77,.8);
+    color:#ffd34d;
+    font-size:32px;
+    z-index:5;
+    box-shadow:0 0 30px rgba(255,190,50,.35);
+}
+
+.video-card h3{
+    margin:0;
+    padding:20px;
+    text-align:left;
+    font-size:19px;
+    color:white;
+}
+
+
+/* =========================
+   GRASS + FLOWERS
+========================= */
+
+.grass-area{
+    position:absolute;
+    bottom:0;
+    left:0;
+    width:100%;
+    height:120px;
+    pointer-events:none;
+}
+
+.grass{
+    position:absolute;
+    bottom:0;
+    width:100%;
+    height:70px;
+    background:
+        linear-gradient(to top,#071b12,#0d3821);
     clip-path:
         polygon(
-            0 45%,
-            3% 20%,
-            5% 50%,
-            8% 10%,
-            11% 48%,
-            14% 18%,
-            17% 52%,
-            20% 12%,
-            23% 48%,
-            26% 20%,
-            29% 50%,
-            32% 10%,
-            35% 48%,
-            38% 18%,
-            41% 50%,
-            44% 12%,
-            47% 48%,
-            50% 20%,
-            53% 50%,
-            56% 10%,
-            59% 48%,
-            62% 18%,
-            65% 50%,
-            68% 12%,
-            71% 48%,
-            74% 20%,
-            77% 50%,
-            80% 10%,
-            83% 48%,
-            86% 18%,
-            89% 50%,
-            92% 12%,
-            95% 48%,
-            100% 15%,
-            100% 100%,
-            0 100%
+        0 45%,3% 20%,5% 50%,8% 10%,11% 48%,
+        14% 18%,17% 52%,20% 12%,23% 48%,
+        26% 20%,29% 50%,32% 10%,35% 48%,
+        38% 18%,41% 50%,44% 12%,47% 48%,
+        50% 20%,53% 50%,56% 10%,59% 48%,
+        62% 18%,65% 50%,68% 12%,71% 48%,
+        74% 20%,77% 50%,80% 10%,83% 48%,
+        86% 18%,89% 50%,92% 12%,95% 48%,
+        100% 15%,100% 100%,0 100%
         );
 }
 
-
 .flower{
-
     position:absolute;
-
     width:14px;
     height:14px;
-
     border-radius:50%;
-
     background:#ff65ad;
-
-    box-shadow:
-        0 0 12px
-        rgba(255,100,180,.9);
+    box-shadow:0 0 12px rgba(255,100,180,.9);
 }
-
 
 .flower::before,
 .flower::after{
-
     content:"";
-
     position:absolute;
-
     width:14px;
     height:14px;
-
     border-radius:50%;
-
     background:#ffb1d9;
 }
-
 
 .flower::before{
     left:-8px;
@@ -862,432 +479,267 @@ body{
     left:8px;
 }
 
-
-.f1{
-    left:10%;
-    bottom:45px;
-}
-
-.f2{
-    left:25%;
-    bottom:30px;
-}
-
-.f3{
-    left:47%;
-    bottom:50px;
-}
-
-.f4{
-    left:68%;
-    bottom:35px;
-}
-
-.f5{
-    left:86%;
-    bottom:50px;
-}
+.f1{left:10%;bottom:45px}
+.f2{left:25%;bottom:30px}
+.f3{left:47%;bottom:50px}
+.f4{left:68%;bottom:35px}
+.f5{left:86%;bottom:50px}
 
 
-/* =====================================
+/* =========================
    FULL SCREEN VIDEO
-===================================== */
+========================= */
 
 .video-player{
-
     position:fixed;
-
     inset:0;
-
     width:100%;
     height:100vh;
-
     background:#000;
-
     z-index:5000;
-
     display:none;
-
     justify-content:center;
     align-items:center;
 }
 
-
 .video-player.show{
-
     display:flex;
 }
 
-
 .video-player video{
-
     width:100%;
     height:100%;
-
     object-fit:contain;
-
     background:#000;
 }
 
 
-/* CLOSE BUTTON */
+/* BIG X BUTTON */
 
 .video-close{
-
     position:absolute;
+    top:20px;
+    right:20px;
 
-    top:18px;
-    left:18px;
+    width:75px;
+    height:75px;
 
-    width:55px;
-    height:55px;
-
-    border:none;
+    border:3px solid rgba(255,255,255,.85);
 
     border-radius:50%;
 
-    background:
-        rgba(255,255,255,.18);
+    background:rgba(0,0,0,.8);
 
     color:white;
 
-    font-size:28px;
+    font-size:38px;
+
+    font-weight:bold;
 
     cursor:pointer;
 
     z-index:5100;
 
-    backdrop-filter:blur(10px);
+    display:flex;
 
-    transition:.3s;
+    align-items:center;
+    justify-content:center;
+
+    box-shadow:
+        0 0 25px rgba(255,255,255,.3);
+
+    transition:.25s;
 }
-
 
 .video-close:hover{
-
     background:#ffd34d;
-
     color:#000;
-
-    transform:
-        rotate(90deg);
+    transform:scale(1.1) rotate(90deg);
 }
 
 
-/* =====================================
+/* =========================
    ANIMATIONS
-===================================== */
+========================= */
 
 @keyframes introOut{
-
     to{
-
         opacity:0;
-
         visibility:hidden;
-
         pointer-events:none;
     }
 }
 
-
 @keyframes glowPulse{
-
     from{
-
-        transform:
-            translate(-50%,-50%)
-            scale(.8);
+        transform:translate(-50%,-50%) scale(.8);
     }
-
     to{
-
-        transform:
-            translate(-50%,-50%)
-            scale(1.2);
+        transform:translate(-50%,-50%) scale(1.2);
     }
 }
-
 
 @keyframes starMove{
-
     from{
-
         opacity:.2;
-
-        transform:
-            scale(.5);
+        transform:scale(.5);
     }
-
     to{
-
         opacity:1;
-
-        transform:
-            scale(1.8);
+        transform:scale(1.8);
     }
 }
-
 
 @keyframes ringRotate{
-
     from{
-
-        transform:
-            translate(-50%,-50%)
-            rotate(0deg);
+        transform:translate(-50%,-50%) rotate(0deg);
     }
-
     to{
-
-        transform:
-            translate(-50%,-50%)
-            rotate(360deg);
+        transform:translate(-50%,-50%) rotate(360deg);
     }
 }
-
 
 @keyframes logoFloat{
-
     0%,100%{
-
-        transform:
-            translateY(0)
-            scale(1);
+        transform:translateY(0) scale(1);
     }
-
     50%{
-
-        transform:
-            translateY(-15px)
-            scale(1.05);
+        transform:translateY(-15px) scale(1.05);
     }
 }
 
-
 @keyframes textShine{
-
     from{
-
         background-position:0%;
     }
-
     to{
-
         background-position:300%;
     }
 }
 
-
 @keyframes floatDesign{
-
     0%,100%{
-
-        transform:
-            translateY(0);
+        transform:translateY(0);
     }
-
     50%{
-
-        transform:
-            translateY(-30px);
+        transform:translateY(-30px);
     }
 }
-
 
 @keyframes dotFloat{
-
     from{
-
-        transform:
-            translateY(0)
-            scale(.7);
+        transform:translateY(0) scale(.7);
     }
-
     to{
-
-        transform:
-            translateY(-25px)
-            scale(1.3);
+        transform:translateY(-25px) scale(1.3);
     }
 }
 
-
 @keyframes buttonShine{
-
     0%{
-
         left:-80px;
     }
-
     60%,100%{
-
         left:120%;
     }
 }
 
-
 @keyframes decorGlow{
-
     from{
-
         opacity:.3;
-
-        transform:
-            scale(.9);
+        transform:scale(.9);
     }
-
     to{
-
         opacity:1;
-
-        transform:
-            scale(1.05);
+        transform:scale(1.05);
     }
 }
 
 
-@keyframes thumbRing{
-
-    from{
-
-        transform:
-            rotate(0deg)
-            scale(.8);
-    }
-
-    to{
-
-        transform:
-            rotate(360deg)
-            scale(1.15);
-    }
-}
-
-
-/* =====================================
+/* =========================
    MOBILE
-===================================== */
+========================= */
 
 @media(max-width:700px){
 
     .intro-logo{
-
         width:100px;
         height:100px;
-
         font-size:48px;
     }
 
-
     .intro-content h2{
-
         font-size:40px;
-
         letter-spacing:3px;
     }
 
-
     .intro-content p{
-
         font-size:11px;
-
         letter-spacing:2px;
     }
 
-
     .welcome{
-
-        padding:
-            90px 15px 120px;
+        padding:90px 15px 120px;
     }
 
-
     .welcome h1{
-
         font-size:43px;
     }
 
-
     .welcome-sub{
-
         font-size:16px;
     }
 
-
     .collection-button{
-
-        padding:
-            17px 25px;
-
+        padding:17px 25px;
         font-size:15px;
     }
 
-
     .button-design{
-
         font-size:18px;
-
         letter-spacing:8px;
     }
 
-
     .video-grid{
-
         grid-template-columns:1fr;
-
         gap:22px;
     }
 
-
     .thumbnail{
-
         height:230px;
     }
 
-
     .collection{
-
-        padding:
-            30px 5px 100px;
+        padding:30px 5px 100px;
     }
-
 
     .video-close{
-
-        width:50px;
-        height:50px;
-
+        width:65px;
+        height:65px;
         top:12px;
-        left:12px;
+        right:12px;
+        font-size:32px;
     }
-
 }
 
 </style>
-
 </head>
 
 
 <body>
 
 
-<!-- =====================================
+<!-- =========================
      INTRO
-===================================== -->
+========================= -->
 
 <div class="intro">
 
-
     <div class="intro-glow"></div>
 
-
     <div class="ring ring1"></div>
-
     <div class="ring ring2"></div>
-
     <div class="ring ring3"></div>
-
 
     <div class="star s1"></div>
     <div class="star s2"></div>
@@ -1305,47 +757,34 @@ body{
     <div class="star s14"></div>
     <div class="star s15"></div>
 
-
     <div class="intro-content">
-
 
         <div class="intro-logo">
             ✦
         </div>
 
-
         <h2>
             CREATIVE
         </h2>
-
 
         <p>
             ENTER THE WORLD OF IMAGINATION
         </p>
 
-
     </div>
-
 
 </div>
 
 
-
-<!-- =====================================
+<!-- =========================
      WELCOME
-===================================== -->
+========================= -->
 
 <section class="welcome">
 
-
-    <!-- DESIGNS -->
-
     <div class="design-circle dc1"></div>
-
     <div class="design-circle dc2"></div>
-
     <div class="design-circle dc3"></div>
-
 
     <div class="dot d1"></div>
     <div class="dot d2"></div>
@@ -1357,19 +796,15 @@ body{
 
     <div class="welcome-content">
 
-
         <h1>
             Welcome to My Creative World
         </h1>
 
-
         <p class="welcome-sub">
-
             A collection of my most creative,
             memorable and legendary works.
             Explore my world and discover
             something extraordinary.
-
         </p>
 
 
@@ -1377,37 +812,28 @@ body{
 
         <div class="button-area">
 
-
             <a
                 href="#collection"
                 class="collection-button"
             >
-
                 View My Legendary Collection
-
             </a>
 
-
             <div class="button-design">
-
                 ✦　✧　✦　✧　✦
-
             </div>
-
 
         </div>
 
 
-
-        <!-- =================================
+        <!-- =========================
              COLLECTION
-        ================================= -->
+        ========================= -->
 
         <section
             class="collection"
             id="collection"
         >
-
 
             <h2>
                 My Legendary Collection
@@ -1421,15 +847,23 @@ body{
 
                 <div
                     class="video-card"
-                    onclick="
-                        openVideo(
-                            '525099_gif_480.mp4'
-                        )
-                    "
+                    onclick="openVideo('525099_gif_480.mp4')"
                 >
 
                     <div class="thumbnail">
-                        ▶
+
+                        <video
+                            src="525099_gif_480.mp4"
+                            muted
+                            loop
+                            autoplay
+                            playsinline
+                        ></video>
+
+                        <div class="play-icon">
+                            ▶
+                        </div>
+
                     </div>
 
                     <h3>
@@ -1439,20 +873,27 @@ body{
                 </div>
 
 
-
                 <!-- VIDEO 2 -->
 
                 <div
                     class="video-card"
-                    onclick="
-                        openVideo(
-                            '525081_gif_480.mp4'
-                        )
-                    "
+                    onclick="openVideo('525081_gif_480.mp4')"
                 >
 
                     <div class="thumbnail">
-                        ▶
+
+                        <video
+                            src="525081_gif_480.mp4"
+                            muted
+                            loop
+                            autoplay
+                            playsinline
+                        ></video>
+
+                        <div class="play-icon">
+                            ▶
+                        </div>
+
                     </div>
 
                     <h3>
@@ -1462,20 +903,27 @@ body{
                 </div>
 
 
-
                 <!-- VIDEO 3 -->
 
                 <div
                     class="video-card"
-                    onclick="
-                        openVideo(
-                            '511514_gif_480.mp4'
-                        )
-                    "
+                    onclick="openVideo('511514_gif_480.mp4')"
                 >
 
                     <div class="thumbnail">
-                        ▶
+
+                        <video
+                            src="511514_gif_480.mp4"
+                            muted
+                            loop
+                            autoplay
+                            playsinline
+                        ></video>
+
+                        <div class="play-icon">
+                            ▶
+                        </div>
+
                     </div>
 
                     <h3>
@@ -1485,20 +933,27 @@ body{
                 </div>
 
 
-
                 <!-- VIDEO 4 -->
 
                 <div
                     class="video-card"
-                    onclick="
-                        openVideo(
-                            '505260_gif_480.mp4'
-                        )
-                    "
+                    onclick="openVideo('505260_gif_480.mp4')"
                 >
 
                     <div class="thumbnail">
-                        ▶
+
+                        <video
+                            src="505260_gif_480.mp4"
+                            muted
+                            loop
+                            autoplay
+                            playsinline
+                        ></video>
+
+                        <div class="play-icon">
+                            ▶
+                        </div>
+
                     </div>
 
                     <h3>
@@ -1508,20 +963,27 @@ body{
                 </div>
 
 
-
                 <!-- VIDEO 5 -->
 
                 <div
                     class="video-card"
-                    onclick="
-                        openVideo(
-                            '510149_gif_480.mp4'
-                        )
-                    "
+                    onclick="openVideo('510149_gif_480.mp4')"
                 >
 
                     <div class="thumbnail">
-                        ▶
+
+                        <video
+                            src="510149_gif_480.mp4"
+                            muted
+                            loop
+                            autoplay
+                            playsinline
+                        ></video>
+
+                        <div class="play-icon">
+                            ▶
+                        </div>
+
                     </div>
 
                     <h3>
@@ -1533,9 +995,7 @@ body{
 
             </div>
 
-
         </section>
-
 
     </div>
 
@@ -1544,37 +1004,27 @@ body{
 
     <div class="grass-area">
 
-
         <div class="flower f1"></div>
-
         <div class="flower f2"></div>
-
         <div class="flower f3"></div>
-
         <div class="flower f4"></div>
-
         <div class="flower f5"></div>
-
 
         <div class="grass"></div>
 
-
     </div>
-
 
 </section>
 
 
-
-<!-- =====================================
-     FULL SCREEN VIDEO PLAYER
-===================================== -->
+<!-- =========================
+     FULL SCREEN VIDEO
+========================= -->
 
 <div
     class="video-player"
     id="videoPlayer"
 >
-
 
     <button
         class="video-close"
@@ -1598,13 +1048,10 @@ body{
 
     </video>
 
-
 </div>
 
 
-
 <script>
-
 
 function openVideo(file){
 
@@ -1613,12 +1060,10 @@ function openVideo(file){
             "videoPlayer"
         );
 
-
     const video =
         document.getElementById(
             "mainVideo"
         );
-
 
     const source =
         document.getElementById(
@@ -1628,35 +1073,21 @@ function openVideo(file){
 
     source.src = file;
 
-
     video.load();
 
-
-    player.classList.add(
-        "show"
-    );
-
+    player.classList.add("show");
 
     video.play();
 
 
-    /*
-       Try browser fullscreen
-    */
-
-    if(
-        video.requestFullscreen
-    ){
+    if(video.requestFullscreen){
 
         video.requestFullscreen()
-        .catch(
-            function(){}
-        );
+        .catch(function(){});
 
     }
 
 }
-
 
 
 function closeVideo(){
@@ -1665,7 +1096,6 @@ function closeVideo(){
         document.getElementById(
             "videoPlayer"
         );
-
 
     const video =
         document.getElementById(
@@ -1676,31 +1106,20 @@ function closeVideo(){
     video.pause();
 
 
-    /*
-       Exit fullscreen
-    */
-
-    if(
-        document.fullscreenElement
-    ){
+    if(document.fullscreenElement){
 
         document
             .exitFullscreen()
-            .catch(
-                function(){}
-            );
+            .catch(function(){});
 
     }
 
 
-    player.classList.remove(
-        "show"
-    );
+    player.classList.remove("show");
 
 }
 
 </script>
-
 
 </body>
 </html>
