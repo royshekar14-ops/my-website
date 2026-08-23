@@ -1,7 +1,7 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html>
 <head>
-    <title>Lotus and Rising Sun</title>
+    <title>My Creative World</title>
 
     <style>
 
@@ -9,30 +9,38 @@
             box-sizing: border-box;
         }
 
-        body {
-            margin: 0;
-            height: 100vh;
-            overflow: hidden;
-            font-family: Arial, sans-serif;
-            background: #07111f;
+        html {
+            scroll-behavior: smooth;
         }
 
-        /* =========================
-           FIRST SCREEN
-        ========================= */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #050505;
+            color: white;
+        }
+
+        /* =================================
+           FIRST ANIMATION SCREEN
+        ================================= */
 
         .first-screen {
-            position: absolute;
+            position: fixed;
+            inset: 0;
+
             width: 100%;
             height: 100vh;
+
+            background: #07111f;
 
             display: flex;
             justify-content: center;
             align-items: center;
 
-            background: #07111f;
+            z-index: 1000;
 
-            animation: firstScreenOut 1.5s ease-in-out 6s forwards;
+            animation:
+                firstScreenOut 1.5s ease-in-out 6s forwards;
         }
 
         .lotus-area {
@@ -42,19 +50,19 @@
             justify-content: center;
             align-items: center;
 
-            gap: 35px;
+            gap: 20px;
 
-            transform: scale(1.25);
+            transform: scale(1.1);
         }
 
-        /* =========================
+        /* =================================
            LOTUS
-        ========================= */
+        ================================= */
 
         .lotus {
             position: relative;
 
-            width: 320px;
+            width: 300px;
             height: 300px;
         }
 
@@ -65,11 +73,11 @@
         .petal {
             position: absolute;
 
-            width: 100px;
-            height: 175px;
+            width: 95px;
+            height: 165px;
 
-            left: 110px;
-            top: 55px;
+            left: 102px;
+            top: 65px;
 
             background: linear-gradient(
                 to top,
@@ -94,32 +102,32 @@
 
         .p2 {
             transform: rotate(-45deg) scale(0);
-            animation: bloom2 2s ease-out 0.1s forwards;
+            animation: bloom2 2s ease-out .1s forwards;
         }
 
         .p3 {
             transform: rotate(-25deg) scale(0);
-            animation: bloom3 2s ease-out 0.2s forwards;
+            animation: bloom3 2s ease-out .2s forwards;
         }
 
         .p4 {
             transform: rotate(-10deg) scale(0);
-            animation: bloom4 2s ease-out 0.3s forwards;
+            animation: bloom4 2s ease-out .3s forwards;
         }
 
         .p5 {
             transform: rotate(10deg) scale(0);
-            animation: bloom5 2s ease-out 0.3s forwards;
+            animation: bloom5 2s ease-out .3s forwards;
         }
 
         .p6 {
             transform: rotate(25deg) scale(0);
-            animation: bloom6 2s ease-out 0.2s forwards;
+            animation: bloom6 2s ease-out .2s forwards;
         }
 
         .p7 {
             transform: rotate(45deg) scale(0);
-            animation: bloom7 2s ease-out 0.1s forwards;
+            animation: bloom7 2s ease-out .1s forwards;
         }
 
         .p8 {
@@ -128,33 +136,33 @@
         }
 
         .inner {
-            width: 82px;
-            height: 140px;
+            width: 78px;
+            height: 130px;
 
-            top: 85px;
-            left: 119px;
+            top: 95px;
+            left: 110px;
 
             z-index: 10;
         }
 
         .i1 {
             transform: rotate(-40deg) scale(0);
-            animation: inner1 2s ease-out 0.7s forwards;
+            animation: inner1 2s ease-out .7s forwards;
         }
 
         .i2 {
             transform: rotate(-20deg) scale(0);
-            animation: inner2 2s ease-out 0.8s forwards;
+            animation: inner2 2s ease-out .8s forwards;
         }
 
         .i3 {
             transform: rotate(20deg) scale(0);
-            animation: inner3 2s ease-out 0.8s forwards;
+            animation: inner3 2s ease-out .8s forwards;
         }
 
         .i4 {
             transform: rotate(40deg) scale(0);
-            animation: inner4 2s ease-out 0.7s forwards;
+            animation: inner4 2s ease-out .7s forwards;
         }
 
         .center {
@@ -163,8 +171,8 @@
             width: 70px;
             height: 70px;
 
-            left: 125px;
-            top: 135px;
+            left: 115px;
+            top: 140px;
 
             border-radius: 50%;
 
@@ -179,12 +187,12 @@
             z-index: 30;
 
             box-shadow:
-                0 0 22px rgba(255, 215, 80, 0.9);
+                0 0 25px rgba(255, 215, 80, .9);
         }
 
-        /* =========================
+        /* =================================
            SUN
-        ========================= */
+        ================================= */
 
         .sun-area {
             position: absolute;
@@ -192,17 +200,17 @@
             left: 50%;
             top: 50%;
 
-            width: 250px;
-            height: 250px;
+            width: 280px;
+            height: 280px;
 
             transform:
                 translate(-50%, -50%)
-                translateY(170px);
+                translateY(180px);
 
             z-index: 100;
 
             animation:
-                sunRise 2.5s ease-out 0s forwards;
+                sunRise 2.5s ease-out forwards;
         }
 
         .rays {
@@ -211,8 +219,8 @@
             left: 50%;
             top: 50%;
 
-            width: 250px;
-            height: 250px;
+            width: 270px;
+            height: 270px;
 
             transform:
                 translate(-50%, -50%);
@@ -222,7 +230,7 @@
             background:
                 repeating-conic-gradient(
                     from 0deg,
-                    rgba(255, 215, 70, 0.65) 0deg 5deg,
+                    rgba(255, 215, 70, .65) 0deg 5deg,
                     transparent 5deg 15deg
                 );
 
@@ -230,10 +238,8 @@
 
             opacity: 0;
 
-            z-index: 1;
-
             animation:
-                raysAppear 1.5s ease-out 0s forwards;
+                raysAppear 1.5s ease-out forwards;
         }
 
         .sun {
@@ -242,8 +248,8 @@
             left: 50%;
             top: 50%;
 
-            width: 125px;
-            height: 125px;
+            width: 135px;
+            height: 135px;
 
             transform:
                 translate(-50%, -50%);
@@ -252,173 +258,42 @@
 
             background: radial-gradient(
                 circle,
-                #fffbd0 0%,
+                #fffbd0,
                 #fff176 25%,
                 #ffd43b 60%,
-                #ff9d00 100%
+                #ff9d00
             );
 
             box-shadow:
-                0 0 30px #ffd43b,
-                0 0 70px #ffb300,
-                0 0 110px rgba(255, 179, 0, 0.6);
-
-            z-index: 2;
+                0 0 35px #ffd43b,
+                0 0 80px #ffb300,
+                0 0 120px rgba(255, 179, 0, .6);
 
             animation:
                 sunGlow 2s ease-in-out 2.5s infinite alternate;
         }
 
-        /* =========================
-           GRASS
-        ========================= */
-
-        .grass {
-            position: absolute;
-
-            bottom: 0;
-            left: 0;
-
-            width: 100%;
-            height: 115px;
-
-            z-index: 150;
-
-            background:
-                linear-gradient(
-                    to top,
-                    #071f12,
-                    #0b3d20
-                );
-
-            clip-path: polygon(
-                0 35%,
-                3% 20%,
-                6% 38%,
-                9% 12%,
-                12% 35%,
-                15% 18%,
-                18% 40%,
-                21% 10%,
-                24% 35%,
-                27% 15%,
-                30% 38%,
-                33% 12%,
-                36% 35%,
-                39% 18%,
-                42% 40%,
-                45% 10%,
-                48% 35%,
-                51% 15%,
-                54% 38%,
-                57% 12%,
-                60% 35%,
-                63% 18%,
-                66% 40%,
-                69% 10%,
-                72% 35%,
-                75% 15%,
-                78% 38%,
-                81% 12%,
-                84% 35%,
-                87% 18%,
-                90% 40%,
-                93% 10%,
-                96% 35%,
-                100% 18%,
-                100% 100%,
-                0 100%
-            );
-        }
-
-        /* =========================
-           SMALL FLOWERS IN GRASS
-        ========================= */
-
-        .field-flower {
-            position: absolute;
-
-            width: 13px;
-            height: 13px;
-
-            border-radius: 50%;
-
-            background: #ff75b5;
-
-            box-shadow:
-                0 0 8px rgba(255, 120, 190, 0.8);
-        }
-
-        .field-flower::before,
-        .field-flower::after {
-            content: "";
-
-            position: absolute;
-
-            width: 13px;
-            height: 13px;
-
-            border-radius: 50%;
-
-            background: #ffb6dc;
-        }
-
-        .field-flower::before {
-            left: -7px;
-        }
-
-        .field-flower::after {
-            left: 7px;
-        }
-
-        .flower1 {
-            left: 12%;
-            bottom: 45px;
-        }
-
-        .flower2 {
-            left: 28%;
-            bottom: 25px;
-        }
-
-        .flower3 {
-            left: 48%;
-            bottom: 48px;
-        }
-
-        .flower4 {
-            left: 68%;
-            bottom: 30px;
-        }
-
-        .flower5 {
-            left: 85%;
-            bottom: 50px;
-        }
-
-        /* =========================
-           SECOND SCREEN
-        ========================= */
+        /* =================================
+           WELCOME / GALLERY
+        ================================= */
 
         .welcome-screen {
-            position: absolute;
+            min-height: 100vh;
 
-            width: 100%;
-            height: 100vh;
+            padding:
+                100px 20px
+                80px;
 
-            background: #000;
-
-            display: flex;
-            flex-direction: column;
-
-            justify-content: center;
-            align-items: center;
+            background:
+                radial-gradient(
+                    circle at top,
+                    #151515,
+                    #050505 55%
+                );
 
             text-align: center;
 
             opacity: 0;
-
-            z-index: 500;
 
             animation:
                 welcomeShow 1.5s ease-in-out 6s forwards;
@@ -427,25 +302,166 @@
         .welcome-screen h1 {
             margin: 0;
 
-            color: white;
+            font-size: clamp(38px, 7vw, 72px);
 
-            font-size: 42px;
+            line-height: 1.15;
 
             letter-spacing: 2px;
+
+            color: white;
+
+            text-shadow:
+                0 0 15px rgba(255,255,255,.5),
+                0 0 40px rgba(255,180,50,.35);
         }
 
-        .welcome-screen p {
+        .welcome-screen > p {
+            margin:
+                20px auto 35px;
+
             color: #aaa;
 
-            font-size: 17px;
-
-            margin-top: 12px;
+            font-size: 19px;
         }
 
-        .collection-button {
-            margin-top: 30px;
+        /* =================================
+           MAIN VIDEO
+        ================================= */
 
-            padding: 15px 28px;
+        .video-player {
+            width: min(100%, 1000px);
+
+            margin: 0 auto;
+
+            background: #111;
+
+            padding: 12px;
+
+            border-radius: 18px;
+
+            box-shadow:
+                0 0 35px rgba(255,190,50,.12);
+        }
+
+        .video-player video {
+            display: block;
+
+            width: 100%;
+
+            max-height: 560px;
+
+            background: #000;
+
+            border-radius: 12px;
+        }
+
+        .current-title {
+            margin-top: 15px;
+
+            font-size: 22px;
+
+            color: #ffd43b;
+        }
+
+        /* =================================
+           VIDEO COLLECTION
+        ================================= */
+
+        .collection {
+            width: min(100%, 1100px);
+
+            margin: 70px auto 0;
+        }
+
+        .collection h2 {
+            font-size: 32px;
+
+            margin-bottom: 30px;
+        }
+
+        .video-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 22px;
+        }
+
+        .video-card {
+            background: #111;
+
+            border: 1px solid #252525;
+
+            border-radius: 15px;
+
+            overflow: hidden;
+
+            cursor: pointer;
+
+            transition:
+                transform .3s,
+                border-color .3s,
+                box-shadow .3s;
+        }
+
+        .video-card:hover {
+            transform: translateY(-7px);
+
+            border-color: #ffd43b;
+
+            box-shadow:
+                0 10px 30px rgba(255,210,50,.15);
+        }
+
+        .video-card.active {
+            border-color: #ffd43b;
+
+            box-shadow:
+                0 0 20px rgba(255,210,50,.25);
+        }
+
+        .thumbnail {
+            height: 180px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #202020,
+                    #080808
+                );
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            font-size: 55px;
+
+            color: #ffd43b;
+        }
+
+        .video-card h3 {
+            margin: 0;
+
+            padding: 18px;
+
+            font-size: 18px;
+
+            color: white;
+        }
+
+        /* =================================
+           BUTTON
+        ================================= */
+
+        .collection-button {
+            display: inline-block;
+
+            margin-top: 35px;
+
+            padding: 16px 30px;
 
             border: 1px solid #ffd43b;
 
@@ -455,11 +471,11 @@
 
             color: #ffd43b;
 
-            font-size: 16px;
+            font-size: 17px;
 
             cursor: pointer;
 
-            transition: 0.3s;
+            transition: .3s;
         }
 
         .collection-button:hover {
@@ -468,21 +484,19 @@
             color: #000;
 
             box-shadow:
-                0 0 25px rgba(255, 212, 59, 0.8);
-
-            transform: translateY(-3px);
+                0 0 30px rgba(255,210,50,.6);
         }
 
-        /* =========================
+        /* =================================
            ANIMATIONS
-        ========================= */
+        ================================= */
 
         @keyframes sunRise {
 
             0% {
                 transform:
                     translate(-50%, -50%)
-                    translateY(170px);
+                    translateY(180px);
 
                 opacity: 0;
             }
@@ -511,11 +525,11 @@
 
                 transform:
                     translate(-50%, -50%)
-                    scale(0.2);
+                    scale(.2);
             }
 
             to {
-                opacity: 0.45;
+                opacity: .45;
 
                 transform:
                     translate(-50%, -50%)
@@ -527,92 +541,69 @@
 
             from {
                 box-shadow:
-                    0 0 30px #ffd43b,
-                    0 0 70px #ffb300,
-                    0 0 110px rgba(255, 179, 0, 0.5);
+                    0 0 35px #ffd43b,
+                    0 0 80px #ffb300,
+                    0 0 120px rgba(255,179,0,.5);
             }
 
             to {
                 box-shadow:
-                    0 0 45px #fff176,
-                    0 0 100px #ffb300,
-                    0 0 150px rgba(255, 179, 0, 0.8);
+                    0 0 50px #fff176,
+                    0 0 110px #ffb300,
+                    0 0 160px rgba(255,179,0,.8);
             }
         }
 
         @keyframes bloom1 {
-            to {
-                transform: rotate(-65deg) scale(1);
-            }
+            to { transform: rotate(-65deg) scale(1); }
         }
 
         @keyframes bloom2 {
-            to {
-                transform: rotate(-45deg) scale(1);
-            }
+            to { transform: rotate(-45deg) scale(1); }
         }
 
         @keyframes bloom3 {
-            to {
-                transform: rotate(-25deg) scale(1);
-            }
+            to { transform: rotate(-25deg) scale(1); }
         }
 
         @keyframes bloom4 {
-            to {
-                transform: rotate(-10deg) scale(1);
-            }
+            to { transform: rotate(-10deg) scale(1); }
         }
 
         @keyframes bloom5 {
-            to {
-                transform: rotate(10deg) scale(1);
-            }
+            to { transform: rotate(10deg) scale(1); }
         }
 
         @keyframes bloom6 {
-            to {
-                transform: rotate(25deg) scale(1);
-            }
+            to { transform: rotate(25deg) scale(1); }
         }
 
         @keyframes bloom7 {
-            to {
-                transform: rotate(45deg) scale(1);
-            }
+            to { transform: rotate(45deg) scale(1); }
         }
 
         @keyframes bloom8 {
-            to {
-                transform: rotate(65deg) scale(1);
-            }
+            to { transform: rotate(65deg) scale(1); }
         }
 
         @keyframes inner1 {
-            to {
-                transform: rotate(-40deg) scale(1);
-            }
+            to { transform: rotate(-40deg) scale(1); }
         }
 
         @keyframes inner2 {
-            to {
-                transform: rotate(-20deg) scale(1);
-            }
+            to { transform: rotate(-20deg) scale(1); }
         }
 
         @keyframes inner3 {
-            to {
-                transform: rotate(20deg) scale(1);
-            }
+            to { transform: rotate(20deg) scale(1); }
         }
 
         @keyframes inner4 {
-            to {
-                transform: rotate(40deg) scale(1);
-            }
+            to { transform: rotate(40deg) scale(1); }
         }
 
         @keyframes firstScreenOut {
+
             0% {
                 opacity: 1;
             }
@@ -620,6 +611,7 @@
             100% {
                 opacity: 0;
                 visibility: hidden;
+                pointer-events: none;
             }
         }
 
@@ -627,7 +619,7 @@
 
             0% {
                 opacity: 0;
-                transform: scale(1.05);
+                transform: scale(1.04);
             }
 
             100% {
@@ -636,12 +628,59 @@
             }
         }
 
+        /* =================================
+           MOBILE
+        ================================= */
+
+        @media (max-width: 700px) {
+
+            .lotus-area {
+                transform: scale(.65);
+
+                gap: -10px;
+            }
+
+            .welcome-screen {
+                padding:
+                    70px 12px
+                    60px;
+            }
+
+            .welcome-screen h1 {
+                font-size: 38px;
+            }
+
+            .welcome-screen > p {
+                font-size: 16px;
+            }
+
+            .video-player {
+                padding: 7px;
+
+                border-radius: 12px;
+            }
+
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .thumbnail {
+                height: 210px;
+            }
+
+            .collection h2 {
+                font-size: 28px;
+            }
+        }
+
     </style>
 </head>
 
 <body>
 
-    <!-- FIRST SCREEN -->
+    <!-- =================================
+         FIRST ANIMATION
+    ================================= -->
 
     <div class="first-screen">
 
@@ -703,34 +742,259 @@
 
         </div>
 
-        <!-- GRASS -->
+    </div>
 
-        <div class="grass">
 
-            <div class="field-flower flower1"></div>
-            <div class="field-flower flower2"></div>
-            <div class="field-flower flower3"></div>
-            <div class="field-flower flower4"></div>
-            <div class="field-flower flower5"></div>
+    <!-- =================================
+         MAIN WEBSITE
+    ================================= -->
+
+    <main class="welcome-screen">
+
+        <h1>
+            Welcome to My Creative World
+        </h1>
+
+        <p>
+            Discover something legendary.
+        </p>
+
+
+        <!-- MAIN VIDEO -->
+
+        <div class="video-player">
+
+            <video
+                id="mainVideo"
+                controls
+                playsinline
+                poster=""
+            >
+                <source
+                    id="videoSource"
+                    src="525099_gif_480.mp4"
+                    type="video/mp4"
+                >
+            </video>
+
+            <div
+                class="current-title"
+                id="currentTitle"
+            >
+                Legendary Video 1
+            </div>
 
         </div>
 
-    </div>
+
+        <!-- COLLECTION -->
+
+        <section class="collection">
+
+            <h2>
+                My Legendary Collection
+            </h2>
+
+            <div class="video-grid">
+
+                <!-- VIDEO 1 -->
+
+                <div
+                    class="video-card active"
+                    onclick="selectVideo(
+                        '525099_gif_480.mp4',
+                        'Legendary Video 1',
+                        this
+                    )"
+                >
+
+                    <div class="thumbnail">
+                        ▶
+                    </div>
+
+                    <h3>
+                        Legendary Video 1
+                    </h3>
+
+                </div>
 
 
-    <!-- SECOND SCREEN -->
+                <!-- VIDEO 2 -->
 
-    <div class="welcome-screen">
+                <div
+                    class="video-card"
+                    onclick="selectVideo(
+                        'video2.mp4',
+                        'Legendary Video 2',
+                        this
+                    )"
+                >
 
-        <h1>Welcome to My Creative World</h1>
+                    <div class="thumbnail">
+                        ▶
+                    </div>
 
-        <p>Discover something legendary.</p>
+                    <h3>
+                        Legendary Video 2
+                    </h3>
 
-        <button class="collection-button">
-            View My Legendary Collection
-        </button>
+                </div>
 
-    </div>
+
+                <!-- VIDEO 3 -->
+
+                <div
+                    class="video-card"
+                    onclick="selectVideo(
+                        'video3.mp4',
+                        'Legendary Video 3',
+                        this
+                    )"
+                >
+
+                    <div class="thumbnail">
+                        ▶
+                    </div>
+
+                    <h3>
+                        Legendary Video 3
+                    </h3>
+
+                </div>
+
+
+                <!-- VIDEO 4 -->
+
+                <div
+                    class="video-card"
+                    onclick="selectVideo(
+                        'video4.mp4',
+                        'Legendary Video 4',
+                        this
+                    )"
+                >
+
+                    <div class="thumbnail">
+                        ▶
+                    </div>
+
+                    <h3>
+                        Legendary Video 4
+                    </h3>
+
+                </div>
+
+
+                <!-- VIDEO 5 -->
+
+                <div
+                    class="video-card"
+                    onclick="selectVideo(
+                        'video5.mp4',
+                        'Legendary Video 5',
+                        this
+                    )"
+                >
+
+                    <div class="thumbnail">
+                        ▶
+                    </div>
+
+                    <h3>
+                        Legendary Video 5
+                    </h3>
+
+                </div>
+
+
+                <!-- VIDEO 6 -->
+
+                <div
+                    class="video-card"
+                    onclick="selectVideo(
+                        'video6.mp4',
+                        'Legendary Video 6',
+                        this
+                    )"
+                >
+
+                    <div class="thumbnail">
+                        ▶
+                    </div>
+
+                    <h3>
+                        Legendary Video 6
+                    </h3>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =================================
+         JAVASCRIPT
+    ================================= -->
+
+    <script>
+
+        function selectVideo(file, title, card) {
+
+            const video =
+                document.getElementById("mainVideo");
+
+            const source =
+                document.getElementById("videoSource");
+
+            const titleBox =
+                document.getElementById("currentTitle");
+
+
+            /* Change video */
+
+            source.src = file;
+
+            video.load();
+
+            video.play();
+
+
+            /* Change title */
+
+            titleBox.textContent = title;
+
+
+            /* Remove old active */
+
+            document
+                .querySelectorAll(".video-card")
+                .forEach(function(item) {
+
+                    item.classList.remove("active");
+
+                });
+
+
+            /* Add active */
+
+            card.classList.add("active");
+
+
+            /* Scroll to main video */
+
+            document
+                .querySelector(".video-player")
+                .scrollIntoView({
+                    behavior: "smooth",
+                    block: "center"
+                });
+
+        }
+
+    </script>
 
 </body>
 </html>
