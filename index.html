@@ -1,811 +1,1431 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
-    <title>My Creative World</title>
 
-    <style>
+<title>My Creative World</title>
 
-        * {
-            box-sizing: border-box;
-        }
+<style>
 
-        html {
-            scroll-behavior: smooth;
-        }
+*{
+    box-sizing:border-box;
+}
 
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #050505;
-            color: white;
-        }
+html{
+    scroll-behavior:smooth;
+}
 
-        /* =================================
-           FIRST ANIMATION SCREEN
-        ================================= */
+body{
+    margin:0;
+    background:#050509;
+    color:white;
+    font-family:Arial,sans-serif;
+}
 
-        .first-screen {
-            position: fixed;
-            inset: 0;
 
-            width: 100%;
-            height: 100vh;
+/* =====================================
+   FULL SCREEN INTRO
+===================================== */
 
-            background: #07111f;
+.intro{
+    position:fixed;
+    inset:0;
 
-            display: flex;
-            justify-content: center;
-            align-items: center;
+    width:100%;
+    height:100vh;
 
-            z-index: 1000;
+    overflow:hidden;
 
-            animation:
-                firstScreenOut 1.5s ease-in-out 6s forwards;
-        }
+    background:
+        radial-gradient(
+            circle at center,
+            #35105f 0%,
+            #120d2d 35%,
+            #03040b 100%
+        );
 
-        .lotus-area {
-            position: relative;
+    z-index:9999;
 
-            display: flex;
-            justify-content: center;
-            align-items: center;
+    animation:
+        introOut 1.5s ease 7s forwards;
+}
 
-            gap: 20px;
 
-            transform: scale(1.1);
-        }
+/* BIG CENTER GLOW */
 
-        /* =================================
-           LOTUS
-        ================================= */
+.intro-glow{
+    position:absolute;
 
-        .lotus {
-            position: relative;
+    left:50%;
+    top:50%;
 
-            width: 300px;
-            height: 300px;
-        }
+    width:60vw;
+    height:60vw;
 
-        .second-lotus {
-            transform: scaleX(-1);
-        }
+    max-width:800px;
+    max-height:800px;
 
-        .petal {
-            position: absolute;
+    transform:
+        translate(-50%,-50%);
 
-            width: 95px;
-            height: 165px;
+    border-radius:50%;
 
-            left: 102px;
-            top: 65px;
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,190,80,.35),
+            rgba(180,60,255,.18),
+            transparent 70%
+        );
 
-            background: linear-gradient(
-                to top,
-                #d92f83,
-                #f85ca5,
-                #ffd6e8
-            );
+    filter:blur(15px);
 
-            border-radius: 50% 50% 45% 45%;
+    animation:
+        glowPulse 3s infinite alternate;
+}
 
-            transform-origin: bottom center;
 
-            box-shadow:
-                inset 0 -12px 18px rgba(120, 0, 70, 0.2),
-                0 4px 15px rgba(255, 100, 180, 0.3);
-        }
+/* ROTATING RINGS */
 
-        .p1 {
-            transform: rotate(-65deg) scale(0);
-            animation: bloom1 2s ease-out 0s forwards;
-        }
+.ring{
+    position:absolute;
 
-        .p2 {
-            transform: rotate(-45deg) scale(0);
-            animation: bloom2 2s ease-out .1s forwards;
-        }
-
-        .p3 {
-            transform: rotate(-25deg) scale(0);
-            animation: bloom3 2s ease-out .2s forwards;
-        }
+    left:50%;
+    top:50%;
 
-        .p4 {
-            transform: rotate(-10deg) scale(0);
-            animation: bloom4 2s ease-out .3s forwards;
-        }
-
-        .p5 {
-            transform: rotate(10deg) scale(0);
-            animation: bloom5 2s ease-out .3s forwards;
-        }
+    border-radius:50%;
 
-        .p6 {
-            transform: rotate(25deg) scale(0);
-            animation: bloom6 2s ease-out .2s forwards;
-        }
+    border:
+        1px solid
+        rgba(255,210,100,.25);
 
-        .p7 {
-            transform: rotate(45deg) scale(0);
-            animation: bloom7 2s ease-out .1s forwards;
-        }
+    transform:
+        translate(-50%,-50%);
 
-        .p8 {
-            transform: rotate(65deg) scale(0);
-            animation: bloom8 2s ease-out 0s forwards;
-        }
+    animation:
+        ringRotate 12s linear infinite;
+}
 
-        .inner {
-            width: 78px;
-            height: 130px;
+.ring1{
+    width:75vw;
+    height:75vw;
 
-            top: 95px;
-            left: 110px;
+    max-width:900px;
+    max-height:900px;
+}
 
-            z-index: 10;
-        }
+.ring2{
+    width:50vw;
+    height:50vw;
 
-        .i1 {
-            transform: rotate(-40deg) scale(0);
-            animation: inner1 2s ease-out .7s forwards;
-        }
+    max-width:650px;
+    max-height:650px;
 
-        .i2 {
-            transform: rotate(-20deg) scale(0);
-            animation: inner2 2s ease-out .8s forwards;
-        }
+    border-color:
+        rgba(210,100,255,.25);
 
-        .i3 {
-            transform: rotate(20deg) scale(0);
-            animation: inner3 2s ease-out .8s forwards;
-        }
+    animation-direction:reverse;
 
-        .i4 {
-            transform: rotate(40deg) scale(0);
-            animation: inner4 2s ease-out .7s forwards;
-        }
+    animation-duration:9s;
+}
 
-        .center {
-            position: absolute;
+.ring3{
+    width:30vw;
+    height:30vw;
 
-            width: 70px;
-            height: 70px;
+    max-width:400px;
+    max-height:400px;
 
-            left: 115px;
-            top: 140px;
+    border-color:
+        rgba(255,190,60,.25);
 
-            border-radius: 50%;
+    animation-duration:7s;
+}
 
-            background: radial-gradient(
-                circle at 35% 30%,
-                #fff9c4,
-                #ffe071 35%,
-                #ffc13d 70%,
-                #e99b20
-            );
 
-            z-index: 30;
+/* STARS */
 
-            box-shadow:
-                0 0 25px rgba(255, 215, 80, .9);
-        }
+.star{
+    position:absolute;
 
-        /* =================================
-           SUN
-        ================================= */
+    width:4px;
+    height:4px;
 
-        .sun-area {
-            position: absolute;
+    border-radius:50%;
 
-            left: 50%;
-            top: 50%;
+    background:white;
 
-            width: 280px;
-            height: 280px;
+    box-shadow:
+        0 0 10px white;
 
-            transform:
-                translate(-50%, -50%)
-                translateY(180px);
+    animation:
+        starMove 4s infinite alternate;
+}
 
-            z-index: 100;
+.s1{left:8%;top:15%;}
+.s2{left:18%;top:70%;animation-delay:1s;}
+.s3{left:30%;top:25%;animation-delay:1.5s;}
+.s4{left:45%;top:12%;animation-delay:.5s;}
+.s5{left:60%;top:75%;animation-delay:1.8s;}
+.s6{left:72%;top:20%;animation-delay:.8s;}
+.s7{left:84%;top:65%;animation-delay:1.2s;}
+.s8{left:92%;top:32%;animation-delay:2s;}
+.s9{left:12%;top:45%;animation-delay:2.5s;}
+.s10{left:78%;top:45%;animation-delay:1.7s;}
+.s11{left:38%;top:82%;animation-delay:2.2s;}
+.s12{left:55%;top:30%;animation-delay:1.3s;}
+.s13{left:25%;top:90%;animation-delay:1.7s;}
+.s14{left:88%;top:80%;animation-delay:.7s;}
+.s15{left:50%;top:90%;animation-delay:2.4s;}
 
-            animation:
-                sunRise 2.5s ease-out forwards;
-        }
 
-        .rays {
-            position: absolute;
+/* INTRO CONTENT */
 
-            left: 50%;
-            top: 50%;
+.intro-content{
+    position:absolute;
 
-            width: 270px;
-            height: 270px;
+    left:50%;
+    top:50%;
 
-            transform:
-                translate(-50%, -50%);
+    transform:
+        translate(-50%,-50%);
 
-            border-radius: 50%;
+    text-align:center;
 
-            background:
-                repeating-conic-gradient(
-                    from 0deg,
-                    rgba(255, 215, 70, .65) 0deg 5deg,
-                    transparent 5deg 15deg
-                );
+    width:90%;
+}
 
-            filter: blur(2px);
 
-            opacity: 0;
+/* LOGO */
 
-            animation:
-                raysAppear 1.5s ease-out forwards;
-        }
+.intro-logo{
+    width:150px;
+    height:150px;
 
-        .sun {
-            position: absolute;
+    margin:auto;
 
-            left: 50%;
-            top: 50%;
+    border-radius:50%;
 
-            width: 135px;
-            height: 135px;
+    display:flex;
 
-            transform:
-                translate(-50%, -50%);
+    justify-content:center;
+    align-items:center;
 
-            border-radius: 50%;
+    font-size:70px;
 
-            background: radial-gradient(
-                circle,
-                #fffbd0,
-                #fff176 25%,
-                #ffd43b 60%,
-                #ff9d00
-            );
+    background:
+        radial-gradient(
+            circle,
+            #fff5a0,
+            #ffbd32 45%,
+            #ff6b00
+        );
 
-            box-shadow:
-                0 0 35px #ffd43b,
-                0 0 80px #ffb300,
-                0 0 120px rgba(255, 179, 0, .6);
+    box-shadow:
+        0 0 30px #ffc400,
+        0 0 80px #ff8c00,
+        0 0 150px
+        rgba(255,120,0,.5);
 
-            animation:
-                sunGlow 2s ease-in-out 2.5s infinite alternate;
-        }
+    animation:
+        logoFloat 3s ease-in-out infinite;
+}
 
-        /* =================================
-           WELCOME / GALLERY
-        ================================= */
 
-        .welcome-screen {
-            min-height: 100vh;
+.intro-content h2{
 
-            padding:
-                100px 20px
-                80px;
+    margin:
+        35px 0 10px;
 
-            background:
-                radial-gradient(
-                    circle at top,
-                    #151515,
-                    #050505 55%
-                );
+    font-size:
+        clamp(40px,8vw,90px);
 
-            text-align: center;
+    letter-spacing:7px;
 
-            opacity: 0;
+    background:
+        linear-gradient(
+            90deg,
+            #ffffff,
+            #ffd75e,
+            #ffffff,
+            #ffd75e
+        );
 
-            animation:
-                welcomeShow 1.5s ease-in-out 6s forwards;
-        }
+    background-size:300%;
 
-        .welcome-screen h1 {
-            margin: 0;
+    -webkit-background-clip:text;
 
-            font-size: clamp(38px, 7vw, 72px);
+    color:transparent;
 
-            line-height: 1.15;
+    animation:
+        textShine 3s linear infinite;
+}
 
-            letter-spacing: 2px;
 
-            color: white;
+.intro-content p{
 
-            text-shadow:
-                0 0 15px rgba(255,255,255,.5),
-                0 0 40px rgba(255,180,50,.35);
-        }
+    margin:0;
 
-        .welcome-screen > p {
-            margin:
-                20px auto 35px;
+    color:#d0cde0;
 
-            color: #aaa;
+    font-size:
+        clamp(13px,2vw,21px);
 
-            font-size: 19px;
-        }
+    letter-spacing:5px;
+}
 
-        /* =================================
-           MAIN VIDEO
-        ================================= */
 
-        .video-player {
-            width: min(100%, 1000px);
+/* =====================================
+   WELCOME
+===================================== */
 
-            margin: 0 auto;
+.welcome{
 
-            background: #111;
+    min-height:100vh;
 
-            padding: 12px;
+    position:relative;
 
-            border-radius: 18px;
+    overflow:hidden;
 
-            box-shadow:
-                0 0 35px rgba(255,190,50,.12);
-        }
+    padding:
+        120px 20px 140px;
 
-        .video-player video {
-            display: block;
+    text-align:center;
 
-            width: 100%;
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            #24103e,
+            #080810 45%,
+            #030306 100%
+        );
+}
 
-            max-height: 560px;
 
-            background: #000;
+/* DECORATIVE CIRCLES */
 
-            border-radius: 12px;
-        }
+.design-circle{
 
-        .current-title {
-            margin-top: 15px;
+    position:absolute;
 
-            font-size: 22px;
+    border-radius:50%;
 
-            color: #ffd43b;
-        }
+    border:
+        1px solid
+        rgba(255,210,90,.18);
 
-        /* =================================
-           VIDEO COLLECTION
-        ================================= */
+    pointer-events:none;
+}
 
-        .collection {
-            width: min(100%, 1100px);
+.dc1{
 
-            margin: 70px auto 0;
-        }
+    width:500px;
+    height:500px;
 
-        .collection h2 {
-            font-size: 32px;
+    left:-250px;
+    top:80px;
 
-            margin-bottom: 30px;
-        }
+    animation:
+        floatDesign 8s ease-in-out infinite;
+}
 
-        .video-grid {
-            display: grid;
+.dc2{
 
-            grid-template-columns:
-                repeat(3, 1fr);
+    width:400px;
+    height:400px;
 
-            gap: 22px;
-        }
+    right:-200px;
+    top:250px;
 
-        .video-card {
-            background: #111;
+    border-color:
+        rgba(190,100,255,.2);
 
-            border: 1px solid #252525;
+    animation:
+        floatDesign 7s ease-in-out infinite reverse;
+}
 
-            border-radius: 15px;
+.dc3{
 
-            overflow: hidden;
+    width:750px;
+    height:750px;
 
-            cursor: pointer;
+    left:50%;
+    top:45%;
 
-            transition:
-                transform .3s,
-                border-color .3s,
-                box-shadow .3s;
-        }
+    transform:
+        translate(-50%,-50%);
 
-        .video-card:hover {
-            transform: translateY(-7px);
+    border-color:
+        rgba(255,180,70,.08);
+}
 
-            border-color: #ffd43b;
 
-            box-shadow:
-                0 10px 30px rgba(255,210,50,.15);
-        }
+/* SMALL GLOW DOTS */
 
-        .video-card.active {
-            border-color: #ffd43b;
+.dot{
 
-            box-shadow:
-                0 0 20px rgba(255,210,50,.25);
-        }
+    position:absolute;
 
-        .thumbnail {
-            height: 180px;
+    width:8px;
+    height:8px;
 
-            background:
-                linear-gradient(
-                    135deg,
-                    #202020,
-                    #080808
-                );
+    border-radius:50%;
 
-            display: flex;
+    background:#ffd34d;
 
-            justify-content: center;
+    box-shadow:
+        0 0 15px #ffd34d;
 
-            align-items: center;
+    animation:
+        dotFloat 4s infinite alternate;
+}
 
-            font-size: 55px;
+.d1{left:10%;top:30%;}
+.d2{right:12%;top:35%;animation-delay:1s;}
+.d3{left:20%;top:70%;animation-delay:2s;}
+.d4{right:20%;top:75%;animation-delay:1.5s;}
+.d5{left:50%;top:20%;animation-delay:2s;}
+.d6{right:35%;top:65%;animation-delay:1s;}
 
-            color: #ffd43b;
-        }
 
-        .video-card h3 {
-            margin: 0;
+/* WELCOME CONTENT */
 
-            padding: 18px;
+.welcome-content{
 
-            font-size: 18px;
+    position:relative;
 
-            color: white;
-        }
+    z-index:5;
 
-        /* =================================
-           BUTTON
-        ================================= */
+    max-width:1100px;
 
-        .collection-button {
-            display: inline-block;
+    margin:auto;
+}
 
-            margin-top: 35px;
 
-            padding: 16px 30px;
+.welcome h1{
 
-            border: 1px solid #ffd43b;
+    margin:0;
 
-            border-radius: 30px;
+    font-size:
+        clamp(42px,8vw,90px);
 
-            background: transparent;
+    line-height:1.1;
 
-            color: #ffd43b;
+    letter-spacing:2px;
 
-            font-size: 17px;
+    text-shadow:
+        0 0 20px
+        rgba(255,255,255,.25),
 
-            cursor: pointer;
+        0 0 60px
+        rgba(255,190,60,.2);
+}
 
-            transition: .3s;
-        }
 
-        .collection-button:hover {
-            background: #ffd43b;
+.welcome-sub{
 
-            color: #000;
+    margin:
+        25px auto 40px;
 
-            box-shadow:
-                0 0 30px rgba(255,210,50,.6);
-        }
+    max-width:700px;
 
-        /* =================================
-           ANIMATIONS
-        ================================= */
+    color:#aaaabc;
 
-        @keyframes sunRise {
+    font-size:
+        clamp(16px,2vw,21px);
 
-            0% {
-                transform:
-                    translate(-50%, -50%)
-                    translateY(180px);
+    line-height:1.7;
+}
 
-                opacity: 0;
-            }
 
-            70% {
-                transform:
-                    translate(-50%, -50%)
-                    translateY(-10px);
+/* =====================================
+   COLLECTION BUTTON
+===================================== */
 
-                opacity: 1;
-            }
+.button-area{
 
-            100% {
-                transform:
-                    translate(-50%, -50%)
-                    translateY(0);
+    position:relative;
 
-                opacity: 1;
-            }
-        }
+    display:inline-block;
 
-        @keyframes raysAppear {
+    margin-top:10px;
+}
 
-            from {
-                opacity: 0;
 
-                transform:
-                    translate(-50%, -50%)
-                    scale(.2);
-            }
+.collection-button{
 
-            to {
-                opacity: .45;
+    position:relative;
 
-                transform:
-                    translate(-50%, -50%)
-                    scale(1);
-            }
-        }
+    display:inline-flex;
 
-        @keyframes sunGlow {
+    align-items:center;
+    justify-content:center;
 
-            from {
-                box-shadow:
-                    0 0 35px #ffd43b,
-                    0 0 80px #ffb300,
-                    0 0 120px rgba(255,179,0,.5);
-            }
+    padding:
+        19px 38px;
 
-            to {
-                box-shadow:
-                    0 0 50px #fff176,
-                    0 0 110px #ffb300,
-                    0 0 160px rgba(255,179,0,.8);
-            }
-        }
+    border-radius:50px;
 
-        @keyframes bloom1 {
-            to { transform: rotate(-65deg) scale(1); }
-        }
+    text-decoration:none;
 
-        @keyframes bloom2 {
-            to { transform: rotate(-45deg) scale(1); }
-        }
+    color:#fff;
 
-        @keyframes bloom3 {
-            to { transform: rotate(-25deg) scale(1); }
-        }
+    font-size:18px;
 
-        @keyframes bloom4 {
-            to { transform: rotate(-10deg) scale(1); }
-        }
+    font-weight:bold;
 
-        @keyframes bloom5 {
-            to { transform: rotate(10deg) scale(1); }
-        }
+    letter-spacing:1px;
 
-        @keyframes bloom6 {
-            to { transform: rotate(25deg) scale(1); }
-        }
+    background:
+        linear-gradient(
+            135deg,
+            #7b32ff,
+            #ff9d25
+        );
 
-        @keyframes bloom7 {
-            to { transform: rotate(45deg) scale(1); }
-        }
+    border:
+        1px solid
+        rgba(255,255,255,.4);
 
-        @keyframes bloom8 {
-            to { transform: rotate(65deg) scale(1); }
-        }
+    box-shadow:
+        0 0 20px
+        rgba(150,80,255,.4),
 
-        @keyframes inner1 {
-            to { transform: rotate(-40deg) scale(1); }
-        }
+        0 0 50px
+        rgba(255,160,50,.18);
 
-        @keyframes inner2 {
-            to { transform: rotate(-20deg) scale(1); }
-        }
+    transition:.3s;
 
-        @keyframes inner3 {
-            to { transform: rotate(20deg) scale(1); }
-        }
+    overflow:hidden;
+}
 
-        @keyframes inner4 {
-            to { transform: rotate(40deg) scale(1); }
-        }
 
-        @keyframes firstScreenOut {
+.collection-button::before{
 
-            0% {
-                opacity: 1;
-            }
+    content:"";
 
-            100% {
-                opacity: 0;
-                visibility: hidden;
-                pointer-events: none;
-            }
-        }
+    position:absolute;
 
-        @keyframes welcomeShow {
+    width:45px;
+    height:200%;
 
-            0% {
-                opacity: 0;
-                transform: scale(1.04);
-            }
+    top:-50%;
 
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
+    left:-80px;
 
-        /* =================================
-           MOBILE
-        ================================= */
+    background:
+        rgba(255,255,255,.5);
 
-        @media (max-width: 700px) {
+    transform:
+        rotate(25deg);
 
-            .lotus-area {
-                transform: scale(.65);
+    animation:
+        buttonShine 3s infinite;
+}
 
-                gap: -10px;
-            }
 
-            .welcome-screen {
-                padding:
-                    70px 12px
-                    60px;
-            }
+.collection-button:hover{
 
-            .welcome-screen h1 {
-                font-size: 38px;
-            }
+    transform:
+        translateY(-5px)
+        scale(1.04);
 
-            .welcome-screen > p {
-                font-size: 16px;
-            }
+    box-shadow:
+        0 0 30px
+        rgba(150,80,255,.6),
 
-            .video-player {
-                padding: 7px;
+        0 0 70px
+        rgba(255,160,50,.35);
+}
 
-                border-radius: 12px;
-            }
 
-            .video-grid {
-                grid-template-columns: 1fr;
-            }
+/* BUTTON OUTSIDE DESIGN */
 
-            .thumbnail {
-                height: 210px;
-            }
+.button-design{
 
-            .collection h2 {
-                font-size: 28px;
-            }
-        }
+    margin-top:25px;
 
-    </style>
+    font-size:24px;
+
+    letter-spacing:15px;
+
+    color:#ffd34d;
+
+    text-shadow:
+        0 0 15px #ffd34d;
+
+    animation:
+        decorGlow 2s infinite alternate;
+}
+
+
+/* =====================================
+   COLLECTION
+===================================== */
+
+.collection{
+
+    position:relative;
+
+    z-index:5;
+
+    width:
+        min(1100px,100%);
+
+    margin:
+        100px auto 0;
+
+    padding:
+        50px 20px 100px;
+}
+
+
+.collection h2{
+
+    margin:
+        0 0 45px;
+
+    font-size:
+        clamp(30px,5vw,50px);
+
+    letter-spacing:2px;
+
+    color:#fff;
+
+    text-shadow:
+        0 0 25px
+        rgba(255,190,50,.25);
+}
+
+
+/* =====================================
+   VIDEO GRID
+===================================== */
+
+.video-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:30px;
+}
+
+
+.video-card{
+
+    position:relative;
+
+    overflow:hidden;
+
+    border-radius:22px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #181522,
+            #09090d
+        );
+
+    border:
+        1px solid
+        rgba(255,255,255,.1);
+
+    cursor:pointer;
+
+    transition:.35s;
+
+    box-shadow:
+        0 15px 40px
+        rgba(0,0,0,.4);
+}
+
+
+.video-card:hover{
+
+    transform:
+        translateY(-8px)
+        scale(1.015);
+
+    border-color:#ffd34d;
+
+    box-shadow:
+        0 20px 60px
+        rgba(255,180,50,.18);
+}
+
+
+.thumbnail{
+
+    height:270px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:75px;
+
+    color:#ffd34d;
+
+    background:
+        radial-gradient(
+            circle,
+            #30203e,
+            #0a0a10
+        );
+
+    position:relative;
+}
+
+
+.thumbnail::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:100px;
+    height:100px;
+
+    border-radius:50%;
+
+    border:
+        2px solid
+        rgba(255,211,77,.25);
+
+    animation:
+        thumbRing 3s linear infinite;
+}
+
+
+.thumbnail::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+        linear-gradient(
+            120deg,
+            transparent,
+            rgba(255,255,255,.08),
+            transparent
+        );
+
+    transform:
+        translateX(-100%);
+
+    transition:.6s;
+}
+
+
+.video-card:hover
+.thumbnail::after{
+
+    transform:
+        translateX(100%);
+}
+
+
+.video-card h3{
+
+    margin:0;
+
+    padding:22px;
+
+    text-align:left;
+
+    font-size:20px;
+
+    color:#fff;
+}
+
+
+/* =====================================
+   GRASS + FLOWERS
+===================================== */
+
+.grass-area{
+
+    position:absolute;
+
+    bottom:0;
+    left:0;
+
+    width:100%;
+    height:120px;
+
+    pointer-events:none;
+}
+
+
+.grass{
+
+    position:absolute;
+
+    bottom:0;
+
+    width:100%;
+    height:70px;
+
+    background:
+        linear-gradient(
+            to top,
+            #071b12,
+            #0d3821
+        );
+
+    clip-path:
+        polygon(
+            0 45%,
+            3% 20%,
+            5% 50%,
+            8% 10%,
+            11% 48%,
+            14% 18%,
+            17% 52%,
+            20% 12%,
+            23% 48%,
+            26% 20%,
+            29% 50%,
+            32% 10%,
+            35% 48%,
+            38% 18%,
+            41% 50%,
+            44% 12%,
+            47% 48%,
+            50% 20%,
+            53% 50%,
+            56% 10%,
+            59% 48%,
+            62% 18%,
+            65% 50%,
+            68% 12%,
+            71% 48%,
+            74% 20%,
+            77% 50%,
+            80% 10%,
+            83% 48%,
+            86% 18%,
+            89% 50%,
+            92% 12%,
+            95% 48%,
+            100% 15%,
+            100% 100%,
+            0 100%
+        );
+}
+
+
+.flower{
+
+    position:absolute;
+
+    width:14px;
+    height:14px;
+
+    border-radius:50%;
+
+    background:#ff65ad;
+
+    box-shadow:
+        0 0 12px
+        rgba(255,100,180,.9);
+}
+
+
+.flower::before,
+.flower::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:14px;
+    height:14px;
+
+    border-radius:50%;
+
+    background:#ffb1d9;
+}
+
+
+.flower::before{
+    left:-8px;
+}
+
+.flower::after{
+    left:8px;
+}
+
+
+.f1{
+    left:10%;
+    bottom:45px;
+}
+
+.f2{
+    left:25%;
+    bottom:30px;
+}
+
+.f3{
+    left:47%;
+    bottom:50px;
+}
+
+.f4{
+    left:68%;
+    bottom:35px;
+}
+
+.f5{
+    left:86%;
+    bottom:50px;
+}
+
+
+/* =====================================
+   FULL SCREEN VIDEO
+===================================== */
+
+.video-player{
+
+    position:fixed;
+
+    inset:0;
+
+    width:100%;
+    height:100vh;
+
+    background:#000;
+
+    z-index:5000;
+
+    display:none;
+
+    justify-content:center;
+    align-items:center;
+}
+
+
+.video-player.show{
+
+    display:flex;
+}
+
+
+.video-player video{
+
+    width:100%;
+    height:100%;
+
+    object-fit:contain;
+
+    background:#000;
+}
+
+
+/* CLOSE BUTTON */
+
+.video-close{
+
+    position:absolute;
+
+    top:18px;
+    left:18px;
+
+    width:55px;
+    height:55px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:
+        rgba(255,255,255,.18);
+
+    color:white;
+
+    font-size:28px;
+
+    cursor:pointer;
+
+    z-index:5100;
+
+    backdrop-filter:blur(10px);
+
+    transition:.3s;
+}
+
+
+.video-close:hover{
+
+    background:#ffd34d;
+
+    color:#000;
+
+    transform:
+        rotate(90deg);
+}
+
+
+/* =====================================
+   ANIMATIONS
+===================================== */
+
+@keyframes introOut{
+
+    to{
+
+        opacity:0;
+
+        visibility:hidden;
+
+        pointer-events:none;
+    }
+}
+
+
+@keyframes glowPulse{
+
+    from{
+
+        transform:
+            translate(-50%,-50%)
+            scale(.8);
+    }
+
+    to{
+
+        transform:
+            translate(-50%,-50%)
+            scale(1.2);
+    }
+}
+
+
+@keyframes starMove{
+
+    from{
+
+        opacity:.2;
+
+        transform:
+            scale(.5);
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+            scale(1.8);
+    }
+}
+
+
+@keyframes ringRotate{
+
+    from{
+
+        transform:
+            translate(-50%,-50%)
+            rotate(0deg);
+    }
+
+    to{
+
+        transform:
+            translate(-50%,-50%)
+            rotate(360deg);
+    }
+}
+
+
+@keyframes logoFloat{
+
+    0%,100%{
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+    50%{
+
+        transform:
+            translateY(-15px)
+            scale(1.05);
+    }
+}
+
+
+@keyframes textShine{
+
+    from{
+
+        background-position:0%;
+    }
+
+    to{
+
+        background-position:300%;
+    }
+}
+
+
+@keyframes floatDesign{
+
+    0%,100%{
+
+        transform:
+            translateY(0);
+    }
+
+    50%{
+
+        transform:
+            translateY(-30px);
+    }
+}
+
+
+@keyframes dotFloat{
+
+    from{
+
+        transform:
+            translateY(0)
+            scale(.7);
+    }
+
+    to{
+
+        transform:
+            translateY(-25px)
+            scale(1.3);
+    }
+}
+
+
+@keyframes buttonShine{
+
+    0%{
+
+        left:-80px;
+    }
+
+    60%,100%{
+
+        left:120%;
+    }
+}
+
+
+@keyframes decorGlow{
+
+    from{
+
+        opacity:.3;
+
+        transform:
+            scale(.9);
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+            scale(1.05);
+    }
+}
+
+
+@keyframes thumbRing{
+
+    from{
+
+        transform:
+            rotate(0deg)
+            scale(.8);
+    }
+
+    to{
+
+        transform:
+            rotate(360deg)
+            scale(1.15);
+    }
+}
+
+
+/* =====================================
+   MOBILE
+===================================== */
+
+@media(max-width:700px){
+
+    .intro-logo{
+
+        width:100px;
+        height:100px;
+
+        font-size:48px;
+    }
+
+
+    .intro-content h2{
+
+        font-size:40px;
+
+        letter-spacing:3px;
+    }
+
+
+    .intro-content p{
+
+        font-size:11px;
+
+        letter-spacing:2px;
+    }
+
+
+    .welcome{
+
+        padding:
+            90px 15px 120px;
+    }
+
+
+    .welcome h1{
+
+        font-size:43px;
+    }
+
+
+    .welcome-sub{
+
+        font-size:16px;
+    }
+
+
+    .collection-button{
+
+        padding:
+            17px 25px;
+
+        font-size:15px;
+    }
+
+
+    .button-design{
+
+        font-size:18px;
+
+        letter-spacing:8px;
+    }
+
+
+    .video-grid{
+
+        grid-template-columns:1fr;
+
+        gap:22px;
+    }
+
+
+    .thumbnail{
+
+        height:230px;
+    }
+
+
+    .collection{
+
+        padding:
+            30px 5px 100px;
+    }
+
+
+    .video-close{
+
+        width:50px;
+        height:50px;
+
+        top:12px;
+        left:12px;
+    }
+
+}
+
+</style>
+
 </head>
+
 
 <body>
 
-    <!-- =================================
-         FIRST ANIMATION
-    ================================= -->
 
-    <div class="first-screen">
+<!-- =====================================
+     INTRO
+===================================== -->
 
-        <div class="lotus-area">
+<div class="intro">
 
-            <!-- LEFT LOTUS -->
 
-            <div class="lotus">
+    <div class="intro-glow"></div>
 
-                <div class="petal p1"></div>
-                <div class="petal p2"></div>
-                <div class="petal p3"></div>
-                <div class="petal p4"></div>
-                <div class="petal p5"></div>
-                <div class="petal p6"></div>
-                <div class="petal p7"></div>
-                <div class="petal p8"></div>
 
-                <div class="petal inner i1"></div>
-                <div class="petal inner i2"></div>
-                <div class="petal inner i3"></div>
-                <div class="petal inner i4"></div>
+    <div class="ring ring1"></div>
 
-                <div class="center"></div>
+    <div class="ring ring2"></div>
 
-            </div>
+    <div class="ring ring3"></div>
 
-            <!-- RIGHT LOTUS -->
 
-            <div class="lotus second-lotus">
+    <div class="star s1"></div>
+    <div class="star s2"></div>
+    <div class="star s3"></div>
+    <div class="star s4"></div>
+    <div class="star s5"></div>
+    <div class="star s6"></div>
+    <div class="star s7"></div>
+    <div class="star s8"></div>
+    <div class="star s9"></div>
+    <div class="star s10"></div>
+    <div class="star s11"></div>
+    <div class="star s12"></div>
+    <div class="star s13"></div>
+    <div class="star s14"></div>
+    <div class="star s15"></div>
 
-                <div class="petal p1"></div>
-                <div class="petal p2"></div>
-                <div class="petal p3"></div>
-                <div class="petal p4"></div>
-                <div class="petal p5"></div>
-                <div class="petal p6"></div>
-                <div class="petal p7"></div>
-                <div class="petal p8"></div>
 
-                <div class="petal inner i1"></div>
-                <div class="petal inner i2"></div>
-                <div class="petal inner i3"></div>
-                <div class="petal inner i4"></div>
+    <div class="intro-content">
 
-                <div class="center"></div>
 
-            </div>
-
-            <!-- SUN -->
-
-            <div class="sun-area">
-
-                <div class="rays"></div>
-
-                <div class="sun"></div>
-
-            </div>
-
+        <div class="intro-logo">
+            ✦
         </div>
+
+
+        <h2>
+            CREATIVE
+        </h2>
+
+
+        <p>
+            ENTER THE WORLD OF IMAGINATION
+        </p>
+
 
     </div>
 
 
-    <!-- =================================
-         MAIN WEBSITE
-    ================================= -->
+</div>
 
-    <main class="welcome-screen">
+
+
+<!-- =====================================
+     WELCOME
+===================================== -->
+
+<section class="welcome">
+
+
+    <!-- DESIGNS -->
+
+    <div class="design-circle dc1"></div>
+
+    <div class="design-circle dc2"></div>
+
+    <div class="design-circle dc3"></div>
+
+
+    <div class="dot d1"></div>
+    <div class="dot d2"></div>
+    <div class="dot d3"></div>
+    <div class="dot d4"></div>
+    <div class="dot d5"></div>
+    <div class="dot d6"></div>
+
+
+    <div class="welcome-content">
+
 
         <h1>
             Welcome to My Creative World
         </h1>
 
-        <p>
-            Discover something legendary.
+
+        <p class="welcome-sub">
+
+            A collection of my most creative,
+            memorable and legendary works.
+            Explore my world and discover
+            something extraordinary.
+
         </p>
 
 
-        <!-- MAIN VIDEO -->
+        <!-- BUTTON -->
 
-        <div class="video-player">
+        <div class="button-area">
 
-            <video
-                id="mainVideo"
-                controls
-                playsinline
-                poster=""
+
+            <a
+                href="#collection"
+                class="collection-button"
             >
-                <source
-                    id="videoSource"
-                    src="525099_gif_480.mp4"
-                    type="video/mp4"
-                >
-            </video>
 
-            <div
-                class="current-title"
-                id="currentTitle"
-            >
-                Legendary Video 1
+                View My Legendary Collection
+
+            </a>
+
+
+            <div class="button-design">
+
+                ✦　✧　✦　✧　✦
+
             </div>
+
 
         </div>
 
 
-        <!-- COLLECTION -->
 
-        <section class="collection">
+        <!-- =================================
+             COLLECTION
+        ================================= -->
+
+        <section
+            class="collection"
+            id="collection"
+        >
+
 
             <h2>
                 My Legendary Collection
             </h2>
 
+
             <div class="video-grid">
+
 
                 <!-- VIDEO 1 -->
 
                 <div
-                    class="video-card active"
-                    onclick="selectVideo(
-                        '525099_gif_480.mp4',
-                        'Legendary Video 1',
-                        this
-                    )"
+                    class="video-card"
+                    onclick="
+                        openVideo(
+                            '525099_gif_480.mp4'
+                        )
+                    "
                 >
 
                     <div class="thumbnail">
@@ -813,21 +1433,22 @@
                     </div>
 
                     <h3>
-                        Legendary Video 1
+                        Legendary Collection 01
                     </h3>
 
                 </div>
+
 
 
                 <!-- VIDEO 2 -->
 
                 <div
                     class="video-card"
-                    onclick="selectVideo(
-                        'video2.mp4',
-                        'Legendary Video 2',
-                        this
-                    )"
+                    onclick="
+                        openVideo(
+                            '525081_gif_480.mp4'
+                        )
+                    "
                 >
 
                     <div class="thumbnail">
@@ -835,21 +1456,22 @@
                     </div>
 
                     <h3>
-                        Legendary Video 2
+                        Legendary Collection 02
                     </h3>
 
                 </div>
+
 
 
                 <!-- VIDEO 3 -->
 
                 <div
                     class="video-card"
-                    onclick="selectVideo(
-                        'video3.mp4',
-                        'Legendary Video 3',
-                        this
-                    )"
+                    onclick="
+                        openVideo(
+                            '511514_gif_480.mp4'
+                        )
+                    "
                 >
 
                     <div class="thumbnail">
@@ -857,21 +1479,22 @@
                     </div>
 
                     <h3>
-                        Legendary Video 3
+                        Legendary Collection 03
                     </h3>
 
                 </div>
+
 
 
                 <!-- VIDEO 4 -->
 
                 <div
                     class="video-card"
-                    onclick="selectVideo(
-                        'video4.mp4',
-                        'Legendary Video 4',
-                        this
-                    )"
+                    onclick="
+                        openVideo(
+                            '505260_gif_480.mp4'
+                        )
+                    "
                 >
 
                     <div class="thumbnail">
@@ -879,21 +1502,22 @@
                     </div>
 
                     <h3>
-                        Legendary Video 4
+                        Legendary Collection 04
                     </h3>
 
                 </div>
+
 
 
                 <!-- VIDEO 5 -->
 
                 <div
                     class="video-card"
-                    onclick="selectVideo(
-                        'video5.mp4',
-                        'Legendary Video 5',
-                        this
-                    )"
+                    onclick="
+                        openVideo(
+                            '510149_gif_480.mp4'
+                        )
+                    "
                 >
 
                     <div class="thumbnail">
@@ -901,100 +1525,182 @@
                     </div>
 
                     <h3>
-                        Legendary Video 5
+                        Legendary Collection 05
                     </h3>
 
                 </div>
 
-
-                <!-- VIDEO 6 -->
-
-                <div
-                    class="video-card"
-                    onclick="selectVideo(
-                        'video6.mp4',
-                        'Legendary Video 6',
-                        this
-                    )"
-                >
-
-                    <div class="thumbnail">
-                        ▶
-                    </div>
-
-                    <h3>
-                        Legendary Video 6
-                    </h3>
-
-                </div>
 
             </div>
 
+
         </section>
 
-    </main>
+
+    </div>
 
 
-    <!-- =================================
-         JAVASCRIPT
-    ================================= -->
+    <!-- GRASS -->
 
-    <script>
-
-        function selectVideo(file, title, card) {
-
-            const video =
-                document.getElementById("mainVideo");
-
-            const source =
-                document.getElementById("videoSource");
-
-            const titleBox =
-                document.getElementById("currentTitle");
+    <div class="grass-area">
 
 
-            /* Change video */
+        <div class="flower f1"></div>
 
-            source.src = file;
+        <div class="flower f2"></div>
 
-            video.load();
+        <div class="flower f3"></div>
 
-            video.play();
+        <div class="flower f4"></div>
 
-
-            /* Change title */
-
-            titleBox.textContent = title;
+        <div class="flower f5"></div>
 
 
-            /* Remove old active */
-
-            document
-                .querySelectorAll(".video-card")
-                .forEach(function(item) {
-
-                    item.classList.remove("active");
-
-                });
+        <div class="grass"></div>
 
 
-            /* Add active */
-
-            card.classList.add("active");
+    </div>
 
 
-            /* Scroll to main video */
+</section>
 
-            document
-                .querySelector(".video-player")
-                .scrollIntoView({
-                    behavior: "smooth",
-                    block: "center"
-                });
 
-        }
 
-    </script>
+<!-- =====================================
+     FULL SCREEN VIDEO PLAYER
+===================================== -->
+
+<div
+    class="video-player"
+    id="videoPlayer"
+>
+
+
+    <button
+        class="video-close"
+        onclick="closeVideo()"
+    >
+        ✕
+    </button>
+
+
+    <video
+        id="mainVideo"
+        controls
+        playsinline
+    >
+
+        <source
+            id="videoSource"
+            src=""
+            type="video/mp4"
+        >
+
+    </video>
+
+
+</div>
+
+
+
+<script>
+
+
+function openVideo(file){
+
+    const player =
+        document.getElementById(
+            "videoPlayer"
+        );
+
+
+    const video =
+        document.getElementById(
+            "mainVideo"
+        );
+
+
+    const source =
+        document.getElementById(
+            "videoSource"
+        );
+
+
+    source.src = file;
+
+
+    video.load();
+
+
+    player.classList.add(
+        "show"
+    );
+
+
+    video.play();
+
+
+    /*
+       Try browser fullscreen
+    */
+
+    if(
+        video.requestFullscreen
+    ){
+
+        video.requestFullscreen()
+        .catch(
+            function(){}
+        );
+
+    }
+
+}
+
+
+
+function closeVideo(){
+
+    const player =
+        document.getElementById(
+            "videoPlayer"
+        );
+
+
+    const video =
+        document.getElementById(
+            "mainVideo"
+        );
+
+
+    video.pause();
+
+
+    /*
+       Exit fullscreen
+    */
+
+    if(
+        document.fullscreenElement
+    ){
+
+        document
+            .exitFullscreen()
+            .catch(
+                function(){}
+            );
+
+    }
+
+
+    player.classList.remove(
+        "show"
+    );
+
+}
+
+</script>
+
 
 </body>
 </html>
