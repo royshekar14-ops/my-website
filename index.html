@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
 <title>My Video Site</title>
 
 <style>
@@ -109,10 +113,6 @@ body{
     outline:none;
 }
 
-.account-box input:focus{
-    border-color:#6c4cff;
-}
-
 .login-button,
 .signup-button,
 .logout-button{
@@ -121,7 +121,7 @@ body{
     border:none;
     border-radius:8px;
     cursor:pointer;
-    margin-top:5px;
+    margin-top:6px;
 }
 
 .login-button{
@@ -137,25 +137,41 @@ body{
 .logout-button{
     background:#ff4d4d;
     color:white;
-}
-
-.user-info{
     display:none;
-    text-align:center;
 }
 
-.user-email{
+.login-button:hover{
+    background:#5739e8;
+}
+
+.signup-button:hover{
+    background:#ddd;
+}
+
+.logout-button:hover{
+    background:#dd3333;
+}
+
+
+/* =========================
+   LOGIN STATUS
+========================= */
+
+.login-status{
     font-size:14px;
+    text-align:center;
+    margin:10px 0;
     color:#555;
     word-break:break-word;
-    margin:10px 0;
 }
 
-.auth-message{
-    font-size:13px;
-    text-align:center;
-    margin-top:10px;
-    min-height:18px;
+.logged-in{
+    color:green;
+    font-weight:bold;
+}
+
+.logged-out{
+    color:#777;
 }
 
 
@@ -551,6 +567,7 @@ main{
 }
 
 </style>
+
 </head>
 
 
@@ -584,74 +601,49 @@ main{
 
 <div class="account-box">
 
-    <!-- LOGIN / SIGN UP AREA -->
-
-    <div id="loginArea">
-
-        <h3>
-            👤 Account
-        </h3>
-
-        <input
-            id="emailInput"
-            type="email"
-            placeholder="Email">
-
-        <input
-            id="passwordInput"
-            type="password"
-            placeholder="Password">
-
-        <button
-            id="loginButton"
-            class="login-button">
-
-            Login
-
-        </button>
-
-        <button
-            id="signupButton"
-            class="signup-button">
-
-            Sign Up
-
-        </button>
-
-        <div
-            id="authMessage"
-            class="auth-message">
-
-        </div>
-
-    </div>
-
-
-    <!-- LOGGED IN AREA -->
+    <h3>👤 Account</h3>
 
     <div
-        id="userInfo"
-        class="user-info">
+        id="loginStatus"
+        class="login-status logged-out">
 
-        <h3>
-            ✅ Logged In
-        </h3>
-
-        <div
-            id="userEmail"
-            class="user-email">
-
-        </div>
-
-        <button
-            id="logoutButton"
-            class="logout-button">
-
-            Logout
-
-        </button>
+        Not logged in
 
     </div>
+
+    <input
+        id="email"
+        type="email"
+        placeholder="Email">
+
+    <input
+        id="password"
+        type="password"
+        placeholder="Password">
+
+    <button
+        id="loginButton"
+        class="login-button">
+
+        Login
+
+    </button>
+
+    <button
+        id="signupButton"
+        class="signup-button">
+
+        Sign Up
+
+    </button>
+
+    <button
+        id="logoutButton"
+        class="logout-button">
+
+        Logout
+
+    </button>
 
 </div>
 
@@ -696,6 +688,7 @@ main{
 
 </div>
 
+
 <div class="overlay"></div>
 
 
@@ -720,16 +713,13 @@ main{
 
 
 <h2 class="section-title">
-
     🎬 Videos
-
 </h2>
 
 
 <div
     id="videoFeed"
     class="video-feed">
-
 </div>
 
 
@@ -812,7 +802,6 @@ main{
     id="shortViewer"
     class="short-viewer">
 
-
     <button
         id="shortClose"
         class="short-close">
@@ -837,7 +826,6 @@ main{
 
     </div>
 
-
 </div>
 
 
@@ -848,9 +836,9 @@ main{
 <script type="module">
 
 
-/* ==================================================
-   FIREBASE SDK
-================================================== */
+/* =====================================================
+   FIREBASE IMPORT
+===================================================== */
 
 import {
     initializeApp
@@ -866,143 +854,103 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
 
 
-/* ==================================================
+/* =====================================================
    FIREBASE CONFIG
-================================================== */
+===================================================== */
 
 const firebaseConfig = {
 
     apiKey:
-        "AIzaSyAjFiEYq9xxAqpQBS_W15ugKJViJggd-2U",
+    "AIzaSyAjFiEYq9xxAqpQBS_W15ugKJViJggd-2U",
 
     authDomain:
-        "my-video-site-a21fe.firebaseapp.com",
+    "my-video-site-a21fe.firebaseapp.com",
 
     projectId:
-        "my-video-site-a21fe",
+    "my-video-site-a21fe",
 
     storageBucket:
-        "my-video-site-a21fe.firebasestorage.app",
+    "my-video-site-a21fe.firebasestorage.app",
 
     messagingSenderId:
-        "107193146030",
+    "107193146030",
 
     appId:
-        "1:107193146030:web:e6168ffad8b118d6ba2b3f",
+    "1:107193146030:web:e6168ffad8b118d6ba2b3f",
 
     measurementId:
-        "G-2YE5DRCJPH"
+    "G-2YE5DRCJPH"
 
 };
 
 
-/* ==================================================
+/* =====================================================
    INITIALIZE FIREBASE
-================================================== */
+===================================================== */
 
 const app =
-    initializeApp(firebaseConfig);
+initializeApp(firebaseConfig);
 
 
 const auth =
-    getAuth(app);
+getAuth(app);
 
 
-/* ==================================================
-   MENU
-================================================== */
-
-const menuButton =
-    document.querySelector(".menu-button");
-
-
-const sideMenu =
-    document.querySelector(".side-menu");
-
-
-const closeButton =
-    document.querySelector(".close-btn");
-
-
-const overlay =
-    document.querySelector(".overlay");
-
-
-menuButton.onclick =
-    function(){
-
-        sideMenu.classList.add("active");
-
-        overlay.classList.add("active");
-
-    };
-
-
-closeButton.onclick =
-    function(){
-
-        sideMenu.classList.remove("active");
-
-        overlay.classList.remove("active");
-
-    };
-
-
-overlay.onclick =
-    function(){
-
-        sideMenu.classList.remove("active");
-
-        overlay.classList.remove("active");
-
-    };
-
-
-document
-.querySelectorAll(".menu-item")
-.forEach(
-    function(item){
-
-        item.onclick =
-            function(){
-
-                sideMenu.classList.remove(
-                    "active"
-                );
-
-                overlay.classList.remove(
-                    "active"
-                );
-
-            };
-
-    }
-);
-
-
-/* ==================================================
-   ACCOUNT BOX
-================================================== */
+/* =====================================================
+   ACCOUNT ELEMENTS
+===================================================== */
 
 const account =
-    document.querySelector(".account");
+document.querySelector(".account");
 
 
 const accountBox =
-    document.querySelector(".account-box");
+document.querySelector(".account-box");
 
+
+const emailInput =
+document.getElementById("email");
+
+
+const passwordInput =
+document.getElementById("password");
+
+
+const loginButton =
+document.getElementById("loginButton");
+
+
+const signupButton =
+document.getElementById("signupButton");
+
+
+const logoutButton =
+document.getElementById("logoutButton");
+
+
+const loginStatus =
+document.getElementById("loginStatus");
+
+
+/* =====================================================
+   ACCOUNT BOX OPEN
+===================================================== */
 
 account.onclick =
-    function(event){
+function(event){
 
-        event.stopPropagation();
+    event.stopPropagation();
 
-        accountBox.classList.toggle(
-            "active"
-        );
+    accountBox.classList.toggle(
+        "active"
+    );
 
-    };
+};
 
+
+/* =====================================================
+   CLOSE ACCOUNT BOX
+===================================================== */
 
 document.addEventListener(
     "click",
@@ -1023,337 +971,223 @@ document.addEventListener(
 );
 
 
-/* ==================================================
-   FIREBASE LOGIN ELEMENTS
-================================================== */
-
-const emailInput =
-    document.getElementById(
-        "emailInput"
-    );
-
-
-const passwordInput =
-    document.getElementById(
-        "passwordInput"
-    );
-
-
-const loginButton =
-    document.getElementById(
-        "loginButton"
-    );
-
-
-const signupButton =
-    document.getElementById(
-        "signupButton"
-    );
-
-
-const logoutButton =
-    document.getElementById(
-        "logoutButton"
-    );
-
-
-const authMessage =
-    document.getElementById(
-        "authMessage"
-    );
-
-
-const loginArea =
-    document.getElementById(
-        "loginArea"
-    );
-
-
-const userInfo =
-    document.getElementById(
-        "userInfo"
-    );
-
-
-const userEmail =
-    document.getElementById(
-        "userEmail"
-    );
-
-
-/* ==================================================
-   SHOW MESSAGE
-================================================== */
-
-function showAuthMessage(message){
-
-    authMessage.textContent =
-        message;
-
-}
-
-
-/* ==================================================
+/* =====================================================
    SIGN UP
-================================================== */
+===================================================== */
 
 signupButton.onclick =
-    async function(){
+async function(){
 
-        const email =
-            emailInput.value.trim();
+    const email =
+        emailInput.value.trim();
 
-
-        const password =
-            passwordInput.value;
-
-
-        if(
-            !email ||
-            !password
-        ){
-
-            showAuthMessage(
-                "Email and password দিন।"
-            );
-
-            return;
-
-        }
+    const password =
+        passwordInput.value;
 
 
-        if(
-            password.length < 6
-        ){
+    if(!email || !password){
 
-            showAuthMessage(
-                "Password কমপক্ষে 6 অক্ষরের হতে হবে।"
-            );
+        alert(
+            "Email এবং Password দিন।"
+        );
 
-            return;
+        return;
 
-        }
+    }
 
 
-        signupButton.disabled =
-            true;
+    if(password.length < 6){
+
+        alert(
+            "Password কমপক্ষে 6 characters হতে হবে।"
+        );
+
+        return;
+
+    }
 
 
-        showAuthMessage(
-            "Account তৈরি হচ্ছে..."
+    try{
+
+        await createUserWithEmailAndPassword(
+            auth,
+            email,
+            password
         );
 
 
-        try{
+        alert(
+            "Sign Up সফল হয়েছে! 🎉"
+        );
 
-            await createUserWithEmailAndPassword(
-                auth,
-                email,
-                password
+
+        passwordInput.value = "";
+
+
+    }catch(error){
+
+        console.error(error);
+
+
+        if(
+            error.code ===
+            "auth/email-already-in-use"
+        ){
+
+            alert(
+                "এই Email দিয়ে আগে থেকেই Account আছে।"
             );
 
+        }else if(
+            error.code ===
+            "auth/invalid-email"
+        ){
 
-            showAuthMessage(
-                "✅ Sign Up সফল হয়েছে!"
+            alert(
+                "Email ঠিকভাবে লিখুন।"
             );
 
+        }else if(
+            error.code ===
+            "auth/weak-password"
+        ){
 
-            emailInput.value =
-                "";
+            alert(
+                "Password আরও শক্ত করুন।"
+            );
 
-            passwordInput.value =
-                "";
+        }else{
+
+            alert(
+                "Sign Up হয়নি: " +
+                error.message
+            );
 
         }
 
-        catch(error){
+    }
 
-            console.error(error);
-
-
-            if(
-                error.code ===
-                "auth/email-already-in-use"
-            ){
-
-                showAuthMessage(
-                    "এই Email দিয়ে আগে থেকেই Account আছে।"
-                );
-
-            }
-
-            else if(
-                error.code ===
-                "auth/invalid-email"
-            ){
-
-                showAuthMessage(
-                    "Email ঠিক নয়।"
-                );
-
-            }
-
-            else if(
-                error.code ===
-                "auth/weak-password"
-            ){
-
-                showAuthMessage(
-                    "Password আরও শক্ত করুন।"
-                );
-
-            }
-
-            else{
-
-                showAuthMessage(
-                    "Sign Up করা যায়নি। আবার চেষ্টা করুন।"
-                );
-
-            }
-
-        }
+};
 
 
-        signupButton.disabled =
-            false;
-
-    };
-
-
-/* ==================================================
+/* =====================================================
    LOGIN
-================================================== */
+===================================================== */
 
 loginButton.onclick =
-    async function(){
+async function(){
 
-        const email =
-            emailInput.value.trim();
+    const email =
+        emailInput.value.trim();
 
-
-        const password =
-            passwordInput.value;
-
-
-        if(
-            !email ||
-            !password
-        ){
-
-            showAuthMessage(
-                "Email এবং password দিন।"
-            );
-
-            return;
-
-        }
+    const password =
+        passwordInput.value;
 
 
-        loginButton.disabled =
-            true;
+    if(!email || !password){
+
+        alert(
+            "Email এবং Password দিন।"
+        );
+
+        return;
+
+    }
 
 
-        showAuthMessage(
-            "Login হচ্ছে..."
+    try{
+
+        await signInWithEmailAndPassword(
+            auth,
+            email,
+            password
         );
 
 
-        try{
+        alert(
+            "Login সফল হয়েছে! ✅"
+        );
 
-            await signInWithEmailAndPassword(
-                auth,
-                email,
-                password
+
+        passwordInput.value = "";
+
+
+    }catch(error){
+
+        console.error(error);
+
+
+        if(
+            error.code ===
+            "auth/invalid-credential"
+        ){
+
+            alert(
+                "Email অথবা Password ভুল।"
             );
 
+        }else if(
+            error.code ===
+            "auth/user-not-found"
+        ){
 
-            showAuthMessage(
-                "✅ Login সফল হয়েছে!"
+            alert(
+                "এই Email দিয়ে কোনো Account নেই।"
             );
 
+        }else if(
+            error.code ===
+            "auth/wrong-password"
+        ){
 
-            emailInput.value =
-                "";
+            alert(
+                "Password ভুল।"
+            );
 
-            passwordInput.value =
-                "";
+        }else{
+
+            alert(
+                "Login হয়নি: " +
+                error.message
+            );
 
         }
 
-        catch(error){
+    }
 
-            console.error(error);
-
-
-            if(
-                error.code ===
-                "auth/invalid-credential"
-            ){
-
-                showAuthMessage(
-                    "Email অথবা password ভুল।"
-                );
-
-            }
-
-            else if(
-                error.code ===
-                "auth/invalid-email"
-            ){
-
-                showAuthMessage(
-                    "Email ঠিক নয়।"
-                );
-
-            }
-
-            else{
-
-                showAuthMessage(
-                    "Login করা যায়নি। আবার চেষ্টা করুন।"
-                );
-
-            }
-
-        }
+};
 
 
-        loginButton.disabled =
-            false;
-
-    };
-
-
-/* ==================================================
+/* =====================================================
    LOGOUT
-================================================== */
+===================================================== */
 
 logoutButton.onclick =
-    async function(){
+async function(){
 
-        try{
+    try{
 
-            await signOut(auth);
+        await signOut(auth);
 
-            showAuthMessage(
-                "Logout সফল হয়েছে।"
-            );
+        alert(
+            "Logout সফল হয়েছে।"
+        );
 
-        }
+    }catch(error){
 
-        catch(error){
+        alert(
+            "Logout হয়নি: " +
+            error.message
+        );
 
-            console.error(error);
+    }
 
-        }
-
-    };
+};
 
 
-/* ==================================================
-   LOGIN STATE
-================================================== */
+/* =====================================================
+   LOGIN STATUS
+===================================================== */
 
 onAuthStateChanged(
     auth,
@@ -1361,32 +1195,68 @@ onAuthStateChanged(
 
         if(user){
 
-            loginArea.style.display =
-                "none";
+            loginStatus.innerHTML =
+                "✅ Logged in<br>" +
+                user.email;
 
-            userInfo.style.display =
-                "block";
-
-
-            userEmail.textContent =
-                user.email || "User";
+            loginStatus.className =
+                "login-status logged-in";
 
 
-            account.textContent =
-                "✓";
-
-        }
-
-        else{
-
-            loginArea.style.display =
-                "block";
-
-            userInfo.style.display =
+            loginButton.style.display =
                 "none";
 
 
-            account.textContent =
+            signupButton.style.display =
+                "none";
+
+
+            logoutButton.style.display =
+                "block";
+
+
+            emailInput.style.display =
+                "none";
+
+
+            passwordInput.style.display =
+                "none";
+
+
+            account.innerHTML =
+                "✅";
+
+
+        }else{
+
+            loginStatus.innerHTML =
+                "Not logged in";
+
+            loginStatus.className =
+                "login-status logged-out";
+
+
+            loginButton.style.display =
+                "block";
+
+
+            signupButton.style.display =
+                "block";
+
+
+            logoutButton.style.display =
+                "none";
+
+
+            emailInput.style.display =
+                "block";
+
+
+            passwordInput.style.display =
+                "block";
+
+
+            account.innerHTML =
                 "👤";
 
         }
@@ -1395,9 +1265,93 @@ onAuthStateChanged(
 );
 
 
-/* ==================================================
+/* =====================================================
+   MENU
+===================================================== */
+
+const menuButton =
+    document.querySelector(".menu-button");
+
+
+const sideMenu =
+    document.querySelector(".side-menu");
+
+
+const closeButton =
+    document.querySelector(".close-btn");
+
+
+const overlay =
+    document.querySelector(".overlay");
+
+
+menuButton.onclick =
+function(){
+
+    sideMenu.classList.add(
+        "active"
+    );
+
+    overlay.classList.add(
+        "active"
+    );
+
+};
+
+
+closeButton.onclick =
+function(){
+
+    sideMenu.classList.remove(
+        "active"
+    );
+
+    overlay.classList.remove(
+        "active"
+    );
+
+};
+
+
+overlay.onclick =
+function(){
+
+    sideMenu.classList.remove(
+        "active"
+    );
+
+    overlay.classList.remove(
+        "active"
+    );
+
+};
+
+
+document
+.querySelectorAll(".menu-item")
+.forEach(
+    function(item){
+
+        item.onclick =
+        function(){
+
+            sideMenu.classList.remove(
+                "active"
+            );
+
+            overlay.classList.remove(
+                "active"
+            );
+
+        };
+
+    }
+);
+
+
+/* =====================================================
    FULL VIDEOS
-================================================== */
+===================================================== */
 
 const fullVideos = [
 
@@ -1460,9 +1414,9 @@ const fullVideos = [
 ];
 
 
-/* ==================================================
+/* =====================================================
    JUMPSHARE SHORTS
-================================================== */
+===================================================== */
 
 const jumpshareShorts = [
 
@@ -1485,9 +1439,9 @@ const jumpshareShorts = [
 ];
 
 
-/* ==================================================
+/* =====================================================
    MP4 SHORTS
-================================================== */
+===================================================== */
 
 const mp4Shorts = [
 
@@ -1502,9 +1456,9 @@ const mp4Shorts = [
 ];
 
 
-/* ==================================================
+/* =====================================================
    SHORT OBJECTS
-================================================== */
+===================================================== */
 
 const shortVideos = [
 
@@ -1512,10 +1466,8 @@ const shortVideos = [
         function(src){
 
             return {
-
                 type:"file",
                 src:src
-
             };
 
         }
@@ -1525,10 +1477,8 @@ const shortVideos = [
         function(src){
 
             return {
-
                 type:"jumpshare",
                 src:src
-
             };
 
         }
@@ -1537,9 +1487,9 @@ const shortVideos = [
 ];
 
 
-/* ==================================================
+/* =====================================================
    RANDOM FUNCTION
-================================================== */
+===================================================== */
 
 function shuffle(array){
 
@@ -1551,8 +1501,7 @@ function shuffle(array){
 
         const j =
             Math.floor(
-                Math.random() *
-                (i+1)
+                Math.random()*(i+1)
             );
 
 
@@ -1572,9 +1521,9 @@ function shuffle(array){
 }
 
 
-/* ==================================================
+/* =====================================================
    RANDOM FULL VIDEO
-================================================== */
+===================================================== */
 
 const randomFull =
     shuffle(
@@ -1588,9 +1537,9 @@ const feed =
     );
 
 
-/* ==================================================
+/* =====================================================
    CREATE FULL VIDEO
-================================================== */
+===================================================== */
 
 function createFullVideo(video){
 
@@ -1644,9 +1593,9 @@ function createFullVideo(video){
 }
 
 
-/* ==================================================
+/* =====================================================
    CREATE SHORT ROW
-================================================== */
+===================================================== */
 
 function createShortRow(){
 
@@ -1773,9 +1722,9 @@ function createShortRow(){
 }
 
 
-/* ==================================================
+/* =====================================================
    BUILD FEED
-================================================== */
+===================================================== */
 
 randomFull.forEach(
     function(video,index){
@@ -1801,9 +1750,9 @@ randomFull.forEach(
 );
 
 
-/* ==================================================
+/* =====================================================
    SHORT VIEWER
-================================================== */
+===================================================== */
 
 const shortViewer =
     document.getElementById(
@@ -1835,9 +1784,9 @@ let currentVideos = [];
 let loadingMore = false;
 
 
-/* ==================================================
+/* =====================================================
    OPEN SHORT
-================================================== */
+===================================================== */
 
 function openShortViewer(
     clickedVideo
@@ -1858,9 +1807,7 @@ function openShortViewer(
         );
 
 
-    shuffle(
-        others
-    );
+    shuffle(others);
 
 
     currentVideos = [
@@ -1905,9 +1852,9 @@ function openShortViewer(
 }
 
 
-/* ==================================================
-   CREATE VIEWER
-================================================== */
+/* =====================================================
+   CREATE VIEWER VIDEOS
+===================================================== */
 
 function createViewerVideos(){
 
@@ -1975,9 +1922,9 @@ function createViewerVideos(){
 }
 
 
-/* ==================================================
+/* =====================================================
    PLAY VISIBLE VIDEO
-================================================== */
+===================================================== */
 
 function playVisibleVideo(){
 
@@ -1987,12 +1934,10 @@ function playVisibleVideo(){
         );
 
 
-    let bestItem =
-        null;
+    let bestItem = null;
 
 
-    let bestVisibility =
-        0;
+    let bestVisibility = 0;
 
 
     items.forEach(
@@ -2032,7 +1977,6 @@ function playVisibleVideo(){
                 bestVisibility =
                     visible;
 
-
                 bestItem =
                     item;
 
@@ -2066,9 +2010,7 @@ function playVisibleVideo(){
                     function(){}
                 );
 
-            }
-
-            else{
+            }else{
 
                 video.pause();
 
@@ -2080,9 +2022,9 @@ function playVisibleVideo(){
 }
 
 
-/* ==================================================
+/* =====================================================
    SHORT SCROLL
-================================================== */
+===================================================== */
 
 let scrollTimer;
 
@@ -2106,8 +2048,7 @@ shortFeed.addEventListener(
                     if(
                         shortFeed.scrollTop +
                         shortFeed.clientHeight >=
-                        shortFeed.scrollHeight -
-                        500
+                        shortFeed.scrollHeight - 500
                     ){
 
                         if(
@@ -2128,14 +2069,13 @@ shortFeed.addEventListener(
 );
 
 
-/* ==================================================
-   ADD MORE SHORTS
-================================================== */
+/* =====================================================
+   ADD MORE RANDOM SHORTS
+===================================================== */
 
 function addMoreRandomShorts(){
 
-    loadingMore =
-        true;
+    loadingMore = true;
 
 
     const more =
@@ -2204,8 +2144,7 @@ function addMoreRandomShorts(){
     setTimeout(
         function(){
 
-            loadingMore =
-                false;
+            loadingMore = false;
 
         },
         500
@@ -2214,9 +2153,9 @@ function addMoreRandomShorts(){
 }
 
 
-/* ==================================================
+/* =====================================================
    LIKE
-================================================== */
+===================================================== */
 
 shortLike.onclick =
     function(event){
@@ -2238,9 +2177,7 @@ shortLike.onclick =
             shortLike.innerHTML =
                 "❤️ Liked";
 
-        }
-
-        else{
+        }else{
 
             shortLike.innerHTML =
                 "🤍 Like";
@@ -2250,9 +2187,9 @@ shortLike.onclick =
     };
 
 
-/* ==================================================
+/* =====================================================
    CLOSE SHORT
-================================================== */
+===================================================== */
 
 function closeShortViewer(){
 
@@ -2266,9 +2203,7 @@ function closeShortViewer(){
 
 
     shortFeed
-        .querySelectorAll(
-            "video"
-        )
+        .querySelectorAll("video")
         .forEach(
             function(video){
 
@@ -2292,9 +2227,9 @@ shortClose.onclick =
     };
 
 
-/* ==================================================
+/* =====================================================
    ESC KEY
-================================================== */
+===================================================== */
 
 document.addEventListener(
     "keydown",
@@ -2317,6 +2252,7 @@ document.addEventListener(
 
     }
 );
+
 
 </script>
 
