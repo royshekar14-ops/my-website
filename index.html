@@ -3,9 +3,7 @@
 <head>
 
 <meta charset="UTF-8">
-
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>My Video Site</title>
 
@@ -89,8 +87,8 @@ body{
     width:260px;
     background:white;
     padding:20px;
-    border-radius:15px;
-    box-shadow:0 5px 20px rgba(0,0,0,.2);
+    border-radius:18px;
+    box-shadow:0 5px 25px rgba(0,0,0,.2);
     display:none;
     z-index:3000;
 }
@@ -104,13 +102,25 @@ body{
     text-align:center;
 }
 
+.account-status{
+    text-align:center;
+    font-size:13px;
+    color:#666;
+    margin-bottom:12px;
+    word-break:break-word;
+}
+
 .account-box input{
     width:100%;
     padding:11px;
     margin-bottom:10px;
     border:1px solid #ddd;
-    border-radius:8px;
+    border-radius:9px;
     outline:none;
+}
+
+.account-box input:focus{
+    border-color:#6c4cff;
 }
 
 .login-button,
@@ -119,9 +129,10 @@ body{
     width:100%;
     padding:11px;
     border:none;
-    border-radius:8px;
+    border-radius:9px;
     cursor:pointer;
     margin-top:6px;
+    font-weight:bold;
 }
 
 .login-button{
@@ -137,41 +148,13 @@ body{
 .logout-button{
     background:#ff4d4d;
     color:white;
-    display:none;
 }
 
-.login-button:hover{
-    background:#5739e8;
-}
-
-.signup-button:hover{
-    background:#ddd;
-}
-
-.logout-button:hover{
-    background:#dd3333;
-}
-
-
-/* =========================
-   LOGIN STATUS
-========================= */
-
-.login-status{
-    font-size:14px;
+.auth-message{
     text-align:center;
-    margin:10px 0;
-    color:#555;
-    word-break:break-word;
-}
-
-.logged-in{
-    color:green;
-    font-weight:bold;
-}
-
-.logged-out{
-    color:#777;
+    font-size:13px;
+    margin-top:10px;
+    min-height:18px;
 }
 
 
@@ -374,6 +357,7 @@ main{
     overflow:hidden;
     flex-shrink:0;
     cursor:pointer;
+    position:relative;
 }
 
 .tiktok-card video{
@@ -410,7 +394,7 @@ main{
 
 
 /* =========================
-   CLOSE BUTTON
+   SHORT CLOSE
 ========================= */
 
 .short-close{
@@ -430,27 +414,107 @@ main{
 
 
 /* =========================
-   LIKE BUTTON
+   LIKE AREA
 ========================= */
 
-.short-like{
+.like-area{
     position:fixed;
-    top:58%;
     right:15px;
+    bottom:70px;
     z-index:7000;
-    border:none;
-    border-radius:25px;
-    padding:11px 17px;
-    background:rgba(255,255,255,.9);
-    color:#222;
-    font-size:16px;
-    font-weight:bold;
-    cursor:pointer;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:5px;
 }
 
-.short-like.liked{
-    color:red;
+.like-button{
+    width:52px;
+    height:52px;
+    border:none;
+    border-radius:50%;
+    background:rgba(255,255,255,.92);
+    font-size:27px;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 3px 10px rgba(0,0,0,.3);
+}
+
+.like-button.liked{
     background:#ffe5e5;
+}
+
+.like-count{
+    color:white;
+    font-size:15px;
+    font-weight:bold;
+    text-shadow:0 2px 5px #000;
+}
+
+
+/* =========================
+   LOGIN REQUIRED POPUP
+========================= */
+
+.login-popup{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.65);
+    z-index:10000;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.login-popup.active{
+    display:flex;
+}
+
+.login-popup-box{
+    width:100%;
+    max-width:350px;
+    background:white;
+    border-radius:20px;
+    padding:25px;
+    box-shadow:0 10px 40px rgba(0,0,0,.35);
+    text-align:center;
+}
+
+.login-popup-box h2{
+    margin-top:0;
+}
+
+.login-popup-box p{
+    color:#666;
+    font-size:14px;
+}
+
+.popup-login,
+.popup-signup,
+.popup-close{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    margin-top:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.popup-login{
+    background:#6c4cff;
+    color:white;
+}
+
+.popup-signup{
+    background:#eee;
+}
+
+.popup-close{
+    background:#ddd;
 }
 
 
@@ -559,11 +623,6 @@ main{
         height:300px;
     }
 
-    .short-like{
-        top:58%;
-        right:12px;
-    }
-
 }
 
 </style>
@@ -596,7 +655,7 @@ main{
 
 
 <!-- =========================
-     FIREBASE ACCOUNT BOX
+     ACCOUNT BOX
 ========================= -->
 
 <div class="account-box">
@@ -604,20 +663,20 @@ main{
     <h3>👤 Account</h3>
 
     <div
-        id="loginStatus"
-        class="login-status logged-out">
+        id="accountStatus"
+        class="account-status">
 
         Not logged in
 
     </div>
 
     <input
-        id="email"
+        id="emailInput"
         type="email"
         placeholder="Email">
 
     <input
-        id="password"
+        id="passwordInput"
         type="password"
         placeholder="Password">
 
@@ -639,11 +698,18 @@ main{
 
     <button
         id="logoutButton"
-        class="logout-button">
+        class="logout-button"
+        style="display:none;">
 
         Logout
 
     </button>
+
+    <div
+        id="authMessage"
+        class="auth-message">
+
+    </div>
 
 </div>
 
@@ -688,7 +754,6 @@ main{
 
 </div>
 
-
 <div class="overlay"></div>
 
 
@@ -715,7 +780,6 @@ main{
 <h2 class="section-title">
     🎬 Videos
 </h2>
-
 
 <div
     id="videoFeed"
@@ -802,6 +866,7 @@ main{
     id="shortViewer"
     class="short-viewer">
 
+
     <button
         id="shortClose"
         class="short-close">
@@ -811,13 +876,29 @@ main{
     </button>
 
 
-    <button
-        id="shortLike"
-        class="short-like">
+    <!-- =========================
+         LIKE
+    ========================= -->
 
-        🤍 Like
+    <div class="like-area">
 
-    </button>
+        <button
+            id="likeButton"
+            class="like-button">
+
+            ♡
+
+        </button>
+
+        <div
+            id="likeCount"
+            class="like-count">
+
+            0
+
+        </div>
+
+    </div>
 
 
     <div
@@ -826,23 +907,74 @@ main{
 
     </div>
 
+
 </div>
 
 
 <!-- =========================
-     FIREBASE + WEBSITE JAVASCRIPT
+     LOGIN REQUIRED POPUP
+========================= -->
+
+<div
+    id="loginPopup"
+    class="login-popup">
+
+
+    <div class="login-popup-box">
+
+        <h2>
+            🔐 Login Required
+        </h2>
+
+        <p>
+            Like করতে হলে আগে Login অথবা Sign Up করতে হবে।
+        </p>
+
+        <button
+            id="popupLogin"
+            class="popup-login">
+
+            Login
+
+        </button>
+
+        <button
+            id="popupSignup"
+            class="popup-signup">
+
+            Sign Up
+
+        </button>
+
+        <button
+            id="popupClose"
+            class="popup-close">
+
+            Cancel
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     FIREBASE + JAVASCRIPT
 ========================= -->
 
 <script type="module">
 
 
-/* =====================================================
-   FIREBASE IMPORT
-===================================================== */
+/* =========================
+   FIREBASE IMPORTS
+========================= */
 
 import {
     initializeApp
-} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+}
+from
+"https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
 
 
 import {
@@ -851,12 +983,27 @@ import {
     signInWithEmailAndPassword,
     signOut,
     onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+}
+from
+"https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
 
 
-/* =====================================================
+import {
+    getFirestore,
+    doc,
+    setDoc,
+    deleteDoc,
+    getDoc,
+    collection,
+    getCountFromServer
+}
+from
+"https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+
+
+/* =========================
    FIREBASE CONFIG
-===================================================== */
+========================= */
 
 const firebaseConfig = {
 
@@ -884,405 +1031,50 @@ const firebaseConfig = {
 };
 
 
-/* =====================================================
+/* =========================
    INITIALIZE FIREBASE
-===================================================== */
+========================= */
 
 const app =
-initializeApp(firebaseConfig);
+    initializeApp(
+        firebaseConfig
+    );
 
 
 const auth =
-getAuth(app);
+    getAuth(app);
 
 
-/* =====================================================
-   ACCOUNT ELEMENTS
-===================================================== */
+const db =
+    getFirestore(app);
 
-const account =
-document.querySelector(".account");
 
-
-const accountBox =
-document.querySelector(".account-box");
-
-
-const emailInput =
-document.getElementById("email");
-
-
-const passwordInput =
-document.getElementById("password");
-
-
-const loginButton =
-document.getElementById("loginButton");
-
-
-const signupButton =
-document.getElementById("signupButton");
-
-
-const logoutButton =
-document.getElementById("logoutButton");
-
-
-const loginStatus =
-document.getElementById("loginStatus");
-
-
-/* =====================================================
-   ACCOUNT BOX OPEN
-===================================================== */
-
-account.onclick =
-function(event){
-
-    event.stopPropagation();
-
-    accountBox.classList.toggle(
-        "active"
-    );
-
-};
-
-
-/* =====================================================
-   CLOSE ACCOUNT BOX
-===================================================== */
-
-document.addEventListener(
-    "click",
-    function(event){
-
-        if(
-            !account.contains(event.target) &&
-            !accountBox.contains(event.target)
-        ){
-
-            accountBox.classList.remove(
-                "active"
-            );
-
-        }
-
-    }
-);
-
-
-/* =====================================================
-   SIGN UP
-===================================================== */
-
-signupButton.onclick =
-async function(){
-
-    const email =
-        emailInput.value.trim();
-
-    const password =
-        passwordInput.value;
-
-
-    if(!email || !password){
-
-        alert(
-            "Email এবং Password দিন।"
-        );
-
-        return;
-
-    }
-
-
-    if(password.length < 6){
-
-        alert(
-            "Password কমপক্ষে 6 characters হতে হবে।"
-        );
-
-        return;
-
-    }
-
-
-    try{
-
-        await createUserWithEmailAndPassword(
-            auth,
-            email,
-            password
-        );
-
-
-        alert(
-            "Sign Up সফল হয়েছে! 🎉"
-        );
-
-
-        passwordInput.value = "";
-
-
-    }catch(error){
-
-        console.error(error);
-
-
-        if(
-            error.code ===
-            "auth/email-already-in-use"
-        ){
-
-            alert(
-                "এই Email দিয়ে আগে থেকেই Account আছে।"
-            );
-
-        }else if(
-            error.code ===
-            "auth/invalid-email"
-        ){
-
-            alert(
-                "Email ঠিকভাবে লিখুন।"
-            );
-
-        }else if(
-            error.code ===
-            "auth/weak-password"
-        ){
-
-            alert(
-                "Password আরও শক্ত করুন।"
-            );
-
-        }else{
-
-            alert(
-                "Sign Up হয়নি: " +
-                error.message
-            );
-
-        }
-
-    }
-
-};
-
-
-/* =====================================================
-   LOGIN
-===================================================== */
-
-loginButton.onclick =
-async function(){
-
-    const email =
-        emailInput.value.trim();
-
-    const password =
-        passwordInput.value;
-
-
-    if(!email || !password){
-
-        alert(
-            "Email এবং Password দিন।"
-        );
-
-        return;
-
-    }
-
-
-    try{
-
-        await signInWithEmailAndPassword(
-            auth,
-            email,
-            password
-        );
-
-
-        alert(
-            "Login সফল হয়েছে! ✅"
-        );
-
-
-        passwordInput.value = "";
-
-
-    }catch(error){
-
-        console.error(error);
-
-
-        if(
-            error.code ===
-            "auth/invalid-credential"
-        ){
-
-            alert(
-                "Email অথবা Password ভুল।"
-            );
-
-        }else if(
-            error.code ===
-            "auth/user-not-found"
-        ){
-
-            alert(
-                "এই Email দিয়ে কোনো Account নেই।"
-            );
-
-        }else if(
-            error.code ===
-            "auth/wrong-password"
-        ){
-
-            alert(
-                "Password ভুল।"
-            );
-
-        }else{
-
-            alert(
-                "Login হয়নি: " +
-                error.message
-            );
-
-        }
-
-    }
-
-};
-
-
-/* =====================================================
-   LOGOUT
-===================================================== */
-
-logoutButton.onclick =
-async function(){
-
-    try{
-
-        await signOut(auth);
-
-        alert(
-            "Logout সফল হয়েছে।"
-        );
-
-    }catch(error){
-
-        alert(
-            "Logout হয়নি: " +
-            error.message
-        );
-
-    }
-
-};
-
-
-/* =====================================================
-   LOGIN STATUS
-===================================================== */
-
-onAuthStateChanged(
-    auth,
-    function(user){
-
-        if(user){
-
-            loginStatus.innerHTML =
-                "✅ Logged in<br>" +
-                user.email;
-
-            loginStatus.className =
-                "login-status logged-in";
-
-
-            loginButton.style.display =
-                "none";
-
-
-            signupButton.style.display =
-                "none";
-
-
-            logoutButton.style.display =
-                "block";
-
-
-            emailInput.style.display =
-                "none";
-
-
-            passwordInput.style.display =
-                "none";
-
-
-            account.innerHTML =
-                "✅";
-
-
-        }else{
-
-            loginStatus.innerHTML =
-                "Not logged in";
-
-            loginStatus.className =
-                "login-status logged-out";
-
-
-            loginButton.style.display =
-                "block";
-
-
-            signupButton.style.display =
-                "block";
-
-
-            logoutButton.style.display =
-                "none";
-
-
-            emailInput.style.display =
-                "block";
-
-
-            passwordInput.style.display =
-                "block";
-
-
-            account.innerHTML =
-                "👤";
-
-        }
-
-    }
-);
-
-
-/* =====================================================
+/* =========================
    MENU
-===================================================== */
+========================= */
 
 const menuButton =
-    document.querySelector(".menu-button");
+    document.querySelector(
+        ".menu-button"
+    );
 
 
 const sideMenu =
-    document.querySelector(".side-menu");
+    document.querySelector(
+        ".side-menu"
+    );
 
 
 const closeButton =
-    document.querySelector(".close-btn");
+    document.querySelector(
+        ".close-btn"
+    );
 
 
 const overlay =
-    document.querySelector(".overlay");
+    document.querySelector(
+        ".overlay"
+    );
 
 
 menuButton.onclick =
@@ -1328,30 +1120,377 @@ function(){
 
 
 document
-.querySelectorAll(".menu-item")
+.querySelectorAll(
+    ".menu-item"
+)
 .forEach(
-    function(item){
+function(item){
 
-        item.onclick =
-        function(){
+    item.onclick =
+    function(){
 
-            sideMenu.classList.remove(
+        sideMenu.classList.remove(
+            "active"
+        );
+
+        overlay.classList.remove(
+            "active"
+        );
+
+    };
+
+});
+
+
+/* =========================
+   ACCOUNT
+========================= */
+
+const account =
+    document.querySelector(
+        ".account"
+    );
+
+
+const accountBox =
+    document.querySelector(
+        ".account-box"
+    );
+
+
+account.onclick =
+function(){
+
+    accountBox.classList.toggle(
+        "active"
+    );
+
+};
+
+
+document.addEventListener(
+    "click",
+    function(event){
+
+        if(
+
+            !account.contains(
+                event.target
+            )
+
+            &&
+
+            !accountBox.contains(
+                event.target
+            )
+
+        ){
+
+            accountBox.classList.remove(
                 "active"
             );
 
-            overlay.classList.remove(
-                "active"
-            );
-
-        };
+        }
 
     }
 );
 
 
-/* =====================================================
+/* =========================
+   AUTH ELEMENTS
+========================= */
+
+const emailInput =
+    document.getElementById(
+        "emailInput"
+    );
+
+
+const passwordInput =
+    document.getElementById(
+        "passwordInput"
+    );
+
+
+const loginButton =
+    document.getElementById(
+        "loginButton"
+    );
+
+
+const signupButton =
+    document.getElementById(
+        "signupButton"
+    );
+
+
+const logoutButton =
+    document.getElementById(
+        "logoutButton"
+    );
+
+
+const accountStatus =
+    document.getElementById(
+        "accountStatus"
+    );
+
+
+const authMessage =
+    document.getElementById(
+        "authMessage"
+    );
+
+
+/* =========================
+   SIGN UP
+========================= */
+
+signupButton.onclick =
+async function(){
+
+    const email =
+        emailInput.value.trim();
+
+
+    const password =
+        passwordInput.value;
+
+
+    if(
+        !email ||
+        !password
+    ){
+
+        authMessage.innerText =
+            "Email এবং Password দিন।";
+
+        return;
+
+    }
+
+
+    try{
+
+        await createUserWithEmailAndPassword(
+            auth,
+            email,
+            password
+        );
+
+
+        authMessage.innerText =
+            "✅ Sign Up সফল হয়েছে!";
+
+
+        emailInput.value = "";
+        passwordInput.value = "";
+
+    }
+
+    catch(error){
+
+        authMessage.innerText =
+            "❌ " + getAuthError(error.code);
+
+    }
+
+};
+
+
+/* =========================
+   LOGIN
+========================= */
+
+loginButton.onclick =
+async function(){
+
+    const email =
+        emailInput.value.trim();
+
+
+    const password =
+        passwordInput.value;
+
+
+    if(
+        !email ||
+        !password
+    ){
+
+        authMessage.innerText =
+            "Email এবং Password দিন।";
+
+        return;
+
+    }
+
+
+    try{
+
+        await signInWithEmailAndPassword(
+            auth,
+            email,
+            password
+        );
+
+
+        authMessage.innerText =
+            "✅ Login সফল হয়েছে!";
+
+
+        emailInput.value = "";
+        passwordInput.value = "";
+
+    }
+
+    catch(error){
+
+        authMessage.innerText =
+            "❌ " + getAuthError(error.code);
+
+    }
+
+};
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+logoutButton.onclick =
+async function(){
+
+    try{
+
+        await signOut(auth);
+
+        authMessage.innerText =
+            "✅ Logout হয়েছে।";
+
+    }
+
+    catch(error){
+
+        authMessage.innerText =
+            "❌ Logout করা যায়নি।";
+
+    }
+
+};
+
+
+/* =========================
+   LOGIN STATUS
+========================= */
+
+let currentUser = null;
+
+
+onAuthStateChanged(
+    auth,
+    function(user){
+
+        currentUser =
+            user;
+
+
+        if(user){
+
+            accountStatus.innerText =
+                "🟢 Logged in: " +
+                user.email;
+
+
+            loginButton.style.display =
+                "none";
+
+
+            signupButton.style.display =
+                "none";
+
+
+            logoutButton.style.display =
+                "block";
+
+
+        }else{
+
+            accountStatus.innerText =
+                "🔴 Not logged in";
+
+
+            loginButton.style.display =
+                "block";
+
+
+            signupButton.style.display =
+                "block";
+
+
+            logoutButton.style.display =
+                "none";
+
+        }
+
+    }
+);
+
+
+/* =========================
+   AUTH ERROR
+========================= */
+
+function getAuthError(code){
+
+    if(
+        code ===
+        "auth/email-already-in-use"
+    ){
+
+        return "এই Email দিয়ে Account আগে থেকেই আছে।";
+
+    }
+
+
+    if(
+        code ===
+        "auth/invalid-email"
+    ){
+
+        return "Email ঠিক নয়।";
+
+    }
+
+
+    if(
+        code ===
+        "auth/weak-password"
+    ){
+
+        return "Password কমপক্ষে 6 characters দিন।";
+
+    }
+
+
+    if(
+        code ===
+        "auth/invalid-credential"
+    ){
+
+        return "Email অথবা Password ভুল।";
+
+    }
+
+
+    return "কিছু একটা সমস্যা হয়েছে।";
+
+}
+
+
+/* =========================
    FULL VIDEOS
-===================================================== */
+========================= */
 
 const fullVideos = [
 
@@ -1414,9 +1553,9 @@ const fullVideos = [
 ];
 
 
-/* =====================================================
+/* =========================
    JUMPSHARE SHORTS
-===================================================== */
+========================= */
 
 const jumpshareShorts = [
 
@@ -1439,46 +1578,57 @@ const jumpshareShorts = [
 ];
 
 
-/* =====================================================
+/* =========================
    MP4 SHORTS
-===================================================== */
+========================= */
 
 const mp4Shorts = [
 
     "short1.mp4",
-
     "short2.mp4",
-
     "short3.mp4",
-
     "short4.mp4"
 
 ];
 
 
-/* =====================================================
+/* =========================
    SHORT OBJECTS
-===================================================== */
+========================= */
 
 const shortVideos = [
 
     ...mp4Shorts.map(
-        function(src){
+        function(src,index){
 
             return {
+
+                id:
+                "short" +
+                (index + 1),
+
                 type:"file",
+
                 src:src
+
             };
 
         }
     ),
 
     ...jumpshareShorts.map(
-        function(src){
+        function(src,index){
 
             return {
+
+                id:
+                "jumpshare" +
+                (index + 1),
+
                 type:"jumpshare",
+
                 src:src
+
             };
 
         }
@@ -1487,21 +1637,25 @@ const shortVideos = [
 ];
 
 
-/* =====================================================
-   RANDOM FUNCTION
-===================================================== */
+/* =========================
+   RANDOM
+========================= */
 
 function shuffle(array){
 
     for(
-        let i=array.length-1;
-        i>0;
+        let i =
+        array.length - 1;
+
+        i > 0;
+
         i--
     ){
 
         const j =
             Math.floor(
-                Math.random()*(i+1)
+                Math.random() *
+                (i + 1)
             );
 
 
@@ -1521,9 +1675,9 @@ function shuffle(array){
 }
 
 
-/* =====================================================
-   RANDOM FULL VIDEO
-===================================================== */
+/* =========================
+   FULL VIDEO FEED
+========================= */
 
 const randomFull =
     shuffle(
@@ -1537,9 +1691,9 @@ const feed =
     );
 
 
-/* =====================================================
+/* =========================
    CREATE FULL VIDEO
-===================================================== */
+========================= */
 
 function createFullVideo(video){
 
@@ -1554,7 +1708,8 @@ function createFullVideo(video){
 
 
     if(
-        video.type === "file"
+        video.type ===
+        "file"
     ){
 
         card.innerHTML = `
@@ -1572,14 +1727,18 @@ function createFullVideo(video){
 
 
     if(
-        video.type === "jumpshare"
+        video.type ===
+        "jumpshare"
     ){
 
         card.innerHTML = `
 
             <iframe
                 src="${video.src}"
-                allow="autoplay; fullscreen; picture-in-picture"
+                allow="
+                autoplay;
+                fullscreen;
+                picture-in-picture"
                 allowfullscreen>
             </iframe>
 
@@ -1593,9 +1752,9 @@ function createFullVideo(video){
 }
 
 
-/* =====================================================
+/* =========================
    CREATE SHORT ROW
-===================================================== */
+========================= */
 
 function createShortRow(){
 
@@ -1658,7 +1817,8 @@ function createShortRow(){
 
 
             if(
-                video.type === "file"
+                video.type ===
+                "file"
             ){
 
                 card.innerHTML = `
@@ -1678,14 +1838,18 @@ function createShortRow(){
 
 
             if(
-                video.type === "jumpshare"
+                video.type ===
+                "jumpshare"
             ){
 
                 card.innerHTML = `
 
                     <iframe
                         src="${video.src}"
-                        allow="autoplay; fullscreen; picture-in-picture"
+                        allow="
+                        autoplay;
+                        fullscreen;
+                        picture-in-picture"
                         allowfullscreen>
                     </iframe>
 
@@ -1695,13 +1859,13 @@ function createShortRow(){
 
 
             card.onclick =
-                function(){
+            function(){
 
-                    openShortViewer(
-                        video
-                    );
+                openShortViewer(
+                    video
+                );
 
-                };
+            };
 
 
             line.appendChild(
@@ -1722,9 +1886,9 @@ function createShortRow(){
 }
 
 
-/* =====================================================
+/* =========================
    BUILD FEED
-===================================================== */
+========================= */
 
 randomFull.forEach(
     function(video,index){
@@ -1750,9 +1914,9 @@ randomFull.forEach(
 );
 
 
-/* =====================================================
-   SHORT VIEWER
-===================================================== */
+/* =========================
+   SHORT VIEWER ELEMENTS
+========================= */
 
 const shortViewer =
     document.getElementById(
@@ -1772,36 +1936,64 @@ const shortClose =
     );
 
 
-const shortLike =
+const likeButton =
     document.getElementById(
-        "shortLike"
+        "likeButton"
+    );
+
+
+const likeCount =
+    document.getElementById(
+        "likeCount"
+    );
+
+
+const loginPopup =
+    document.getElementById(
+        "loginPopup"
+    );
+
+
+const popupLogin =
+    document.getElementById(
+        "popupLogin"
+    );
+
+
+const popupSignup =
+    document.getElementById(
+        "popupSignup"
+    );
+
+
+const popupClose =
+    document.getElementById(
+        "popupClose"
     );
 
 
 let currentVideos = [];
 
+let currentShort = null;
 
-let loadingMore = false;
 
-
-/* =====================================================
+/* =========================
    OPEN SHORT
-===================================================== */
+========================= */
 
 function openShortViewer(
     clickedVideo
 ){
 
-    shortFeed.innerHTML =
-        "";
+    shortFeed.innerHTML = "";
 
 
     const others =
         shortVideos.filter(
             function(video){
 
-                return video.src !==
-                    clickedVideo.src;
+                return video.id !==
+                    clickedVideo.id;
 
             }
         );
@@ -1819,6 +2011,10 @@ function openShortViewer(
     ];
 
 
+    currentShort =
+        clickedVideo;
+
+
     createViewerVideos();
 
 
@@ -1831,13 +2027,22 @@ function openShortViewer(
         "hidden";
 
 
-    shortLike.classList.remove(
+    likeButton.innerHTML =
+        "♡";
+
+
+    likeButton.classList.remove(
         "liked"
     );
 
 
-    shortLike.innerHTML =
-        "🤍 Like";
+    likeCount.innerText =
+        "0";
+
+
+    loadLikeData(
+        clickedVideo.id
+    );
 
 
     setTimeout(
@@ -1852,14 +2057,13 @@ function openShortViewer(
 }
 
 
-/* =====================================================
+/* =========================
    CREATE VIEWER VIDEOS
-===================================================== */
+========================= */
 
 function createViewerVideos(){
 
-    shortFeed.innerHTML =
-        "";
+    shortFeed.innerHTML = "";
 
 
     currentVideos.forEach(
@@ -1876,7 +2080,8 @@ function createViewerVideos(){
 
 
             if(
-                video.type === "file"
+                video.type ===
+                "file"
             ){
 
                 item.innerHTML = `
@@ -1896,14 +2101,18 @@ function createViewerVideos(){
 
 
             if(
-                video.type === "jumpshare"
+                video.type ===
+                "jumpshare"
             ){
 
                 item.innerHTML = `
 
                     <iframe
                         src="${video.src}"
-                        allow="autoplay; fullscreen; picture-in-picture"
+                        allow="
+                        autoplay;
+                        fullscreen;
+                        picture-in-picture"
                         allowfullscreen>
                     </iframe>
 
@@ -1922,9 +2131,9 @@ function createViewerVideos(){
 }
 
 
-/* =====================================================
+/* =========================
    PLAY VISIBLE VIDEO
-===================================================== */
+========================= */
 
 function playVisibleVideo(){
 
@@ -1935,7 +2144,6 @@ function playVisibleVideo(){
 
 
     let bestItem = null;
-
 
     let bestVisibility = 0;
 
@@ -2022,11 +2230,13 @@ function playVisibleVideo(){
 }
 
 
-/* =====================================================
+/* =========================
    SHORT SCROLL
-===================================================== */
+========================= */
 
 let scrollTimer;
+
+let loadingMore = false;
 
 
 shortFeed.addEventListener(
@@ -2039,39 +2249,40 @@ shortFeed.addEventListener(
 
 
         scrollTimer =
-            setTimeout(
-                function(){
+        setTimeout(
+            function(){
 
-                    playVisibleVideo();
+                playVisibleVideo();
 
+
+                if(
+                    shortFeed.scrollTop +
+                    shortFeed.clientHeight >=
+                    shortFeed.scrollHeight -
+                    500
+                ){
 
                     if(
-                        shortFeed.scrollTop +
-                        shortFeed.clientHeight >=
-                        shortFeed.scrollHeight - 500
+                        !loadingMore
                     ){
 
-                        if(
-                            !loadingMore
-                        ){
-
-                            addMoreRandomShorts();
-
-                        }
+                        addMoreRandomShorts();
 
                     }
 
-                },
-                80
-            );
+                }
+
+            },
+            80
+        );
 
     }
 );
 
 
-/* =====================================================
-   ADD MORE RANDOM SHORTS
-===================================================== */
+/* =========================
+   ADD MORE SHORTS
+========================= */
 
 function addMoreRandomShorts(){
 
@@ -2098,7 +2309,8 @@ function addMoreRandomShorts(){
 
 
             if(
-                video.type === "file"
+                video.type ===
+                "file"
             ){
 
                 item.innerHTML = `
@@ -2117,14 +2329,18 @@ function addMoreRandomShorts(){
 
 
             if(
-                video.type === "jumpshare"
+                video.type ===
+                "jumpshare"
             ){
 
                 item.innerHTML = `
 
                     <iframe
                         src="${video.src}"
-                        allow="autoplay; fullscreen; picture-in-picture"
+                        allow="
+                        autoplay;
+                        fullscreen;
+                        picture-in-picture"
                         allowfullscreen>
                     </iframe>
 
@@ -2153,43 +2369,277 @@ function addMoreRandomShorts(){
 }
 
 
-/* =====================================================
-   LIKE
-===================================================== */
+/* =========================
+   LOAD LIKE DATA
+========================= */
 
-shortLike.onclick =
-    function(event){
+async function loadLikeData(
+    shortId
+){
 
-        event.stopPropagation();
+    try{
+
+        const likesRef =
+            collection(
+                db,
+                "shorts",
+                shortId,
+                "likes"
+            );
 
 
-        shortLike.classList.toggle(
-            "liked"
-        );
+        const countSnapshot =
+            await getCountFromServer(
+                likesRef
+            );
+
+
+        likeCount.innerText =
+            countSnapshot.data().count;
 
 
         if(
-            shortLike.classList.contains(
-                "liked"
-            )
+            currentUser
         ){
 
-            shortLike.innerHTML =
-                "❤️ Liked";
+            const myLikeRef =
+                doc(
+                    db,
+                    "shorts",
+                    shortId,
+                    "likes",
+                    currentUser.uid
+                );
 
-        }else{
 
-            shortLike.innerHTML =
-                "🤍 Like";
+            const myLike =
+                await getDoc(
+                    myLikeRef
+                );
+
+
+            if(
+                myLike.exists()
+            ){
+
+                likeButton.innerHTML =
+                    "♥";
+
+                likeButton.classList.add(
+                    "liked"
+                );
+
+            }else{
+
+                likeButton.innerHTML =
+                    "♡";
+
+                likeButton.classList.remove(
+                    "liked"
+                );
+
+            }
 
         }
 
-    };
+    }
+
+    catch(error){
+
+        console.log(
+            "Like load error:",
+            error
+        );
+
+    }
+
+}
 
 
-/* =====================================================
+/* =========================
+   LIKE BUTTON
+========================= */
+
+likeButton.onclick =
+async function(){
+
+    if(
+        !currentUser
+    ){
+
+        loginPopup.classList.add(
+            "active"
+        );
+
+        return;
+
+    }
+
+
+    if(
+        !currentShort
+    ){
+
+        return;
+
+    }
+
+
+    const shortId =
+        currentShort.id;
+
+
+    const likeRef =
+        doc(
+            db,
+            "shorts",
+            shortId,
+            "likes",
+            currentUser.uid
+        );
+
+
+    try{
+
+        const existing =
+            await getDoc(
+                likeRef
+            );
+
+
+        if(
+            existing.exists()
+        ){
+
+            await deleteDoc(
+                likeRef
+            );
+
+
+            likeButton.innerHTML =
+                "♡";
+
+
+            likeButton.classList.remove(
+                "liked"
+            );
+
+        }else{
+
+            await setDoc(
+                likeRef,
+                {
+
+                    uid:
+                    currentUser.uid,
+
+                    createdAt:
+                    new Date()
+
+                }
+            );
+
+
+            likeButton.innerHTML =
+                "♥";
+
+
+            likeButton.classList.add(
+                "liked"
+            );
+
+        }
+
+
+        const likesRef =
+            collection(
+                db,
+                "shorts",
+                shortId,
+                "likes"
+            );
+
+
+        const countSnapshot =
+            await getCountFromServer(
+                likesRef
+            );
+
+
+        likeCount.innerText =
+            countSnapshot.data().count;
+
+    }
+
+    catch(error){
+
+        console.log(
+            "Like error:",
+            error
+        );
+
+        alert(
+            "Like করার সময় সমস্যা হয়েছে।"
+        );
+
+    }
+
+};
+
+
+/* =========================
+   LOGIN POPUP
+========================= */
+
+popupLogin.onclick =
+function(){
+
+    loginPopup.classList.remove(
+        "active"
+    );
+
+
+    accountBox.classList.add(
+        "active"
+    );
+
+
+    emailInput.focus();
+
+};
+
+
+popupSignup.onclick =
+function(){
+
+    loginPopup.classList.remove(
+        "active"
+    );
+
+
+    accountBox.classList.add(
+        "active"
+    );
+
+
+    emailInput.focus();
+
+};
+
+
+popupClose.onclick =
+function(){
+
+    loginPopup.classList.remove(
+        "active"
+    );
+
+};
+
+
+/* =========================
    CLOSE SHORT
-===================================================== */
+========================= */
 
 function closeShortViewer(){
 
@@ -2203,7 +2653,9 @@ function closeShortViewer(){
 
 
     shortFeed
-        .querySelectorAll("video")
+        .querySelectorAll(
+            "video"
+        )
         .forEach(
             function(video){
 
@@ -2213,30 +2665,34 @@ function closeShortViewer(){
         );
 
 
-    shortFeed.innerHTML =
-        "";
+    shortFeed.innerHTML = "";
+
+
+    currentShort =
+        null;
 
 }
 
 
 shortClose.onclick =
-    function(){
+function(){
 
-        closeShortViewer();
+    closeShortViewer();
 
-    };
+};
 
 
-/* =====================================================
+/* =========================
    ESC KEY
-===================================================== */
+========================= */
 
 document.addEventListener(
     "keydown",
     function(event){
 
         if(
-            event.key === "Escape"
+            event.key ===
+            "Escape"
         ){
 
             if(
@@ -2247,6 +2703,50 @@ document.addEventListener(
                 closeShortViewer();
 
             }
+
+
+            if(
+                loginPopup.classList
+                .contains("active")
+            ){
+
+                loginPopup.classList.remove(
+                    "active"
+                );
+
+            }
+
+        }
+
+    }
+);
+
+
+/* =========================
+   WHEN LOGIN STATUS CHANGES
+========================= */
+
+onAuthStateChanged(
+    auth,
+    function(user){
+
+        currentUser =
+            user;
+
+
+        /*
+           Viewer-এর ভিতরে থাকলে
+           বর্তমান Short-এর Like
+           আবার Load করবে
+        */
+
+        if(
+            currentShort
+        ){
+
+            loadLikeData(
+                currentShort.id
+            );
 
         }
 
