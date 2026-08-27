@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>My Video Site</title>
 
 <style>
@@ -84,7 +82,7 @@ body{
     position:fixed;
     top:70px;
     right:15px;
-    width:220px;
+    width:260px;
     background:white;
     padding:20px;
     border-radius:15px;
@@ -111,8 +109,13 @@ body{
     outline:none;
 }
 
+.account-box input:focus{
+    border-color:#6c4cff;
+}
+
 .login-button,
-.signup-button{
+.signup-button,
+.logout-button{
     width:100%;
     padding:11px;
     border:none;
@@ -128,6 +131,31 @@ body{
 
 .signup-button{
     background:#eee;
+    color:#333;
+}
+
+.logout-button{
+    background:#ff4d4d;
+    color:white;
+}
+
+.user-info{
+    display:none;
+    text-align:center;
+}
+
+.user-email{
+    font-size:14px;
+    color:#555;
+    word-break:break-word;
+    margin:10px 0;
+}
+
+.auth-message{
+    font-size:13px;
+    text-align:center;
+    margin-top:10px;
+    min-height:18px;
 }
 
 
@@ -366,7 +394,7 @@ main{
 
 
 /* =========================
-   CLOSE
+   CLOSE BUTTON
 ========================= */
 
 .short-close{
@@ -381,25 +409,32 @@ main{
     background:rgba(0,0,0,.55);
     color:white;
     font-size:22px;
+    cursor:pointer;
 }
 
 
 /* =========================
-   SOUND
+   LIKE BUTTON
 ========================= */
 
-.sound-button{
+.short-like{
     position:fixed;
+    top:58%;
     right:15px;
-    bottom:25px;
     z-index:7000;
-    width:48px;
-    height:48px;
     border:none;
-    border-radius:50%;
-    background:rgba(0,0,0,.55);
-    color:white;
-    font-size:22px;
+    border-radius:25px;
+    padding:11px 17px;
+    background:rgba(255,255,255,.9);
+    color:#222;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.short-like.liked{
+    color:red;
+    background:#ffe5e5;
 }
 
 
@@ -508,6 +543,11 @@ main{
         height:300px;
     }
 
+    .short-like{
+        top:58%;
+        right:12px;
+    }
+
 }
 
 </style>
@@ -539,28 +579,79 @@ main{
 
 
 <!-- =========================
-     ACCOUNT
+     FIREBASE ACCOUNT BOX
 ========================= -->
 
 <div class="account-box">
 
-    <h3>👤 Account</h3>
+    <!-- LOGIN / SIGN UP AREA -->
 
-    <input
-        type="email"
-        placeholder="Email">
+    <div id="loginArea">
 
-    <input
-        type="password"
-        placeholder="Password">
+        <h3>
+            👤 Account
+        </h3>
 
-    <button class="login-button">
-        Login
-    </button>
+        <input
+            id="emailInput"
+            type="email"
+            placeholder="Email">
 
-    <button class="signup-button">
-        Sign Up
-    </button>
+        <input
+            id="passwordInput"
+            type="password"
+            placeholder="Password">
+
+        <button
+            id="loginButton"
+            class="login-button">
+
+            Login
+
+        </button>
+
+        <button
+            id="signupButton"
+            class="signup-button">
+
+            Sign Up
+
+        </button>
+
+        <div
+            id="authMessage"
+            class="auth-message">
+
+        </div>
+
+    </div>
+
+
+    <!-- LOGGED IN AREA -->
+
+    <div
+        id="userInfo"
+        class="user-info">
+
+        <h3>
+            ✅ Logged In
+        </h3>
+
+        <div
+            id="userEmail"
+            class="user-email">
+
+        </div>
+
+        <button
+            id="logoutButton"
+            class="logout-button">
+
+            Logout
+
+        </button>
+
+    </div>
 
 </div>
 
@@ -582,23 +673,28 @@ main{
     <a
         href="#home"
         class="menu-item">
+
         🏠 Home
+
     </a>
 
     <a
         href="#short"
         class="menu-item">
+
         🎵 TikTok Short
+
     </a>
 
     <a
         href="#fullvideo"
         class="menu-item">
+
         🎬 Full Video
+
     </a>
 
 </div>
-
 
 <div class="overlay"></div>
 
@@ -624,12 +720,16 @@ main{
 
 
 <h2 class="section-title">
+
     🎬 Videos
+
 </h2>
+
 
 <div
     id="videoFeed"
     class="video-feed">
+
 </div>
 
 
@@ -640,6 +740,7 @@ main{
     🎵 TikTok Short
 
 </h2>
+
 
 <div class="posts">
 
@@ -674,6 +775,7 @@ main{
 
 </h2>
 
+
 <div class="posts">
 
     <div class="post">
@@ -698,6 +800,7 @@ main{
 
 </div>
 
+
 </main>
 
 
@@ -709,6 +812,7 @@ main{
     id="shortViewer"
     class="short-viewer">
 
+
     <button
         id="shortClose"
         class="short-close">
@@ -717,76 +821,125 @@ main{
 
     </button>
 
-    <button
-        id="soundButton"
-        class="sound-button">
 
-        🔇
+    <button
+        id="shortLike"
+        class="short-like">
+
+        🤍 Like
 
     </button>
+
 
     <div
         id="shortFeed"
         class="short-feed">
+
     </div>
+
 
 </div>
 
 
-<script>
+<!-- =========================
+     FIREBASE + WEBSITE JAVASCRIPT
+========================= -->
+
+<script type="module">
 
 
-/* =========================
+/* ==================================================
+   FIREBASE SDK
+================================================== */
+
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
+
+import {
+    getAuth,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    signOut,
+    onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+
+
+/* ==================================================
+   FIREBASE CONFIG
+================================================== */
+
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyAjFiEYq9xxAqpQBS_W15ugKJViJggd-2U",
+
+    authDomain:
+        "my-video-site-a21fe.firebaseapp.com",
+
+    projectId:
+        "my-video-site-a21fe",
+
+    storageBucket:
+        "my-video-site-a21fe.firebasestorage.app",
+
+    messagingSenderId:
+        "107193146030",
+
+    appId:
+        "1:107193146030:web:e6168ffad8b118d6ba2b3f",
+
+    measurementId:
+        "G-2YE5DRCJPH"
+
+};
+
+
+/* ==================================================
+   INITIALIZE FIREBASE
+================================================== */
+
+const app =
+    initializeApp(firebaseConfig);
+
+
+const auth =
+    getAuth(app);
+
+
+/* ==================================================
    MENU
-========================= */
+================================================== */
 
 const menuButton =
-document.querySelector(".menu-button");
+    document.querySelector(".menu-button");
+
 
 const sideMenu =
-document.querySelector(".side-menu");
+    document.querySelector(".side-menu");
+
 
 const closeButton =
-document.querySelector(".close-btn");
+    document.querySelector(".close-btn");
+
 
 const overlay =
-document.querySelector(".overlay");
+    document.querySelector(".overlay");
 
 
-menuButton.onclick = function(){
+menuButton.onclick =
+    function(){
 
-    sideMenu.classList.add("active");
+        sideMenu.classList.add("active");
 
-    overlay.classList.add("active");
+        overlay.classList.add("active");
 
-};
-
-
-closeButton.onclick = function(){
-
-    sideMenu.classList.remove("active");
-
-    overlay.classList.remove("active");
-
-};
+    };
 
 
-overlay.onclick = function(){
-
-    sideMenu.classList.remove("active");
-
-    overlay.classList.remove("active");
-
-};
-
-
-/* MENU LINK CLICK */
-
-document
-.querySelectorAll(".menu-item")
-.forEach(function(item){
-
-    item.onclick = function(){
+closeButton.onclick =
+    function(){
 
         sideMenu.classList.remove("active");
 
@@ -794,25 +947,61 @@ document
 
     };
 
-});
+
+overlay.onclick =
+    function(){
+
+        sideMenu.classList.remove("active");
+
+        overlay.classList.remove("active");
+
+    };
 
 
-/* =========================
-   ACCOUNT
-========================= */
+document
+.querySelectorAll(".menu-item")
+.forEach(
+    function(item){
+
+        item.onclick =
+            function(){
+
+                sideMenu.classList.remove(
+                    "active"
+                );
+
+                overlay.classList.remove(
+                    "active"
+                );
+
+            };
+
+    }
+);
+
+
+/* ==================================================
+   ACCOUNT BOX
+================================================== */
 
 const account =
-document.querySelector(".account");
+    document.querySelector(".account");
+
 
 const accountBox =
-document.querySelector(".account-box");
+    document.querySelector(".account-box");
 
 
-account.onclick = function(){
+account.onclick =
+    function(event){
 
-    accountBox.classList.toggle("active");
+        event.stopPropagation();
 
-};
+        accountBox.classList.toggle(
+            "active"
+        );
+
+    };
 
 
 document.addEventListener(
@@ -834,15 +1023,388 @@ document.addEventListener(
 );
 
 
-/* =========================
+/* ==================================================
+   FIREBASE LOGIN ELEMENTS
+================================================== */
+
+const emailInput =
+    document.getElementById(
+        "emailInput"
+    );
+
+
+const passwordInput =
+    document.getElementById(
+        "passwordInput"
+    );
+
+
+const loginButton =
+    document.getElementById(
+        "loginButton"
+    );
+
+
+const signupButton =
+    document.getElementById(
+        "signupButton"
+    );
+
+
+const logoutButton =
+    document.getElementById(
+        "logoutButton"
+    );
+
+
+const authMessage =
+    document.getElementById(
+        "authMessage"
+    );
+
+
+const loginArea =
+    document.getElementById(
+        "loginArea"
+    );
+
+
+const userInfo =
+    document.getElementById(
+        "userInfo"
+    );
+
+
+const userEmail =
+    document.getElementById(
+        "userEmail"
+    );
+
+
+/* ==================================================
+   SHOW MESSAGE
+================================================== */
+
+function showAuthMessage(message){
+
+    authMessage.textContent =
+        message;
+
+}
+
+
+/* ==================================================
+   SIGN UP
+================================================== */
+
+signupButton.onclick =
+    async function(){
+
+        const email =
+            emailInput.value.trim();
+
+
+        const password =
+            passwordInput.value;
+
+
+        if(
+            !email ||
+            !password
+        ){
+
+            showAuthMessage(
+                "Email and password দিন।"
+            );
+
+            return;
+
+        }
+
+
+        if(
+            password.length < 6
+        ){
+
+            showAuthMessage(
+                "Password কমপক্ষে 6 অক্ষরের হতে হবে।"
+            );
+
+            return;
+
+        }
+
+
+        signupButton.disabled =
+            true;
+
+
+        showAuthMessage(
+            "Account তৈরি হচ্ছে..."
+        );
+
+
+        try{
+
+            await createUserWithEmailAndPassword(
+                auth,
+                email,
+                password
+            );
+
+
+            showAuthMessage(
+                "✅ Sign Up সফল হয়েছে!"
+            );
+
+
+            emailInput.value =
+                "";
+
+            passwordInput.value =
+                "";
+
+        }
+
+        catch(error){
+
+            console.error(error);
+
+
+            if(
+                error.code ===
+                "auth/email-already-in-use"
+            ){
+
+                showAuthMessage(
+                    "এই Email দিয়ে আগে থেকেই Account আছে।"
+                );
+
+            }
+
+            else if(
+                error.code ===
+                "auth/invalid-email"
+            ){
+
+                showAuthMessage(
+                    "Email ঠিক নয়।"
+                );
+
+            }
+
+            else if(
+                error.code ===
+                "auth/weak-password"
+            ){
+
+                showAuthMessage(
+                    "Password আরও শক্ত করুন।"
+                );
+
+            }
+
+            else{
+
+                showAuthMessage(
+                    "Sign Up করা যায়নি। আবার চেষ্টা করুন।"
+                );
+
+            }
+
+        }
+
+
+        signupButton.disabled =
+            false;
+
+    };
+
+
+/* ==================================================
+   LOGIN
+================================================== */
+
+loginButton.onclick =
+    async function(){
+
+        const email =
+            emailInput.value.trim();
+
+
+        const password =
+            passwordInput.value;
+
+
+        if(
+            !email ||
+            !password
+        ){
+
+            showAuthMessage(
+                "Email এবং password দিন।"
+            );
+
+            return;
+
+        }
+
+
+        loginButton.disabled =
+            true;
+
+
+        showAuthMessage(
+            "Login হচ্ছে..."
+        );
+
+
+        try{
+
+            await signInWithEmailAndPassword(
+                auth,
+                email,
+                password
+            );
+
+
+            showAuthMessage(
+                "✅ Login সফল হয়েছে!"
+            );
+
+
+            emailInput.value =
+                "";
+
+            passwordInput.value =
+                "";
+
+        }
+
+        catch(error){
+
+            console.error(error);
+
+
+            if(
+                error.code ===
+                "auth/invalid-credential"
+            ){
+
+                showAuthMessage(
+                    "Email অথবা password ভুল।"
+                );
+
+            }
+
+            else if(
+                error.code ===
+                "auth/invalid-email"
+            ){
+
+                showAuthMessage(
+                    "Email ঠিক নয়।"
+                );
+
+            }
+
+            else{
+
+                showAuthMessage(
+                    "Login করা যায়নি। আবার চেষ্টা করুন।"
+                );
+
+            }
+
+        }
+
+
+        loginButton.disabled =
+            false;
+
+    };
+
+
+/* ==================================================
+   LOGOUT
+================================================== */
+
+logoutButton.onclick =
+    async function(){
+
+        try{
+
+            await signOut(auth);
+
+            showAuthMessage(
+                "Logout সফল হয়েছে।"
+            );
+
+        }
+
+        catch(error){
+
+            console.error(error);
+
+        }
+
+    };
+
+
+/* ==================================================
+   LOGIN STATE
+================================================== */
+
+onAuthStateChanged(
+    auth,
+    function(user){
+
+        if(user){
+
+            loginArea.style.display =
+                "none";
+
+            userInfo.style.display =
+                "block";
+
+
+            userEmail.textContent =
+                user.email || "User";
+
+
+            account.textContent =
+                "✓";
+
+        }
+
+        else{
+
+            loginArea.style.display =
+                "block";
+
+            userInfo.style.display =
+                "none";
+
+
+            account.textContent =
+                "👤";
+
+        }
+
+    }
+);
+
+
+/* ==================================================
    FULL VIDEOS
-========================= */
+================================================== */
 
 const fullVideos = [
 
     {
         type:"jumpshare",
-        src:"https://jumpshare.com/embed/YkjIOaRPiSVYTlWqdOhg"
+        src:
+        "https://jumpshare.com/embed/YkjIOaRPiSVYTlWqdOhg"
     },
 
     {
@@ -898,9 +1460,9 @@ const fullVideos = [
 ];
 
 
-/* =========================
+/* ==================================================
    JUMPSHARE SHORTS
-========================= */
+================================================== */
 
 const jumpshareShorts = [
 
@@ -923,50 +1485,61 @@ const jumpshareShorts = [
 ];
 
 
-/* =========================
+/* ==================================================
    MP4 SHORTS
-========================= */
+================================================== */
 
 const mp4Shorts = [
 
     "short1.mp4",
+
     "short2.mp4",
+
     "short3.mp4",
+
     "short4.mp4"
 
 ];
 
 
-/* =========================
+/* ==================================================
    SHORT OBJECTS
-========================= */
+================================================== */
 
 const shortVideos = [
 
-    ...mp4Shorts.map(function(src){
+    ...mp4Shorts.map(
+        function(src){
 
-        return {
-            type:"file",
-            src:src
-        };
+            return {
 
-    }),
+                type:"file",
+                src:src
 
-    ...jumpshareShorts.map(function(src){
+            };
 
-        return {
-            type:"jumpshare",
-            src:src
-        };
+        }
+    ),
 
-    })
+    ...jumpshareShorts.map(
+        function(src){
+
+            return {
+
+                type:"jumpshare",
+                src:src
+
+            };
+
+        }
+    )
 
 ];
 
 
-/* =========================
+/* ==================================================
    RANDOM FUNCTION
-========================= */
+================================================== */
 
 function shuffle(array){
 
@@ -977,9 +1550,11 @@ function shuffle(array){
     ){
 
         const j =
-        Math.floor(
-            Math.random()*(i+1)
-        );
+            Math.floor(
+                Math.random() *
+                (i+1)
+            );
+
 
         [
             array[i],
@@ -997,36 +1572,37 @@ function shuffle(array){
 }
 
 
-/* =========================
+/* ==================================================
    RANDOM FULL VIDEO
-========================= */
+================================================== */
 
 const randomFull =
-shuffle(
-    [...fullVideos]
-);
+    shuffle(
+        [...fullVideos]
+    );
 
 
 const feed =
-document.getElementById(
-    "videoFeed"
-);
+    document.getElementById(
+        "videoFeed"
+    );
 
 
-/* =========================
+/* ==================================================
    CREATE FULL VIDEO
-========================= */
+================================================== */
 
 function createFullVideo(video){
 
     const card =
-    document.createElement("div");
+        document.createElement(
+            "div"
+        );
+
 
     card.className =
-    "video-card";
+        "video-card";
 
-
-    /* MP4 */
 
     if(
         video.type === "file"
@@ -1046,8 +1622,6 @@ function createFullVideo(video){
     }
 
 
-    /* JUMPSHARE */
-
     if(
         video.type === "jumpshare"
     ){
@@ -1056,10 +1630,7 @@ function createFullVideo(video){
 
             <iframe
                 src="${video.src}"
-                allow="
-                autoplay;
-                fullscreen;
-                picture-in-picture"
+                allow="autoplay; fullscreen; picture-in-picture"
                 allowfullscreen>
             </iframe>
 
@@ -1073,27 +1644,34 @@ function createFullVideo(video){
 }
 
 
-/* =========================
+/* ==================================================
    CREATE SHORT ROW
-========================= */
+================================================== */
 
 function createShortRow(){
 
     const section =
-    document.createElement("div");
+        document.createElement(
+            "div"
+        );
+
 
     section.className =
-    "short-section";
+        "short-section";
 
 
     const heading =
-    document.createElement("div");
+        document.createElement(
+            "div"
+        );
+
 
     heading.className =
-    "short-heading";
+        "short-heading";
+
 
     heading.innerHTML =
-    "👉 🎵 Short Videos";
+        "👉 🎵 Short Videos";
 
 
     section.appendChild(
@@ -1102,26 +1680,32 @@ function createShortRow(){
 
 
     const line =
-    document.createElement("div");
+        document.createElement(
+            "div"
+        );
+
 
     line.className =
-    "tiktok-line";
+        "tiktok-line";
 
 
     const rowShorts =
-    shuffle(
-        [...shortVideos]
-    );
+        shuffle(
+            [...shortVideos]
+        );
 
 
     rowShorts.forEach(
         function(video){
 
             const card =
-            document.createElement("div");
+                document.createElement(
+                    "div"
+                );
+
 
             card.className =
-            "tiktok-card";
+                "tiktok-card";
 
 
             if(
@@ -1152,10 +1736,7 @@ function createShortRow(){
 
                     <iframe
                         src="${video.src}"
-                        allow="
-                        autoplay;
-                        fullscreen;
-                        picture-in-picture"
+                        allow="autoplay; fullscreen; picture-in-picture"
                         allowfullscreen>
                     </iframe>
 
@@ -1165,13 +1746,13 @@ function createShortRow(){
 
 
             card.onclick =
-            function(){
+                function(){
 
-                openShortViewer(
-                    video
-                );
+                    openShortViewer(
+                        video
+                    );
 
-            };
+                };
 
 
             line.appendChild(
@@ -1192,15 +1773,17 @@ function createShortRow(){
 }
 
 
-/* =========================
+/* ==================================================
    BUILD FEED
-========================= */
+================================================== */
 
 randomFull.forEach(
     function(video,index){
 
         feed.appendChild(
-            createFullVideo(video)
+            createFullVideo(
+                video
+            )
         );
 
 
@@ -1218,59 +1801,66 @@ randomFull.forEach(
 );
 
 
-/* =========================
+/* ==================================================
    SHORT VIEWER
-========================= */
+================================================== */
 
 const shortViewer =
-document.getElementById(
-    "shortViewer"
-);
+    document.getElementById(
+        "shortViewer"
+    );
+
 
 const shortFeed =
-document.getElementById(
-    "shortFeed"
-);
+    document.getElementById(
+        "shortFeed"
+    );
+
 
 const shortClose =
-document.getElementById(
-    "shortClose"
-);
-
-const soundButton =
-document.getElementById(
-    "soundButton"
-);
+    document.getElementById(
+        "shortClose"
+    );
 
 
-let soundOn = false;
+const shortLike =
+    document.getElementById(
+        "shortLike"
+    );
+
 
 let currentVideos = [];
 
 
-/* =========================
+let loadingMore = false;
+
+
+/* ==================================================
    OPEN SHORT
-========================= */
+================================================== */
 
 function openShortViewer(
     clickedVideo
 ){
 
-    shortFeed.innerHTML = "";
+    shortFeed.innerHTML =
+        "";
 
 
     const others =
-    shortVideos.filter(
-        function(video){
+        shortVideos.filter(
+            function(video){
 
-            return video.src !==
-                   clickedVideo.src;
+                return video.src !==
+                    clickedVideo.src;
 
-        }
+            }
+        );
+
+
+    shuffle(
+        others
     );
-
-
-    shuffle(others);
 
 
     currentVideos = [
@@ -1291,13 +1881,16 @@ function openShortViewer(
 
 
     document.body.style.overflow =
-    "hidden";
+        "hidden";
 
 
-    soundOn = false;
+    shortLike.classList.remove(
+        "liked"
+    );
 
-    soundButton.innerHTML =
-    "🔇";
+
+    shortLike.innerHTML =
+        "🤍 Like";
 
 
     setTimeout(
@@ -1312,25 +1905,27 @@ function openShortViewer(
 }
 
 
-/* =========================
+/* ==================================================
    CREATE VIEWER
-========================= */
+================================================== */
 
 function createViewerVideos(){
 
-    shortFeed.innerHTML = "";
+    shortFeed.innerHTML =
+        "";
 
 
     currentVideos.forEach(
         function(video){
 
             const item =
-            document.createElement(
-                "div"
-            );
+                document.createElement(
+                    "div"
+                );
+
 
             item.className =
-            "short-item";
+                "short-item";
 
 
             if(
@@ -1361,10 +1956,7 @@ function createViewerVideos(){
 
                     <iframe
                         src="${video.src}"
-                        allow="
-                        autoplay;
-                        fullscreen;
-                        picture-in-picture"
+                        allow="autoplay; fullscreen; picture-in-picture"
                         allowfullscreen>
                     </iframe>
 
@@ -1383,50 +1975,53 @@ function createViewerVideos(){
 }
 
 
-/* =========================
-   PLAY VISIBLE MP4
-========================= */
+/* ==================================================
+   PLAY VISIBLE VIDEO
+================================================== */
 
 function playVisibleVideo(){
 
     const items =
-    shortFeed.querySelectorAll(
-        ".short-item"
-    );
+        shortFeed.querySelectorAll(
+            ".short-item"
+        );
 
 
-    let bestItem = null;
+    let bestItem =
+        null;
 
-    let bestVisibility = 0;
+
+    let bestVisibility =
+        0;
 
 
     items.forEach(
         function(item){
 
             const rect =
-            item.getBoundingClientRect();
+                item.getBoundingClientRect();
 
 
             const visibleTop =
-            Math.max(
-                rect.top,
-                0
-            );
+                Math.max(
+                    rect.top,
+                    0
+                );
 
 
             const visibleBottom =
-            Math.min(
-                rect.bottom,
-                window.innerHeight
-            );
+                Math.min(
+                    rect.bottom,
+                    window.innerHeight
+                );
 
 
             const visible =
-            Math.max(
-                0,
-                visibleBottom -
-                visibleTop
-            );
+                Math.max(
+                    0,
+                    visibleBottom -
+                    visibleTop
+                );
 
 
             if(
@@ -1435,10 +2030,11 @@ function playVisibleVideo(){
             ){
 
                 bestVisibility =
-                visible;
+                    visible;
+
 
                 bestItem =
-                item;
+                    item;
 
             }
 
@@ -1450,13 +2046,15 @@ function playVisibleVideo(){
         function(item){
 
             const video =
-            item.querySelector(
-                "video"
-            );
+                item.querySelector(
+                    "video"
+                );
 
 
             if(!video){
+
                 return;
+
             }
 
 
@@ -1464,14 +2062,13 @@ function playVisibleVideo(){
                 item === bestItem
             ){
 
-                video.muted =
-                !soundOn;
-
                 video.play().catch(
                     function(){}
                 );
 
-            }else{
+            }
+
+            else{
 
                 video.pause();
 
@@ -1483,13 +2080,11 @@ function playVisibleVideo(){
 }
 
 
-/* =========================
-   SCROLL
-========================= */
+/* ==================================================
+   SHORT SCROLL
+================================================== */
 
 let scrollTimer;
-
-let loadingMore = false;
 
 
 shortFeed.addEventListener(
@@ -1502,59 +2097,64 @@ shortFeed.addEventListener(
 
 
         scrollTimer =
-        setTimeout(
-            function(){
+            setTimeout(
+                function(){
 
-                playVisibleVideo();
+                    playVisibleVideo();
 
 
-                if(
-                    shortFeed.scrollTop +
-                    shortFeed.clientHeight >=
-                    shortFeed.scrollHeight - 500
-                ){
+                    if(
+                        shortFeed.scrollTop +
+                        shortFeed.clientHeight >=
+                        shortFeed.scrollHeight -
+                        500
+                    ){
 
-                    if(!loadingMore){
+                        if(
+                            !loadingMore
+                        ){
 
-                        addMoreRandomShorts();
+                            addMoreRandomShorts();
+
+                        }
 
                     }
 
-                }
-
-            },
-            80
-        );
+                },
+                80
+            );
 
     }
 );
 
 
-/* =========================
-   ADD MORE RANDOM SHORTS
-========================= */
+/* ==================================================
+   ADD MORE SHORTS
+================================================== */
 
 function addMoreRandomShorts(){
 
-    loadingMore = true;
+    loadingMore =
+        true;
 
 
     const more =
-    shuffle(
-        [...shortVideos]
-    );
+        shuffle(
+            [...shortVideos]
+        );
 
 
     more.forEach(
         function(video){
 
             const item =
-            document.createElement(
-                "div"
-            );
+                document.createElement(
+                    "div"
+                );
+
 
             item.className =
-            "short-item";
+                "short-item";
 
 
             if(
@@ -1584,10 +2184,7 @@ function addMoreRandomShorts(){
 
                     <iframe
                         src="${video.src}"
-                        allow="
-                        autoplay;
-                        fullscreen;
-                        picture-in-picture"
+                        allow="autoplay; fullscreen; picture-in-picture"
                         allowfullscreen>
                     </iframe>
 
@@ -1607,7 +2204,8 @@ function addMoreRandomShorts(){
     setTimeout(
         function(){
 
-            loadingMore = false;
+            loadingMore =
+                false;
 
         },
         500
@@ -1616,57 +2214,45 @@ function addMoreRandomShorts(){
 }
 
 
-/* =========================
-   SOUND
-========================= */
+/* ==================================================
+   LIKE
+================================================== */
 
-soundButton.onclick =
-function(event){
+shortLike.onclick =
+    function(event){
 
-    event.stopPropagation();
-
-
-    soundOn =
-    !soundOn;
+        event.stopPropagation();
 
 
-    const videos =
-    shortFeed.querySelectorAll(
-        "video"
-    );
+        shortLike.classList.toggle(
+            "liked"
+        );
 
 
-    videos.forEach(
-        function(video){
+        if(
+            shortLike.classList.contains(
+                "liked"
+            )
+        ){
 
-            video.muted =
-            !soundOn;
+            shortLike.innerHTML =
+                "❤️ Liked";
 
         }
-    );
+
+        else{
+
+            shortLike.innerHTML =
+                "🤍 Like";
+
+        }
+
+    };
 
 
-    playVisibleVideo();
-
-
-    if(soundOn){
-
-        soundButton.innerHTML =
-        "🔊";
-
-    }else{
-
-        soundButton.innerHTML =
-        "🔇";
-
-    }
-
-};
-
-
-/* =========================
+/* ==================================================
    CLOSE SHORT
-========================= */
+================================================== */
 
 function closeShortViewer(){
 
@@ -1676,11 +2262,13 @@ function closeShortViewer(){
 
 
     document.body.style.overflow =
-    "";
+        "";
 
 
     shortFeed
-        .querySelectorAll("video")
+        .querySelectorAll(
+            "video"
+        )
         .forEach(
             function(video){
 
@@ -1691,22 +2279,22 @@ function closeShortViewer(){
 
 
     shortFeed.innerHTML =
-    "";
+        "";
 
 }
 
 
 shortClose.onclick =
-function(){
+    function(){
 
-    closeShortViewer();
+        closeShortViewer();
 
-};
+    };
 
 
-/* =========================
+/* ==================================================
    ESC KEY
-========================= */
+================================================== */
 
 document.addEventListener(
     "keydown",
@@ -1721,7 +2309,7 @@ document.addEventListener(
                 .contains("active")
             ){
 
-                shortClose.click();
+                closeShortViewer();
 
             }
 
