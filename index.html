@@ -1,12 +1,10 @@
-DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- =========================
-     WEBSITE TITLE
-========================= -->
 <title>My Video Site</title>
 
 <style>
@@ -14,6 +12,7 @@ DOCTYPE html>
 /* =========================
    BASIC RESET
 ========================= */
+
 *{
     box-sizing:border-box;
 }
@@ -32,6 +31,7 @@ body{
 /* =========================
    TOP BAR
 ========================= */
+
 .topbar{
     height:60px;
     background:#fff;
@@ -47,7 +47,6 @@ body{
     box-shadow:0 2px 10px rgba(0,0,0,.15);
 }
 
-/* MENU BUTTON */
 .menu-button{
     width:45px;
     height:45px;
@@ -56,21 +55,14 @@ body{
     border-radius:12px;
     font-size:25px;
     cursor:pointer;
-    transition:.2s;
 }
 
-.menu-button:hover{
-    transform:scale(1.08);
-}
-
-/* WEBSITE NAME */
 .site-name{
     font-size:20px;
     font-weight:bold;
     color:#6c4cff;
 }
 
-/* ACCOUNT BUTTON */
 .account{
     width:45px;
     height:45px;
@@ -81,17 +73,13 @@ body{
     align-items:center;
     justify-content:center;
     cursor:pointer;
-    transition:.2s;
-}
-
-.account:hover{
-    transform:scale(1.08);
 }
 
 
 /* =========================
    ACCOUNT BOX
 ========================= */
+
 .account-box{
     position:fixed;
     top:70px;
@@ -103,7 +91,6 @@ body{
     box-shadow:0 5px 20px rgba(0,0,0,.2);
     display:none;
     z-index:3000;
-    animation:accountOpen .2s ease;
 }
 
 .account-box.active{
@@ -124,10 +111,6 @@ body{
     outline:none;
 }
 
-.account-box input:focus{
-    border-color:#6c4cff;
-}
-
 .login-button,
 .signup-button{
     width:100%;
@@ -145,24 +128,13 @@ body{
 
 .signup-button{
     background:#eee;
-    color:#333;
-}
-
-@keyframes accountOpen{
-    from{
-        opacity:0;
-        transform:translateY(-10px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
 }
 
 
 /* =========================
    SIDE MENU
 ========================= */
+
 .side-menu{
     position:fixed;
     top:0;
@@ -194,13 +166,11 @@ body{
     color:#222;
     font-size:18px;
     border-radius:12px;
-    transition:.2s;
 }
 
 .menu-item:hover{
     background:#f1efff;
     color:#6c4cff;
-    transform:translateX(5px);
 }
 
 .close-btn{
@@ -230,8 +200,9 @@ body{
 
 
 /* =========================
-   MAIN CONTENT
+   MAIN
 ========================= */
+
 main{
     padding:85px 15px 30px;
     max-width:900px;
@@ -242,6 +213,7 @@ main{
 /* =========================
    HERO
 ========================= */
+
 .hero{
     background:linear-gradient(135deg,#6c4cff,#9c7cff);
     color:white;
@@ -249,7 +221,6 @@ main{
     padding:45px 25px;
     text-align:center;
     box-shadow:0 8px 20px rgba(0,0,0,.15);
-    overflow:hidden;
 }
 
 .hero h1{
@@ -260,13 +231,13 @@ main{
 .hero p{
     margin:0;
     font-size:17px;
-    opacity:.9;
 }
 
 
 /* =========================
-   SECTION TITLE
+   SECTION
 ========================= */
+
 .section-title{
     margin-top:30px;
     font-size:25px;
@@ -276,6 +247,7 @@ main{
 /* =========================
    VIDEO FEED
 ========================= */
+
 .video-feed{
     display:flex;
     flex-direction:column;
@@ -284,8 +256,9 @@ main{
 
 
 /* =========================
-   FULL VIDEO CARD
+   FULL VIDEO
 ========================= */
+
 .video-card{
     background:white;
     border-radius:18px;
@@ -300,10 +273,19 @@ main{
     max-height:500px;
 }
 
+.video-card iframe{
+    width:100%;
+    height:500px;
+    display:block;
+    border:0;
+    background:#000;
+}
+
 
 /* =========================
    SHORT SECTION
 ========================= */
+
 .short-section{
     background:#111;
     border-radius:18px;
@@ -320,8 +302,9 @@ main{
 
 
 /* =========================
-   SHORT HORIZONTAL ROW
+   SHORT ROW
 ========================= */
+
 .tiktok-line{
     display:flex;
     gap:12px;
@@ -337,6 +320,7 @@ main{
 /* =========================
    SHORT CARD
 ========================= */
+
 .tiktok-card{
     min-width:145px;
     width:145px;
@@ -346,7 +330,6 @@ main{
     overflow:hidden;
     flex-shrink:0;
     cursor:pointer;
-    position:relative;
 }
 
 .tiktok-card video{
@@ -354,7 +337,6 @@ main{
     height:100%;
     object-fit:cover;
     display:block;
-    background:#000;
     pointer-events:none;
 }
 
@@ -362,21 +344,20 @@ main{
     width:100%;
     height:100%;
     border:0;
-    display:block;
     pointer-events:none;
 }
 
 
 /* =========================
-   FULLSCREEN SHORT VIEWER
+   SHORT VIEWER
 ========================= */
+
 .short-viewer{
     position:fixed;
     inset:0;
     background:#000;
     z-index:5000;
     display:none;
-    overflow:hidden;
 }
 
 .short-viewer.active{
@@ -385,8 +366,9 @@ main{
 
 
 /* =========================
-   SHORT CLOSE BUTTON
+   CLOSE
 ========================= */
+
 .short-close{
     position:fixed;
     top:15px;
@@ -399,13 +381,13 @@ main{
     background:rgba(0,0,0,.55);
     color:white;
     font-size:22px;
-    cursor:pointer;
 }
 
 
 /* =========================
-   SOUND BUTTON
+   SOUND
 ========================= */
+
 .sound-button{
     position:fixed;
     right:15px;
@@ -418,13 +400,13 @@ main{
     background:rgba(0,0,0,.55);
     color:white;
     font-size:22px;
-    cursor:pointer;
 }
 
 
 /* =========================
-   TIKTOK STYLE SCROLL
+   SHORT FEED
 ========================= */
+
 .short-feed{
     width:100%;
     height:100%;
@@ -432,50 +414,40 @@ main{
     overflow-x:hidden;
     scroll-snap-type:y mandatory;
     -webkit-overflow-scrolling:touch;
-    overscroll-behavior-y:contain;
 }
 
 .short-item{
     width:100%;
     height:100vh;
     min-height:100vh;
-    position:relative;
     background:#000;
+    position:relative;
     display:flex;
     align-items:center;
     justify-content:center;
-    overflow:hidden;
     scroll-snap-align:start;
     scroll-snap-stop:always;
+    overflow:hidden;
 }
 
-
-/* =========================
-   MP4 SHORT PLAYER
-========================= */
 .short-item video{
     width:100%;
     height:100%;
     object-fit:cover;
     display:block;
-    background:#000;
 }
 
-
-/* =========================
-   JUMPSHARE PLAYER
-========================= */
 .short-item iframe{
     width:100%;
     height:100%;
     border:0;
-    display:block;
 }
 
 
 /* =========================
-   POST CARDS
+   POSTS
 ========================= */
+
 .posts{
     display:grid;
     grid-template-columns:repeat(2,1fr);
@@ -515,6 +487,7 @@ main{
 /* =========================
    MOBILE
 ========================= */
+
 @media(max-width:600px){
 
     .posts{
@@ -529,6 +502,10 @@ main{
         min-width:135px;
         width:135px;
         height:195px;
+    }
+
+    .video-card iframe{
+        height:300px;
     }
 
 }
@@ -546,15 +523,14 @@ main{
 
 <header class="topbar">
 
-    <!-- MENU BUTTON -->
-    <button class="menu-button">☰</button>
+    <button class="menu-button">
+        ☰
+    </button>
 
-    <!-- WEBSITE NAME -->
     <div class="site-name">
         🌿 My Video Site
     </div>
 
-    <!-- ACCOUNT BUTTON -->
     <div class="account">
         👤
     </div>
@@ -563,29 +539,25 @@ main{
 
 
 <!-- =========================
-     ACCOUNT LOGIN BOX
+     ACCOUNT
 ========================= -->
 
 <div class="account-box">
 
     <h3>👤 Account</h3>
 
-    <!-- EMAIL -->
     <input
         type="email"
         placeholder="Email">
 
-    <!-- PASSWORD -->
     <input
         type="password"
         placeholder="Password">
 
-    <!-- LOGIN -->
     <button class="login-button">
         Login
     </button>
 
-    <!-- SIGN UP -->
     <button class="signup-button">
         Sign Up
     </button>
@@ -599,31 +571,26 @@ main{
 
 <div class="side-menu">
 
-    <!-- CLOSE MENU -->
     <button class="close-btn">
         ✕
     </button>
 
-    <!-- MENU TITLE -->
     <div class="menu-title">
         📱 Menu
     </div>
 
-    <!-- HOME -->
     <a
         href="#home"
         class="menu-item">
         🏠 Home
     </a>
 
-    <!-- SHORT -->
     <a
         href="#short"
         class="menu-item">
         🎵 TikTok Short
     </a>
 
-    <!-- FULL VIDEO -->
     <a
         href="#fullvideo"
         class="menu-item">
@@ -633,20 +600,15 @@ main{
 </div>
 
 
-<!-- DARK OVERLAY -->
 <div class="overlay"></div>
 
 
 <!-- =========================
-     MAIN WEBSITE
+     MAIN
 ========================= -->
 
 <main id="home">
 
-
-<!-- =========================
-     HERO
-========================= -->
 
 <section class="hero">
 
@@ -661,10 +623,6 @@ main{
 </section>
 
 
-<!-- =========================
-     VIDEO FEED
-========================= -->
-
 <h2 class="section-title">
     🎬 Videos
 </h2>
@@ -674,10 +632,6 @@ main{
     class="video-feed">
 </div>
 
-
-<!-- =========================
-     SHORT SECTION
-========================= -->
 
 <h2
     id="short"
@@ -712,10 +666,6 @@ main{
 </div>
 
 
-<!-- =========================
-     FULL VIDEO SECTION
-========================= -->
-
 <h2
     id="fullvideo"
     class="section-title">
@@ -746,42 +696,19 @@ main{
 
     </div>
 
-
-    <div class="post">
-
-        <div class="post-image">
-            🎬
-        </div>
-
-        <div class="post-content">
-
-            <h2>
-                More Videos
-            </h2>
-
-            <p>
-                Full videos appear above
-            </p>
-
-        </div>
-
-    </div>
-
 </div>
 
 </main>
 
 
 <!-- =========================
-     SHORT FULLSCREEN VIEWER
+     SHORT VIEWER
 ========================= -->
 
 <div
     id="shortViewer"
     class="short-viewer">
 
-
-    <!-- CLOSE -->
     <button
         id="shortClose"
         class="short-close">
@@ -790,8 +717,6 @@ main{
 
     </button>
 
-
-    <!-- VOLUME -->
     <button
         id="soundButton"
         class="sound-button">
@@ -800,8 +725,6 @@ main{
 
     </button>
 
-
-    <!-- SHORT FEED -->
     <div
         id="shortFeed"
         class="short-feed">
@@ -814,7 +737,7 @@ main{
 
 
 /* =========================
-   MENU JAVASCRIPT
+   MENU
 ========================= */
 
 const menuButton =
@@ -830,7 +753,6 @@ const overlay =
 document.querySelector(".overlay");
 
 
-/* OPEN MENU */
 menuButton.onclick = function(){
 
     sideMenu.classList.add("active");
@@ -840,7 +762,6 @@ menuButton.onclick = function(){
 };
 
 
-/* CLOSE MENU */
 closeButton.onclick = function(){
 
     sideMenu.classList.remove("active");
@@ -850,7 +771,6 @@ closeButton.onclick = function(){
 };
 
 
-/* CLOSE WITH OVERLAY */
 overlay.onclick = function(){
 
     sideMenu.classList.remove("active");
@@ -860,8 +780,25 @@ overlay.onclick = function(){
 };
 
 
+/* MENU LINK CLICK */
+
+document
+.querySelectorAll(".menu-item")
+.forEach(function(item){
+
+    item.onclick = function(){
+
+        sideMenu.classList.remove("active");
+
+        overlay.classList.remove("active");
+
+    };
+
+});
+
+
 /* =========================
-   ACCOUNT JAVASCRIPT
+   ACCOUNT
 ========================= */
 
 const account =
@@ -871,7 +808,6 @@ const accountBox =
 document.querySelector(".account-box");
 
 
-/* OPEN ACCOUNT */
 account.onclick = function(){
 
     accountBox.classList.toggle("active");
@@ -879,7 +815,6 @@ account.onclick = function(){
 };
 
 
-/* CLOSE ACCOUNT OUTSIDE */
 document.addEventListener(
     "click",
     function(event){
@@ -900,29 +835,71 @@ document.addEventListener(
 
 
 /* =========================
-   🎬 FULL VIDEO LIST
+   FULL VIDEOS
 ========================= */
 
 const fullVideos = [
 
-    "https://jumpshare.com/embed/YkjIOaRPiSVYTlWqdOhg",
-    
-    "full2.mp4",
-    "full3.mp4",
-    "full4.mp4",
-    "full5.mp4",
-    "full6.mp4",
-    "full7.mp4",
-    "full8.mp4",
-    "full9.mp4",
-    "full10.mp4",
-    "full11.mp4"
+    {
+        type:"jumpshare",
+        src:"https://jumpshare.com/embed/YkjIOaRPiSVYTlWqdOhg"
+    },
+
+    {
+        type:"file",
+        src:"full2.mp4"
+    },
+
+    {
+        type:"file",
+        src:"full3.mp4"
+    },
+
+    {
+        type:"file",
+        src:"full4.mp4"
+    },
+
+    {
+        type:"file",
+        src:"full5.mp4"
+    },
+
+    {
+        type:"file",
+        src:"full6.mp4"
+    },
+
+    {
+        type:"file",
+        src:"full7.mp4"
+    },
+
+    {
+        type:"file",
+        src:"full8.mp4"
+    },
+
+    {
+        type:"file",
+        src:"full9.mp4"
+    },
+
+    {
+        type:"file",
+        src:"full10.mp4"
+    },
+
+    {
+        type:"file",
+        src:"full11.mp4"
+    }
 
 ];
 
 
 /* =========================
-   🎵 JUMPSHARE SHORT LIST
+   JUMPSHARE SHORTS
 ========================= */
 
 const jumpshareShorts = [
@@ -947,9 +924,7 @@ const jumpshareShorts = [
 
 
 /* =========================
-   🎵 MP4 SHORT LIST
-
-   নিজের MP4-এর নাম এখানে দাও
+   MP4 SHORTS
 ========================= */
 
 const mp4Shorts = [
@@ -963,32 +938,28 @@ const mp4Shorts = [
 
 
 /* =========================
-   CREATE SHORT OBJECT
+   SHORT OBJECTS
 ========================= */
 
 const shortVideos = [
 
-    ...mp4Shorts.map(
-        function(src){
+    ...mp4Shorts.map(function(src){
 
-            return {
-                type:"file",
-                src:src
-            };
+        return {
+            type:"file",
+            src:src
+        };
 
-        }
-    ),
+    }),
 
-    ...jumpshareShorts.map(
-        function(src){
+    ...jumpshareShorts.map(function(src){
 
-            return {
-                type:"jumpshare",
-                src:src
-            };
+        return {
+            type:"jumpshare",
+            src:src
+        };
 
-        }
-    )
+    })
 
 ];
 
@@ -1027,7 +998,7 @@ function shuffle(array){
 
 
 /* =========================
-   RANDOM FULL VIDEOS
+   RANDOM FULL VIDEO
 ========================= */
 
 const randomFull =
@@ -1035,10 +1006,6 @@ shuffle(
     [...fullVideos]
 );
 
-
-/* =========================
-   VIDEO FEED
-========================= */
 
 const feed =
 document.getElementById(
@@ -1050,7 +1017,7 @@ document.getElementById(
    CREATE FULL VIDEO
 ========================= */
 
-function createFullVideo(src){
+function createFullVideo(video){
 
     const card =
     document.createElement("div");
@@ -1059,16 +1026,46 @@ function createFullVideo(src){
     "video-card";
 
 
-    card.innerHTML = `
+    /* MP4 */
 
-        <video
-            src="${src}"
-            controls
-            playsinline
-            preload="metadata">
-        </video>
+    if(
+        video.type === "file"
+    ){
 
-    `;
+        card.innerHTML = `
+
+            <video
+                src="${video.src}"
+                controls
+                playsinline
+                preload="metadata">
+            </video>
+
+        `;
+
+    }
+
+
+    /* JUMPSHARE */
+
+    if(
+        video.type === "jumpshare"
+    ){
+
+        card.innerHTML = `
+
+            <iframe
+                src="${video.src}"
+                allow="
+                autoplay;
+                fullscreen;
+                picture-in-picture"
+                allowfullscreen>
+            </iframe>
+
+        `;
+
+    }
 
 
     return card;
@@ -1089,8 +1086,6 @@ function createShortRow(){
     "short-section";
 
 
-    /* SHORT TITLE */
-
     const heading =
     document.createElement("div");
 
@@ -1106,8 +1101,6 @@ function createShortRow(){
     );
 
 
-    /* SHORT HORIZONTAL LINE */
-
     const line =
     document.createElement("div");
 
@@ -1115,18 +1108,11 @@ function createShortRow(){
     "tiktok-line";
 
 
-    /*
-       প্রতিবার নতুন random
-       order
-    */
-
     const rowShorts =
     shuffle(
         [...shortVideos]
     );
 
-
-    /* CREATE EACH SHORT CARD */
 
     rowShorts.forEach(
         function(video){
@@ -1138,8 +1124,6 @@ function createShortRow(){
             "tiktok-card";
 
 
-            /* MP4 SHORT */
-
             if(
                 video.type === "file"
             ){
@@ -1149,6 +1133,7 @@ function createShortRow(){
                     <video
                         src="${video.src}"
                         muted
+                        autoplay
                         playsinline
                         loop
                         preload="metadata">
@@ -1159,8 +1144,6 @@ function createShortRow(){
             }
 
 
-            /* JUMPSHARE SHORT */
-
             if(
                 video.type === "jumpshare"
             ){
@@ -1169,7 +1152,6 @@ function createShortRow(){
 
                     <iframe
                         src="${video.src}"
-                        frameborder="0"
                         allow="
                         autoplay;
                         fullscreen;
@@ -1181,8 +1163,6 @@ function createShortRow(){
 
             }
 
-
-            /* OPEN SHORT VIEWER */
 
             card.onclick =
             function(){
@@ -1213,19 +1193,14 @@ function createShortRow(){
 
 
 /* =========================
-   BUILD MAIN FEED
-
-   প্রতি ৪টি Full Video-এর
-   পরে Short Row
+   BUILD FEED
 ========================= */
 
 randomFull.forEach(
     function(video,index){
 
         feed.appendChild(
-            createFullVideo(
-                video
-            )
+            createFullVideo(video)
         );
 
 
@@ -1244,7 +1219,7 @@ randomFull.forEach(
 
 
 /* =========================
-   SHORT VIEWER VARIABLES
+   SHORT VIEWER
 ========================= */
 
 const shortViewer =
@@ -1268,35 +1243,21 @@ document.getElementById(
 );
 
 
-/* SOUND STATUS */
-
 let soundOn = false;
-
-
-/* CURRENT SHORT LIST */
 
 let currentVideos = [];
 
 
 /* =========================
-   OPEN SHORT VIEWER
+   OPEN SHORT
 ========================= */
 
 function openShortViewer(
     clickedVideo
 ){
 
-    /*
-       পুরোনো viewer পরিষ্কার
-    */
-
     shortFeed.innerHTML = "";
 
-
-    /*
-       যেটায় চাপ দেওয়া হয়েছে
-       সেটা প্রথমে
-    */
 
     const others =
     shortVideos.filter(
@@ -1309,18 +1270,8 @@ function openShortViewer(
     );
 
 
-    /*
-       বাকিগুলো random
-    */
+    shuffle(others);
 
-    shuffle(
-        others
-    );
-
-
-    /*
-       clicked video + random videos
-    */
 
     currentVideos = [
 
@@ -1331,16 +1282,8 @@ function openShortViewer(
     ];
 
 
-    /*
-       Viewer তৈরি
-    */
-
     createViewerVideos();
 
-
-    /*
-       Viewer দেখানো
-    */
 
     shortViewer.classList.add(
         "active"
@@ -1351,19 +1294,11 @@ function openShortViewer(
     "hidden";
 
 
-    /*
-       Sound reset
-    */
-
     soundOn = false;
 
     soundButton.innerHTML =
     "🔇";
 
-
-    /*
-       প্রথম MP4 চালানোর চেষ্টা
-    */
 
     setTimeout(
         function(){
@@ -1371,14 +1306,14 @@ function openShortViewer(
             playVisibleVideo();
 
         },
-        100
+        200
     );
 
 }
 
 
 /* =========================
-   CREATE VIEWER VIDEOS
+   CREATE VIEWER
 ========================= */
 
 function createViewerVideos(){
@@ -1397,8 +1332,6 @@ function createViewerVideos(){
             item.className =
             "short-item";
 
-
-            /* MP4 */
 
             if(
                 video.type === "file"
@@ -1420,8 +1353,6 @@ function createViewerVideos(){
             }
 
 
-            /* JUMPSHARE */
-
             if(
                 video.type === "jumpshare"
             ){
@@ -1430,7 +1361,6 @@ function createViewerVideos(){
 
                     <iframe
                         src="${video.src}"
-                        frameborder="0"
                         allow="
                         autoplay;
                         fullscreen;
@@ -1454,7 +1384,7 @@ function createViewerVideos(){
 
 
 /* =========================
-   FIND VISIBLE SHORT
+   PLAY VISIBLE MP4
 ========================= */
 
 function playVisibleVideo(){
@@ -1516,10 +1446,6 @@ function playVisibleVideo(){
     );
 
 
-    /*
-       সব MP4 pause
-    */
-
     items.forEach(
         function(item){
 
@@ -1563,6 +1489,8 @@ function playVisibleVideo(){
 
 let scrollTimer;
 
+let loadingMore = false;
+
 
 shortFeed.addEventListener(
     "scroll",
@@ -1580,18 +1508,17 @@ shortFeed.addEventListener(
                 playVisibleVideo();
 
 
-                /*
-                   নিচের দিকে গেলে
-                   আরো random Short যোগ
-                */
-
                 if(
                     shortFeed.scrollTop +
                     shortFeed.clientHeight >=
-                    shortFeed.scrollHeight - 300
+                    shortFeed.scrollHeight - 500
                 ){
 
-                    addMoreRandomShorts();
+                    if(!loadingMore){
+
+                        addMoreRandomShorts();
+
+                    }
 
                 }
 
@@ -1609,9 +1536,8 @@ shortFeed.addEventListener(
 
 function addMoreRandomShorts(){
 
-    /*
-       নতুন random list
-    */
+    loadingMore = true;
+
 
     const more =
     shuffle(
@@ -1630,8 +1556,6 @@ function addMoreRandomShorts(){
             item.className =
             "short-item";
 
-
-            /* MP4 */
 
             if(
                 video.type === "file"
@@ -1652,8 +1576,6 @@ function addMoreRandomShorts(){
             }
 
 
-            /* JUMPSHARE */
-
             if(
                 video.type === "jumpshare"
             ){
@@ -1662,7 +1584,6 @@ function addMoreRandomShorts(){
 
                     <iframe
                         src="${video.src}"
-                        frameborder="0"
                         allow="
                         autoplay;
                         fullscreen;
@@ -1681,65 +1602,108 @@ function addMoreRandomShorts(){
 
         }
     );
+
+
+    setTimeout(
+        function(){
+
+            loadingMore = false;
+
+        },
+        500
+    );
+
 }
+
+
 /* =========================
-   🔊 VOLUME BUTTON
+   SOUND
 ========================= */
 
 soundButton.onclick =
 function(event){
+
     event.stopPropagation();
+
+
     soundOn =
     !soundOn;
+
+
     const videos =
     shortFeed.querySelectorAll(
         "video"
     );
+
+
     videos.forEach(
         function(video){
+
             video.muted =
             !soundOn;
+
         }
     );
+
+
     playVisibleVideo();
+
+
     if(soundOn){
 
         soundButton.innerHTML =
         "🔊";
+
     }else{
 
         soundButton.innerHTML =
         "🔇";
+
     }
 
 };
 
+
 /* =========================
-   CLOSE SHORT VIEWER
+   CLOSE SHORT
 ========================= */
 
-shortClose.onclick =
-function(){
+function closeShortViewer(){
 
     shortViewer.classList.remove(
         "active"
     );
+
+
     document.body.style.overflow =
     "";
-    /*
-       সব MP4 বন্ধ
-    */
+
+
     shortFeed
         .querySelectorAll("video")
         .forEach(
             function(video){
 
                 video.pause();
+
             }
         );
+
+
     shortFeed.innerHTML =
     "";
+
+}
+
+
+shortClose.onclick =
+function(){
+
+    closeShortViewer();
+
 };
+
+
 /* =========================
    ESC KEY
 ========================= */
@@ -1751,18 +1715,22 @@ document.addEventListener(
         if(
             event.key === "Escape"
         ){
+
             if(
                 shortViewer.classList
                 .contains("active")
             ){
 
-                #140e78.click();
+                shortClose.click();
+
             }
+
         }
+
     }
 );
 
 </script>
 
-</>
+</body>
 </html>
