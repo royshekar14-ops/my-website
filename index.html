@@ -291,6 +291,7 @@ main{
     border-radius:18px;
     overflow:hidden;
     box-shadow:0 4px 12px rgba(0,0,0,.15);
+    position:relative;
 }
 
 .video-card video{
@@ -306,6 +307,34 @@ main{
     display:block;
     border:0;
     background:#000;
+}
+
+
+/* =========================
+   FULL VIDEO SHARE
+========================= */
+
+.full-share-button{
+    position:absolute;
+    right:15px;
+    bottom:15px;
+    width:50px;
+    height:50px;
+    border:none;
+    border-radius:50%;
+    background:rgba(255,255,255,.94);
+    cursor:pointer;
+    box-shadow:0 3px 10px rgba(0,0,0,.3);
+    z-index:10;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.full-share-button svg{
+    width:25px;
+    height:25px;
+    fill:#111;
 }
 
 
@@ -414,14 +443,29 @@ main{
 
 
 /* =========================
+   SHORT ACTIONS
+   LIKE ABOVE
+   SHARE BELOW
+========================= */
+
+.short-actions{
+    position:fixed;
+    right:15px;
+    bottom:55px;
+    z-index:7000;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:22px;
+}
+
+
+/* =========================
    LIKE AREA
 ========================= */
 
 .like-area{
-    position:fixed;
-    right:15px;
-    bottom:70px;
-    z-index:7000;
+    position:static;
     display:flex;
     flex-direction:column;
     align-items:center;
@@ -451,6 +495,97 @@ main{
     font-size:15px;
     font-weight:bold;
     text-shadow:0 2px 5px #000;
+}
+
+
+/* =========================
+   TIKTOK STYLE SHARE BUTTON
+========================= */
+
+.short-share{
+    position:static;
+    width:52px;
+    height:52px;
+    border:none;
+    border-radius:50%;
+    background:rgba(255,255,255,.92);
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 3px 10px rgba(0,0,0,.3);
+}
+
+.short-share svg{
+    width:27px;
+    height:27px;
+    fill:#111;
+}
+
+
+/* =========================
+   SHARE POPUP
+========================= */
+
+.share-modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.65);
+    z-index:12000;
+    display:none;
+    align-items:flex-end;
+    justify-content:center;
+    padding:15px;
+}
+
+.share-modal.active{
+    display:flex;
+}
+
+.share-box{
+    width:100%;
+    max-width:430px;
+    background:white;
+    border-radius:22px;
+    padding:20px;
+    box-shadow:0 10px 40px rgba(0,0,0,.4);
+}
+
+.share-box h3{
+    margin:0 0 15px;
+    text-align:center;
+    font-size:20px;
+}
+
+.share-options{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+}
+
+.share-option{
+    min-height:50px;
+    border:none;
+    border-radius:12px;
+    background:#f1f1f1;
+    font-size:15px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.share-option:hover{
+    background:#e7e7e7;
+}
+
+.share-cancel{
+    width:100%;
+    margin-top:12px;
+    padding:13px;
+    border:none;
+    border-radius:12px;
+    background:#ddd;
+    font-weight:bold;
+    cursor:pointer;
 }
 
 
@@ -877,26 +1012,52 @@ main{
 
 
     <!-- =========================
-         LIKE
+         SHORT ACTIONS
     ========================= -->
 
-    <div class="like-area">
+    <div class="short-actions">
+
+
+        <!-- LIKE -->
+
+        <div class="like-area">
+
+            <button
+                id="likeButton"
+                class="like-button">
+
+                ♡
+
+            </button>
+
+            <div
+                id="likeCount"
+                class="like-count">
+
+                0
+
+            </div>
+
+        </div>
+
+
+        <!-- SHARE -->
 
         <button
-            id="likeButton"
-            class="like-button">
+            id="shortShare"
+            class="short-share"
+            aria-label="Share">
 
-            ♡
+            <svg
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+
+                <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11A2.99 2.99 0 1 0 15 5c0 .24.04.47.09.7L8.04 9.81A3 3 0 1 0 8 14c.24 0 .47-.04.7-.09l7.13 4.17c-.05.21-.08.43-.08.65a3 3 0 1 0 3-2.65z"/>
+
+            </svg>
 
         </button>
 
-        <div
-            id="likeCount"
-            class="like-count">
-
-            0
-
-        </div>
 
     </div>
 
@@ -949,6 +1110,104 @@ main{
         <button
             id="popupClose"
             class="popup-close">
+
+            Cancel
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     SHARE MODAL
+========================= -->
+
+<div
+    id="shareModal"
+    class="share-modal">
+
+
+    <div class="share-box">
+
+        <h3>
+            Share Video
+        </h3>
+
+
+        <div class="share-options">
+
+
+            <button
+                id="copyLink"
+                class="share-option">
+
+                🔗 Copy Link
+
+            </button>
+
+
+            <button
+                id="nativeShare"
+                class="share-option">
+
+                📤 Share
+
+            </button>
+
+
+            <button
+                id="whatsappShare"
+                class="share-option">
+
+                🟢 WhatsApp
+
+            </button>
+
+
+            <button
+                id="facebookShare"
+                class="share-option">
+
+                🔵 Facebook
+
+            </button>
+
+
+            <button
+                id="messengerShare"
+                class="share-option">
+
+                💬 Messenger
+
+            </button>
+
+
+            <button
+                id="telegramShare"
+                class="share-option">
+
+                🔷 Telegram
+
+            </button>
+
+
+            <button
+                id="downloadVideo"
+                class="share-option">
+
+                ⬇️ Download
+
+            </button>
+
+
+        </div>
+
+
+        <button
+            id="shareCancel"
+            class="share-cancel">
 
             Cancel
 
@@ -1735,6 +1994,20 @@ function createFullVideo(video){
                 preload="metadata">
             </video>
 
+            <button
+                class="full-share-button"
+                aria-label="Share">
+
+                <svg
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+
+                    <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11A2.99 2.99 0 1 0 15 5c0 .24.04.47.09.7L8.04 9.81A3 3 0 1 0 8 14c.24 0 .47-.04.7-.09l7.13 4.17c-.05.21-.08.43-.08.65a3 3 0 1 0 3-2.65z"/>
+
+                </svg>
+
+            </button>
+
         `;
 
     }
@@ -1756,9 +2029,41 @@ function createFullVideo(video){
                 allowfullscreen>
             </iframe>
 
+            <button
+                class="full-share-button"
+                aria-label="Share">
+
+                <svg
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+
+                    <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11A2.99 2.99 0 1 0 15 5c0 .24.04.47.09.7L8.04 9.81A3 3 0 1 0 8 14c.24 0 .47-.04.7-.09l7.13 4.17c-.05.21-.08.43-.08.65a3 3 0 1 0 3-2.65z"/>
+
+                </svg>
+
+            </button>
+
         `;
 
     }
+
+
+    const shareButton =
+        card.querySelector(
+            ".full-share-button"
+        );
+
+
+    shareButton.onclick =
+    function(event){
+
+        event.stopPropagation();
+
+        openShareModal(
+            video
+        );
+
+    };
 
 
     return card;
@@ -1962,6 +2267,12 @@ const likeCount =
     );
 
 
+const shortShare =
+    document.getElementById(
+        "shortShare"
+    );
+
+
 const loginPopup =
     document.getElementById(
         "loginPopup"
@@ -1986,9 +2297,69 @@ const popupClose =
     );
 
 
+/* =========================
+   SHARE ELEMENTS
+========================= */
+
+const shareModal =
+    document.getElementById(
+        "shareModal"
+    );
+
+
+const copyLink =
+    document.getElementById(
+        "copyLink"
+    );
+
+
+const nativeShare =
+    document.getElementById(
+        "nativeShare"
+    );
+
+
+const whatsappShare =
+    document.getElementById(
+        "whatsappShare"
+    );
+
+
+const facebookShare =
+    document.getElementById(
+        "facebookShare"
+    );
+
+
+const messengerShare =
+    document.getElementById(
+        "messengerShare"
+    );
+
+
+const telegramShare =
+    document.getElementById(
+        "telegramShare"
+    );
+
+
+const downloadVideo =
+    document.getElementById(
+        "downloadVideo"
+    );
+
+
+const shareCancel =
+    document.getElementById(
+        "shareCancel"
+    );
+
+
 let currentVideos = [];
 
 let currentShort = null;
+
+let shareVideo = null;
 
 
 /* =========================
@@ -2602,6 +2973,452 @@ async function(){
 
 
 /* =========================
+   GET SHARE URL
+========================= */
+
+function getShareUrl(video){
+
+    if(
+        video.type ===
+        "file"
+    ){
+
+        return new URL(
+            video.src,
+            window.location.href
+        ).href;
+
+    }
+
+
+    return video.src;
+
+}
+
+
+/* =========================
+   OPEN SHARE MODAL
+========================= */
+
+function openShareModal(video){
+
+    shareVideo =
+        video;
+
+    shareModal.classList.add(
+        "active"
+    );
+
+}
+
+
+/* =========================
+   CLOSE SHARE MODAL
+========================= */
+
+function closeShareModal(){
+
+    shareModal.classList.remove(
+        "active"
+    );
+
+    shareVideo =
+        null;
+
+}
+
+
+/* =========================
+   SHORT SHARE
+========================= */
+
+shortShare.onclick =
+function(){
+
+    if(
+        currentShort
+    ){
+
+        openShareModal(
+            currentShort
+        );
+
+    }
+
+};
+
+
+/* =========================
+   COPY LINK
+========================= */
+
+copyLink.onclick =
+async function(){
+
+    if(
+        !shareVideo
+    ){
+
+        return;
+
+    }
+
+
+    const url =
+        getShareUrl(
+            shareVideo
+        );
+
+
+    try{
+
+        await navigator.clipboard.writeText(
+            url
+        );
+
+        alert(
+            "✅ Link copied!"
+        );
+
+    }
+
+    catch(error){
+
+        const textarea =
+            document.createElement(
+                "textarea"
+            );
+
+        textarea.value =
+            url;
+
+        document.body.appendChild(
+            textarea
+        );
+
+        textarea.select();
+
+        document.execCommand(
+            "copy"
+        );
+
+        textarea.remove();
+
+        alert(
+            "✅ Link copied!"
+        );
+
+    }
+
+};
+
+
+/* =========================
+   NATIVE SHARE
+========================= */
+
+nativeShare.onclick =
+async function(){
+
+    if(
+        !shareVideo
+    ){
+
+        return;
+
+    }
+
+
+    const url =
+        getShareUrl(
+            shareVideo
+        );
+
+
+    if(
+        navigator.share
+    ){
+
+        try{
+
+            await navigator.share({
+
+                title:
+                "My Video Site",
+
+                text:
+                "Watch this video",
+
+                url:url
+
+            });
+
+        }
+
+        catch(error){
+
+            if(
+                error.name !==
+                "AbortError"
+            ){
+
+                console.log(
+                    error
+                );
+
+            }
+
+        }
+
+    }else{
+
+        alert(
+            "এই Browser-এ Native Share নেই। Copy Link ব্যবহার করুন।"
+        );
+
+    }
+
+};
+
+
+/* =========================
+   WHATSAPP
+========================= */
+
+whatsappShare.onclick =
+function(){
+
+    if(
+        !shareVideo
+    ){
+
+        return;
+
+    }
+
+
+    const url =
+        getShareUrl(
+            shareVideo
+        );
+
+
+    const text =
+        encodeURIComponent(
+            "Watch this video: " +
+            url
+        );
+
+
+    window.open(
+        "https://wa.me/?text=" +
+        text,
+        "_blank"
+    );
+
+};
+
+
+/* =========================
+   FACEBOOK
+========================= */
+
+facebookShare.onclick =
+function(){
+
+    if(
+        !shareVideo
+    ){
+
+        return;
+
+    }
+
+
+    const url =
+        encodeURIComponent(
+            getShareUrl(
+                shareVideo
+            )
+        );
+
+
+    window.open(
+        "https://www.facebook.com/sharer/sharer.php?u=" +
+        url,
+        "_blank"
+    );
+
+};
+
+
+/* =========================
+   MESSENGER
+========================= */
+
+messengerShare.onclick =
+function(){
+
+    if(
+        !shareVideo
+    ){
+
+        return;
+
+    }
+
+
+    const url =
+        encodeURIComponent(
+            getShareUrl(
+                shareVideo
+            )
+        );
+
+
+    window.open(
+        "https://www.facebook.com/dialog/send?link=" +
+        url,
+        "_blank"
+    );
+
+};
+
+
+/* =========================
+   TELEGRAM
+========================= */
+
+telegramShare.onclick =
+function(){
+
+    if(
+        !shareVideo
+    ){
+
+        return;
+
+    }
+
+
+    const url =
+        encodeURIComponent(
+            getShareUrl(
+                shareVideo
+            )
+        );
+
+
+    const text =
+        encodeURIComponent(
+            "Watch this video"
+        );
+
+
+    window.open(
+        "https://t.me/share/url?url=" +
+        url +
+        "&text=" +
+        text,
+        "_blank"
+    );
+
+};
+
+
+/* =========================
+   DOWNLOAD
+========================= */
+
+downloadVideo.onclick =
+function(){
+
+    if(
+        !shareVideo
+    ){
+
+        return;
+
+    }
+
+
+    if(
+        shareVideo.type ===
+        "file"
+    ){
+
+        const link =
+            document.createElement(
+                "a"
+            );
+
+
+        link.href =
+            shareVideo.src;
+
+
+        link.download =
+            shareVideo.src
+            .split("/")
+            .pop();
+
+
+        document.body.appendChild(
+            link
+        );
+
+
+        link.click();
+
+
+        link.remove();
+
+    }else{
+
+        /*
+           Jumpshare iframe-এর
+           আসল MP4 এখানে bypass করা হচ্ছে না।
+           Embed link নতুন tab-এ খোলা হবে।
+        */
+
+        window.open(
+            shareVideo.src,
+            "_blank"
+        );
+
+    }
+
+};
+
+
+/* =========================
+   SHARE CANCEL
+========================= */
+
+shareCancel.onclick =
+function(){
+
+    closeShareModal();
+
+};
+
+
+shareModal.onclick =
+function(event){
+
+    if(
+        event.target ===
+        shareModal
+    ){
+
+        closeShareModal();
+
+    }
+
+};
+
+
+/* =========================
    LOGIN POPUP
 ========================= */
 
@@ -2708,6 +3525,18 @@ document.addEventListener(
             event.key ===
             "Escape"
         ){
+
+            if(
+                shareModal.classList
+                .contains("active")
+            ){
+
+                closeShareModal();
+
+                return;
+
+            }
+
 
             if(
                 shortViewer.classList
