@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Unique 3D Periodic Table</title>
+<title>3D Periodic Table</title>
 
 <style>
 * {
@@ -13,8 +13,7 @@
 
 body {
     margin: 0;
-    background:
-        radial-gradient(circle at center, #172b3e, #080d18 75%);
+    background: radial-gradient(circle at center, #172b3e, #080d18 80%);
     color: white;
     font-family: Arial, sans-serif;
     overflow: hidden;
@@ -23,15 +22,15 @@ body {
 
 h1 {
     margin: 18px 0 5px;
-    font-size: 28px;
-    letter-spacing: 4px;
+    font-size: 27px;
+    letter-spacing: 3px;
     color: #00eaff;
     text-shadow: 0 0 15px #00eaff;
 }
 
 .subtitle {
     color: #8299aa;
-    font-size: 11px;
+    font-size: 10px;
     letter-spacing: 3px;
     margin-bottom: 15px;
 }
@@ -39,11 +38,10 @@ h1 {
 .buttons {
     position: relative;
     z-index: 10;
-    margin-bottom: 10px;
 }
 
 button {
-    padding: 10px 16px;
+    padding: 9px 14px;
     margin: 3px;
     border: 1px solid #00eaff66;
     border-radius: 20px;
@@ -61,7 +59,7 @@ button.active {
 
 .scene {
     width: 100%;
-    height: 72vh;
+    height: 70vh;
     perspective: 1100px;
     display: flex;
     justify-content: center;
@@ -80,13 +78,11 @@ button.active {
 
 .element {
     position: absolute;
-    width: 48px;
-    height: 54px;
-
+    width: 42px;
+    height: 48px;
     border: 1px solid currentColor;
-    border-radius: 9px;
-
-    background: rgba(10,30,50,0.85);
+    border-radius: 8px;
+    background: rgba(10,30,50,0.88);
 
     display: flex;
     flex-direction: column;
@@ -97,7 +93,7 @@ button.active {
 
     box-shadow:
         0 0 8px currentColor,
-        inset 0 0 10px currentColor;
+        inset 0 0 8px currentColor;
 
     transition:
         transform 0.7s cubic-bezier(.2,.8,.2,1),
@@ -112,35 +108,33 @@ button.active {
     position: absolute;
     inset: 3px;
     border: 1px solid currentColor;
-    border-radius: 6px;
+    border-radius: 5px;
     opacity: 0.3;
     pointer-events: none;
 }
 
 .element:hover {
     background: #263d60;
-    box-shadow:
-        0 0 20px currentColor,
-        inset 0 0 15px currentColor;
+    box-shadow: 0 0 22px currentColor;
     z-index: 100;
 }
 
 .symbol {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
 }
 
 .name {
-    font-size: 7px;
+    font-size: 6px;
     margin-top: 2px;
 }
 
 .number {
-    font-size: 8px;
+    font-size: 7px;
     opacity: 0.8;
 }
 
-/* Original element colors */
+/* Original colors */
 
 .element:nth-child(4n) {
     color: #ff6464;
@@ -158,7 +152,7 @@ button.active {
     color: #4cc9f0;
 }
 
-/* Details popup */
+/* Details */
 
 .overlay {
     display: none;
@@ -213,7 +207,7 @@ button.active {
 
 .hint {
     color: #8299aa;
-    font-size: 11px;
+    font-size: 10px;
     letter-spacing: 1px;
 }
 </style>
@@ -256,9 +250,9 @@ const data = [
 ["C","Carbon",6,12.011,"Found in living organisms"],
 ["N","Nitrogen",7,14.007,"Used in fertilizers"],
 ["O","Oxygen",8,15.999,"Essential for respiration"],
-["F","Fluorine",9,18.998,"Used in toothpaste compounds"],
-["Ne","Neon",10,20.180,"Used in glowing signs"],
-["Na","Sodium",11,22.990,"Found in table salt"],
+["F","Fluorine",9,18.998,"Used in toothpaste"],
+["Ne","Neon",10,20.180,"Used in signs"],
+["Na","Sodium",11,22.990,"Found in salt"],
 ["Mg","Magnesium",12,24.305,"Used in alloys"],
 ["Al","Aluminium",13,26.982,"Used in aircraft"],
 ["Si","Silicon",14,28.085,"Used in computer chips"],
@@ -267,7 +261,105 @@ const data = [
 ["Cl","Chlorine",17,35.45,"Used in water treatment"],
 ["Ar","Argon",18,39.948,"Used in light bulbs"],
 ["K","Potassium",19,39.098,"Important for plants"],
-["Ca","Calcium",20,40.078,"Important for bones"]
+["Ca","Calcium",20,40.078,"Important for bones"],
+["Sc","Scandium",21,44.956,"Used in alloys"],
+["Ti","Titanium",22,47.867,"Used in aircraft"],
+["V","Vanadium",23,50.942,"Used in steel"],
+["Cr","Chromium",24,51.996,"Used in stainless steel"],
+["Mn","Manganese",25,54.938,"Used in steel"],
+["Fe","Iron",26,55.845,"Used in construction"],
+["Co","Cobalt",27,58.933,"Used in batteries"],
+["Ni","Nickel",28,58.693,"Used in coins"],
+["Cu","Copper",29,63.546,"Used in wires"],
+["Zn","Zinc",30,65.38,"Used in galvanizing"],
+["Ga","Gallium",31,69.723,"Used in electronics"],
+["Ge","Germanium",32,72.630,"Used in semiconductors"],
+["As","Arsenic",33,74.922,"Used in electronics"],
+["Se","Selenium",34,78.971,"Used in glass"],
+["Br","Bromine",35,79.904,"Used in chemicals"],
+["Kr","Krypton",36,83.798,"Used in lighting"],
+["Rb","Rubidium",37,85.468,"Used in research"],
+["Sr","Strontium",38,87.62,"Used in fireworks"],
+["Y","Yttrium",39,88.906,"Used in LEDs"],
+["Zr","Zirconium",40,91.224,"Used in ceramics"],
+["Nb","Niobium",41,92.906,"Used in alloys"],
+["Mo","Molybdenum",42,95.95,"Used in steel"],
+["Tc","Technetium",43,98,"Used in medical imaging"],
+["Ru","Ruthenium",44,101.07,"Used in electronics"],
+["Rh","Rhodium",45,102.91,"Used in catalysts"],
+["Pd","Palladium",46,106.42,"Used in catalysts"],
+["Ag","Silver",47,107.87,"Used in jewelry"],
+["Cd","Cadmium",48,112.41,"Used in batteries"],
+["In","Indium",49,114.82,"Used in screens"],
+["Sn","Tin",50,118.71,"Used in solder"],
+["Sb","Antimony",51,121.76,"Used in alloys"],
+["Te","Tellurium",52,127.60,"Used in electronics"],
+["I","Iodine",53,126.90,"Used in medicine"],
+["Xe","Xenon",54,131.29,"Used in lamps"],
+["Cs","Cesium",55,132.91,"Used in atomic clocks"],
+["Ba","Barium",56,137.33,"Used in medical imaging"],
+["La","Lanthanum",57,138.91,"Used in camera lenses"],
+["Ce","Cerium",58,140.12,"Used in polishing"],
+["Pr","Praseodymium",59,140.91,"Used in magnets"],
+["Nd","Neodymium",60,144.24,"Used in strong magnets"],
+["Pm","Promethium",61,145,"Used in research"],
+["Sm","Samarium",62,150.36,"Used in magnets"],
+["Eu","Europium",63,151.96,"Used in displays"],
+["Gd","Gadolinium",64,157.25,"Used in MRI contrast"],
+["Tb","Terbium",65,158.93,"Used in displays"],
+["Dy","Dysprosium",66,162.50,"Used in magnets"],
+["Ho","Holmium",67,164.93,"Used in lasers"],
+["Er","Erbium",68,167.26,"Used in fiber optics"],
+["Tm","Thulium",69,168.93,"Used in lasers"],
+["Yb","Ytterbium",70,173.05,"Used in research"],
+["Lu","Lutetium",71,174.97,"Used in medical research"],
+["Hf","Hafnium",72,178.49,"Used in reactors"],
+["Ta","Tantalum",73,180.95,"Used in electronics"],
+["W","Tungsten",74,183.84,"Used in bulbs"],
+["Re","Rhenium",75,186.21,"Used in jet engines"],
+["Os","Osmium",76,190.23,"Used in alloys"],
+["Ir","Iridium",77,192.22,"Used in spark plugs"],
+["Pt","Platinum",78,195.08,"Used in jewelry"],
+["Au","Gold",79,196.97,"Used in electronics"],
+["Hg","Mercury",80,200.59,"Used in instruments"],
+["Tl","Thallium",81,204.38,"Used in electronics"],
+["Pb","Lead",82,207.2,"Used in batteries"],
+["Bi","Bismuth",83,208.98,"Used in medicine"],
+["Po","Polonium",84,209,"Used in research"],
+["At","Astatine",85,210,"Used in research"],
+["Rn","Radon",86,222,"Used in research"],
+["Fr","Francium",87,223,"Used in research"],
+["Ra","Radium",88,226,"Used in research"],
+["Ac","Actinium",89,227,"Used in research"],
+["Th","Thorium",90,232.04,"Studied as nuclear fuel"],
+["Pa","Protactinium",91,231.04,"Used in research"],
+["U","Uranium",92,238.03,"Used in nuclear fuel"],
+["Np","Neptunium",93,237,"Used in research"],
+["Pu","Plutonium",94,244,"Used in nuclear science"],
+["Am","Americium",95,243,"Used in smoke detectors"],
+["Cm","Curium",96,247,"Used in research"],
+["Bk","Berkelium",97,247,"Used in research"],
+["Cf","Californium",98,251,"Used in research"],
+["Es","Einsteinium",99,252,"Used in research"],
+["Fm","Fermium",100,257,"Used in research"],
+["Md","Mendelevium",101,258,"Used in research"],
+["No","Nobelium",102,259,"Used in research"],
+["Lr","Lawrencium",103,266,"Used in research"],
+["Rf","Rutherfordium",104,267,"Used in research"],
+["Db","Dubnium",105,268,"Used in research"],
+["Sg","Seaborgium",106,269,"Used in research"],
+["Bh","Bohrium",107,270,"Used in research"],
+["Hs","Hassium",108,277,"Used in research"],
+["Mt","Meitnerium",109,278,"Used in research"],
+["Ds","Darmstadtium",110,281,"Used in research"],
+["Rg","Roentgenium",111,282,"Used in research"],
+["Cn","Copernicium",112,285,"Used in research"],
+["Nh","Nihonium",113,286,"Used in research"],
+["Fl","Flerovium",114,289,"Used in research"],
+["Mc","Moscovium",115,290,"Used in research"],
+["Lv","Livermorium",116,293,"Used in research"],
+["Ts","Tennessine",117,294,"Used in research"],
+["Og","Oganesson",118,294,"Used in research"]
 ];
 
 const world = document.getElementById("world");
@@ -275,7 +367,7 @@ const scene = document.getElementById("scene");
 
 let cards = [];
 
-data.forEach((element,i) => {
+data.forEach((element) => {
 
     const card = document.createElement("div");
 
@@ -311,11 +403,11 @@ function changeMode(mode,button) {
 
         if(mode === "table") {
 
-            let col = i % 5;
-            let row = Math.floor(i / 5);
+            let col = i % 18;
+            let row = Math.floor(i / 18);
 
-            x = (col-2)*65;
-            y = (row-1.5)*68;
+            x = (col-8.5)*49;
+            y = (row-3)*55;
             z = 0;
 
         }
@@ -325,7 +417,7 @@ function changeMode(mode,button) {
             let phi = Math.acos(1-2*(i+0.5)/total);
             let theta = Math.PI*(1+Math.sqrt(5))*i;
 
-            let r = 125;
+            let r = 145;
 
             x = r*Math.sin(phi)*Math.cos(theta);
             y = r*Math.sin(phi)*Math.sin(theta);
@@ -335,22 +427,22 @@ function changeMode(mode,button) {
 
         else if(mode === "helix") {
 
-            let angle = i*0.55;
-            let r = 95;
+            let angle = i*0.42;
+            let r = 105;
 
             x = r*Math.cos(angle);
-            y = (i-total/2)*12;
+            y = (i-total/2)*7;
             z = r*Math.sin(angle);
 
         }
 
         else if(mode === "grid") {
 
-            let col = i%4;
-            let row = Math.floor(i/4);
+            let col = i%9;
+            let row = Math.floor(i/9);
 
-            x = (col-1.5)*75;
-            y = (row-2)*65;
+            x = (col-4)*52;
+            y = (row-6)*52;
             z = (i%3)*35;
 
         }
@@ -362,7 +454,7 @@ function changeMode(mode,button) {
 
 }
 
-// Mouse movement
+// Mouse and touch movement
 
 let targetX = 0;
 let targetY = 0;
@@ -386,8 +478,6 @@ scene.addEventListener("pointerleave", () => {
     targetY = 0;
 });
 
-// Smooth animation
-
 function animate() {
 
     rotateX += (targetX-rotateX)*0.08;
@@ -400,7 +490,7 @@ function animate() {
 
 }
 
-// Element details
+// Details
 
 function showDetails(element) {
 
