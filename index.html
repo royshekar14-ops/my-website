@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Interactive 3D Periodic Table</title>
+<title>Unique 3D Periodic Table</title>
 
 <style>
 * {
@@ -13,7 +13,8 @@
 
 body {
     margin: 0;
-    background: #080d18;
+    background:
+        radial-gradient(circle at center, #172b3e, #080d18 75%);
     color: white;
     font-family: Arial, sans-serif;
     overflow: hidden;
@@ -21,40 +22,50 @@ body {
 }
 
 h1 {
-    margin: 18px 0;
+    margin: 18px 0 5px;
     font-size: 28px;
+    letter-spacing: 4px;
     color: #00eaff;
     text-shadow: 0 0 15px #00eaff;
+}
+
+.subtitle {
+    color: #8299aa;
+    font-size: 11px;
+    letter-spacing: 3px;
+    margin-bottom: 15px;
 }
 
 .buttons {
     position: relative;
     z-index: 10;
+    margin-bottom: 10px;
 }
 
 button {
-    padding: 10px 15px;
-    margin: 4px;
-    border: 1px solid #00eaff;
-    border-radius: 8px;
-    background: #101d30;
+    padding: 10px 16px;
+    margin: 3px;
+    border: 1px solid #00eaff66;
+    border-radius: 20px;
+    background: #142638;
     color: white;
     cursor: pointer;
+    transition: 0.3s;
 }
 
-button.active,
-button:hover {
+button.active {
     background: #00eaff;
-    color: black;
+    color: #06111b;
+    box-shadow: 0 0 15px #00eaff;
 }
 
 .scene {
     width: 100%;
-    height: 75vh;
-    perspective: 1000px;
+    height: 72vh;
+    perspective: 1100px;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     overflow: hidden;
     touch-action: pan-y;
 }
@@ -69,40 +80,67 @@ button:hover {
 
 .element {
     position: absolute;
-    width: 52px;
-    height: 60px;
+    width: 48px;
+    height: 54px;
+
     border: 1px solid currentColor;
-    border-radius: 7px;
-    background: rgba(10,30,50,0.9);
-    box-shadow: 0 0 10px currentColor;
+    border-radius: 9px;
+
+    background: rgba(10,30,50,0.85);
+
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+
     transform-style: preserve-3d;
-    transition: transform 0.5s, background 0.3s;
+
+    box-shadow:
+        0 0 8px currentColor,
+        inset 0 0 10px currentColor;
+
+    transition:
+        transform 0.7s cubic-bezier(.2,.8,.2,1),
+        background 0.3s,
+        box-shadow 0.3s;
+
     cursor: pointer;
-    backface-visibility: visible;
+}
+
+.element::before {
+    content: "";
+    position: absolute;
+    inset: 3px;
+    border: 1px solid currentColor;
+    border-radius: 6px;
+    opacity: 0.3;
+    pointer-events: none;
 }
 
 .element:hover {
     background: #263d60;
+    box-shadow:
+        0 0 20px currentColor,
+        inset 0 0 15px currentColor;
     z-index: 100;
-    box-shadow: 0 0 25px currentColor;
 }
 
 .symbol {
-    font-size: 19px;
+    font-size: 18px;
     font-weight: bold;
 }
 
 .name {
-    font-size: 8px;
+    font-size: 7px;
+    margin-top: 2px;
 }
 
 .number {
-    font-size: 9px;
+    font-size: 8px;
+    opacity: 0.8;
 }
+
+/* Original element colors */
 
 .element:nth-child(4n) {
     color: #ff6464;
@@ -126,7 +164,7 @@ button:hover {
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.8);
+    background: rgba(0,0,0,0.85);
     z-index: 1000;
     justify-content: center;
     align-items: center;
@@ -134,14 +172,26 @@ button:hover {
 }
 
 .details {
-    width: 300px;
+    width: 310px;
     max-width: 100%;
     padding: 25px;
     border: 1px solid #00eaff;
-    border-radius: 15px;
-    background: #101d30;
-    box-shadow: 0 0 30px #00eaff;
+    border-radius: 18px;
+    background: linear-gradient(145deg,#19344b,#071321);
+    box-shadow: 0 0 35px #00eaff55;
     text-align: left;
+    animation: popup 0.3s ease;
+}
+
+@keyframes popup {
+    from {
+        transform: scale(0.7);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
 
 .details h2 {
@@ -150,7 +200,8 @@ button:hover {
 }
 
 .details p {
-    line-height: 1.7;
+    line-height: 1.8;
+    font-size: 14px;
 }
 
 .close {
@@ -161,16 +212,17 @@ button:hover {
 }
 
 .hint {
-    color: #aaa;
-    font-size: 12px;
-    margin-top: 15px;
+    color: #8299aa;
+    font-size: 11px;
+    letter-spacing: 1px;
 }
 </style>
 </head>
 
 <body>
 
-<h1>3D PERIODIC TABLE</h1>
+<h1>PERIODIC TABLE</h1>
+<div class="subtitle">INTERACTIVE 3D ELEMENTS</div>
 
 <div class="buttons">
     <button class="active" onclick="changeMode('table',this)">Table</button>
@@ -183,13 +235,13 @@ button:hover {
     <div class="world" id="world"></div>
 </div>
 
-<p class="hint">Move your mouse or finger to control the 3D effect. Click an element for details.</p>
+<p class="hint">MOVE YOUR MOUSE OR TOUCH TO CONTROL 3D</p>
 
 <div class="overlay" id="overlay">
     <div class="details">
         <h2 id="detailSymbol"></h2>
         <p id="detailInfo"></p>
-        <button class="close" onclick="closeDetails()">Close</button>
+        <button class="close" onclick="closeDetails()">CLOSE</button>
     </div>
 </div>
 
@@ -198,32 +250,30 @@ button:hover {
 const data = [
 ["H","Hydrogen",1,1.008,"Used in fuel and water"],
 ["He","Helium",2,4.0026,"Used in balloons"],
-["Li","Lithium",3,6.94,"Used in rechargeable batteries"],
-["Be","Beryllium",4,9.0122,"Used in aerospace materials"],
-["B","Boron",5,10.81,"Used in glass and detergents"],
+["Li","Lithium",3,6.94,"Used in batteries"],
+["Be","Beryllium",4,9.0122,"Used in aerospace"],
+["B","Boron",5,10.81,"Used in glass"],
 ["C","Carbon",6,12.011,"Found in living organisms"],
 ["N","Nitrogen",7,14.007,"Used in fertilizers"],
 ["O","Oxygen",8,15.999,"Essential for respiration"],
 ["F","Fluorine",9,18.998,"Used in toothpaste compounds"],
 ["Ne","Neon",10,20.180,"Used in glowing signs"],
 ["Na","Sodium",11,22.990,"Found in table salt"],
-["Mg","Magnesium",12,24.305,"Used in lightweight alloys"],
-["Al","Aluminium",13,26.982,"Used in cans and aircraft"],
+["Mg","Magnesium",12,24.305,"Used in alloys"],
+["Al","Aluminium",13,26.982,"Used in aircraft"],
 ["Si","Silicon",14,28.085,"Used in computer chips"],
 ["P","Phosphorus",15,30.974,"Used in fertilizers"],
-["S","Sulfur",16,32.06,"Used in chemical industries"],
+["S","Sulfur",16,32.06,"Used in industries"],
 ["Cl","Chlorine",17,35.45,"Used in water treatment"],
 ["Ar","Argon",18,39.948,"Used in light bulbs"],
-["K","Potassium",19,39.098,"Important for plant growth"],
-["Ca","Calcium",20,40.078,"Important for bones and teeth"]
+["K","Potassium",19,39.098,"Important for plants"],
+["Ca","Calcium",20,40.078,"Important for bones"]
 ];
 
 const world = document.getElementById("world");
 const scene = document.getElementById("scene");
 
 let cards = [];
-let positions = [];
-let currentMode = "table";
 
 data.forEach((element,i) => {
 
@@ -248,8 +298,6 @@ data.forEach((element,i) => {
 
 function changeMode(mode,button) {
 
-    currentMode = mode;
-
     document.querySelectorAll(".buttons button")
     .forEach(b => b.classList.remove("active"));
 
@@ -266,8 +314,8 @@ function changeMode(mode,button) {
             let col = i % 5;
             let row = Math.floor(i / 5);
 
-            x = (col-2)*85;
-            y = (row-1.5)*85;
+            x = (col-2)*65;
+            y = (row-1.5)*68;
             z = 0;
 
         }
@@ -277,7 +325,7 @@ function changeMode(mode,button) {
             let phi = Math.acos(1-2*(i+0.5)/total);
             let theta = Math.PI*(1+Math.sqrt(5))*i;
 
-            let r = 200;
+            let r = 125;
 
             x = r*Math.sin(phi)*Math.cos(theta);
             y = r*Math.sin(phi)*Math.sin(theta);
@@ -287,11 +335,11 @@ function changeMode(mode,button) {
 
         else if(mode === "helix") {
 
-            let angle = i*0.8;
-            let r = 150;
+            let angle = i*0.55;
+            let r = 95;
 
             x = r*Math.cos(angle);
-            y = (i-total/2)*20;
+            y = (i-total/2)*12;
             z = r*Math.sin(angle);
 
         }
@@ -301,13 +349,11 @@ function changeMode(mode,button) {
             let col = i%4;
             let row = Math.floor(i/4);
 
-            x = (col-1.5)*100;
-            y = (row-2)*85;
-            z = (i%3)*45;
+            x = (col-1.5)*75;
+            y = (row-2)*65;
+            z = (i%3)*35;
 
         }
-
-        positions[i] = {x,y,z};
 
         card.style.transform =
         `translate3d(${x}px,${y}px,${z}px)`;
@@ -316,28 +362,7 @@ function changeMode(mode,button) {
 
 }
 
-function showDetails(element) {
-
-    document.getElementById("detailSymbol").innerText =
-        element[0] + " - " + element[1];
-
-    document.getElementById("detailInfo").innerHTML = `
-        <b>Atomic Number:</b> ${element[2]}<br>
-        <b>Element:</b> ${element[1]}<br>
-        <b>Symbol:</b> ${element[0]}<br>
-        <b>Atomic Mass:</b> ${element[3]} u<br>
-        <b>Uses:</b> ${element[4]}
-    `;
-
-    document.getElementById("overlay").style.display = "flex";
-
-}
-
-function closeDetails() {
-    document.getElementById("overlay").style.display = "none";
-}
-
-// Mouse and touch movement
+// Mouse movement
 
 let targetX = 0;
 let targetY = 0;
@@ -348,11 +373,11 @@ scene.addEventListener("pointermove", (event) => {
 
     const rect = scene.getBoundingClientRect();
 
-    const x = (event.clientX - rect.left) / rect.width;
-    const y = (event.clientY - rect.top) / rect.height;
+    const x = (event.clientX-rect.left)/rect.width;
+    const y = (event.clientY-rect.top)/rect.height;
 
-    targetY = (x-0.5)*65;
-    targetX = (0.5-y)*50;
+    targetY = (x-0.5)*55;
+    targetX = (0.5-y)*45;
 
 });
 
@@ -373,6 +398,28 @@ function animate() {
 
     requestAnimationFrame(animate);
 
+}
+
+// Element details
+
+function showDetails(element) {
+
+    document.getElementById("detailSymbol").innerText =
+        element[0] + " - " + element[1];
+
+    document.getElementById("detailInfo").innerHTML = `
+        <b>Atomic Number:</b> ${element[2]}<br>
+        <b>Name:</b> ${element[1]}<br>
+        <b>Symbol:</b> ${element[0]}<br>
+        <b>Atomic Mass:</b> ${element[3]} u<br>
+        <b>Uses:</b> ${element[4]}
+    `;
+
+    document.getElementById("overlay").style.display = "flex";
+}
+
+function closeDetails() {
+    document.getElementById("overlay").style.display = "none";
 }
 
 // Start
