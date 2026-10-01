@@ -25,7 +25,7 @@ h1 {
     font-size: 27px;
     letter-spacing: 3px;
     color: #00eaff;
-    text-shadow: 0 0 15px #00eaff;
+    text-shadow: 0 0 12px #00eaff;
 }
 
 .subtitle {
@@ -48,13 +48,12 @@ button {
     background: #142638;
     color: white;
     cursor: pointer;
-    transition: 0.3s;
 }
 
 button.active {
     background: #00eaff;
     color: #06111b;
-    box-shadow: 0 0 15px #00eaff;
+    box-shadow: 0 0 10px #00eaff;
 }
 
 .scene {
@@ -73,7 +72,7 @@ button.active {
     width: 1px;
     height: 1px;
     transform-style: preserve-3d;
-    transition: transform 0.12s ease-out;
+    will-change: transform;
 }
 
 .element {
@@ -82,7 +81,7 @@ button.active {
     height: 48px;
     border: 1px solid currentColor;
     border-radius: 8px;
-    background: rgba(10,30,50,0.88);
+    background: rgba(10,30,50,0.9);
 
     display: flex;
     flex-direction: column;
@@ -90,15 +89,15 @@ button.active {
     justify-content: center;
 
     transform-style: preserve-3d;
+    will-change: transform;
 
     box-shadow:
-        0 0 8px currentColor,
-        inset 0 0 8px currentColor;
+        0 0 4px currentColor,
+        inset 0 0 5px currentColor;
 
     transition:
-        transform 0.7s cubic-bezier(.2,.8,.2,1),
-        background 0.3s,
-        box-shadow 0.3s;
+        background 0.2s,
+        box-shadow 0.2s;
 
     cursor: pointer;
 }
@@ -115,7 +114,7 @@ button.active {
 
 .element:hover {
     background: #263d60;
-    box-shadow: 0 0 22px currentColor;
+    box-shadow: 0 0 12px currentColor;
     z-index: 100;
 }
 
@@ -172,7 +171,7 @@ button.active {
     border: 1px solid #00eaff;
     border-radius: 18px;
     background: linear-gradient(145deg,#19344b,#071321);
-    box-shadow: 0 0 35px #00eaff55;
+    box-shadow: 0 0 25px #00eaff55;
     text-align: left;
     animation: popup 0.3s ease;
 }
@@ -367,7 +366,7 @@ const scene = document.getElementById("scene");
 
 let cards = [];
 
-data.forEach((element) => {
+data.forEach(element => {
 
     const card = document.createElement("div");
 
@@ -454,22 +453,23 @@ function changeMode(mode,button) {
 
 }
 
-// Mouse and touch movement
+// Smooth mouse and touch control
 
 let targetX = 0;
 let targetY = 0;
+
 let rotateX = 0;
 let rotateY = 0;
 
-scene.addEventListener("pointermove", (event) => {
+scene.addEventListener("pointermove", event => {
 
     const rect = scene.getBoundingClientRect();
 
-    const x = (event.clientX-rect.left)/rect.width;
-    const y = (event.clientY-rect.top)/rect.height;
+    const x = (event.clientX - rect.left) / rect.width;
+    const y = (event.clientY - rect.top) / rect.height;
 
-    targetY = (x-0.5)*55;
-    targetX = (0.5-y)*45;
+    targetY = (x - 0.5) * 70;
+    targetX = (0.5 - y) * 60;
 
 });
 
@@ -480,11 +480,11 @@ scene.addEventListener("pointerleave", () => {
 
 function animate() {
 
-    rotateX += (targetX-rotateX)*0.08;
-    rotateY += (targetY-rotateY)*0.08;
+    rotateX += (targetX - rotateX) * 0.12;
+    rotateY += (targetY - rotateY) * 0.12;
 
     world.style.transform =
-    `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
 
     requestAnimationFrame(animate);
 
@@ -515,7 +515,6 @@ function closeDetails() {
 // Start
 
 changeMode("table",document.querySelector(".buttons button"));
-
 animate();
 
 </script>
